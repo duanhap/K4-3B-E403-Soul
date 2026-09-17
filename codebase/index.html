@@ -608,7 +608,7 @@
             Bản mockup này thể hiện <b>toàn bộ các bước xử lý</b> và chỉ rõ <b>chỗ nào AI ra quyết định trung tâm</b>:
             <ul style="margin: 6px 0 6px 20px; font-size: 13px;">
               <li><b>Điểm quyết định 1:</b> Phân loại câu hỏi thuộc Logistics, Ngoài thẩm quyền, hay Chat thường.</li>
-              <li><b>Điểm quyết định 2 (Lõi):</b> Có tìm thấy căn cứ thông báo chính thức không? Đủ tin cậy $\rightarrow$ trả lời $\le 2$ câu kèm link nguồn. Thiếu tin cậy $\rightarrow$ <b>quyết định dừng phỏng đoán và tự động tag @TA</b>.</li>
+              <li><b>Điểm quyết định 2 (Lõi):</b> Có tìm thấy căn cứ thông báo chính thức không? Đủ tin cậy ➔ trả lời ≤ 2 câu kèm link nguồn. Thiếu tin cậy ➔ <b>quyết định dừng phỏng đoán và tự động tag @TA</b>.</li>
             </ul>
             <i>👇 Hãy bấm thử các nút kịch bản bên dưới để quan sát chuỗi quyết định của AI:</i>
           </div>
@@ -623,19 +623,19 @@
         <span class="preset-label">Bấm thử các Luồng Quyết Định (CP2):</span>
         
         <button class="preset-chip" onclick="runScenario(1)">
-          🟢 <b>Luồng 1 (Happy Path):</b> Hỏi hạn Lab 02 [AI tìm thấy nguồn $\rightarrow$ Trả lời kèm link]
+          🟢 <b>Luồng 1 (Happy Path):</b> Hỏi hạn Lab 02 [AI tìm thấy nguồn ➔ Trả lời kèm link]
         </button>
         
         <button class="preset-chip" onclick="runScenario(2)">
-          🟡 <b>Luồng 2 (Low-Confidence):</b> Hỏi hạn Lab 03 [AI phát hiện KHÔNG có nguồn $\rightarrow$ Tự tag TA]
+          🟡 <b>Luồng 2 (Low-Confidence):</b> Hỏi hạn Lab 03 [AI phát hiện KHÔNG có nguồn ➔ Tự tag TA]
         </button>
         
         <button class="preset-chip" onclick="runScenario(3)">
-          🔴 <b>Luồng 3 (Out-of-Scope):</b> Hỏi điểm danh [AI nhận diện ngoài thẩm quyền $\rightarrow$ Từ chối đúng luật]
+          🔴 <b>Luồng 3 (Out-of-Scope):</b> Hỏi điểm danh [AI nhận diện ngoài thẩm quyền ➔ Từ chối đúng luật]
         </button>
 
         <button class="preset-chip" style="background: rgba(255,255,255,0.05);" onclick="runScenario(4)">
-          ⚪ <b>Luồng 4:</b> Tin cụt "hi bot" [AI chào ngắn $\le 1$ câu]
+          ⚪ <b>Luồng 4:</b> Tin cụt "hi bot" [AI chào ngắn ≤ 1 câu]
         </button>
       </div>
 
@@ -777,7 +777,7 @@
                 </div>
                 <div class="decision-row">
                   <span class="decision-tag tag-ai-decision" style="background: rgba(59, 165, 93, 0.25); color: #57f287;">BƯỚC 3 · AI QUYẾT ĐỊNH 2 (LÕI)</span>
-                  <span><b>Kiểm tra nguồn:</b> Tìm thấy thông báo ghim tại <b>#thong-bao-chung (Tin M04816)</b>. Độ khớp: <b>96%</b> $\rightarrow$ <b>QUYẾT ĐỊNH: Tự động trích xuất thông tin ngắn gọn (≤2 câu) kèm link gốc</b> (Không lan man như bot cũ).</span>
+                  <span><b>Kiểm tra nguồn:</b> Tìm thấy thông báo ghim tại <b>#thong-bao-chung (Tin M04816)</b>. Độ khớp: <b>96%</b> ➔ <b>QUYẾT ĐỊNH: Tự động trích xuất thông tin ngắn gọn (≤ 2 câu) kèm link gốc</b> (Không lan man như bot cũ).</span>
                 </div>
                 <div class="decision-row">
                   <span class="decision-tag tag-rule">QUY TẮC HAX ÁP DỤNG</span>
@@ -827,8 +827,8 @@
                 </div>
                 <div class="decision-row">
                   <span class="decision-tag tag-ai-decision" style="background: rgba(250, 168, 26, 0.25); color: #fee75c;">BƯỚC 3 · AI QUYẾT ĐỊNH 2 (LÕI)</span>
-                  <span><b>Kiểm tra nguồn:</b> Kho thông báo chưa có dữ liệu hạn nộp Lab 03 (Độ tin cậy: <b>32%</b> $\rightarrow$ Dưới ngưỡng an toàn 85%).<br>
-                  $\rightarrow$ <b>QUYẾT ĐỊNH: TỪ CHỐI BỊA ĐẶT (Hallucination Prevention) & TỰ ĐỘNG KÍCH HOẠT ESCALATE SANG @TA</b>.</span>
+                  <span><b>Kiểm tra nguồn:</b> Kho thông báo chưa có dữ liệu hạn nộp Lab 03 (Độ tin cậy: <b>32%</b> ➔ Dưới ngưỡng an toàn 85%).<br>
+                  ➔ <b>QUYẾT ĐỊNH: TỪ CHỐI BỊA ĐẶT (Hallucination Prevention) & TỰ ĐỘNG KÍCH HOẠT ESCALATE SANG @TA</b>.</span>
                 </div>
                 <div class="decision-row">
                   <span class="decision-tag tag-rule">QUY TẮC HAX ÁP DỤNG</span>
@@ -876,11 +876,11 @@
               <div class="decision-body">
                 <div class="decision-row">
                   <span class="decision-tag tag-ai-decision">BƯỚC 2 · AI QUYẾT ĐỊNH 1 (LÕI)</span>
-                  <span><b>Nhận diện Intent:</b> <code>check_personal_attendance</code> $\rightarrow$ <b>QUYẾT ĐỊNH: Xác định là OUT-OF-SCOPE</b>. Bot trên kênh công khai không có quyền truy cập CSDL điểm danh cá nhân (Bảo mật thông tin).</span>
+                  <span><b>Nhận diện Intent:</b> <code>check_personal_attendance</code> ➔ <b>QUYẾT ĐỊNH: Xác định là OUT-OF-SCOPE</b>. Bot trên kênh công khai không có quyền truy cập CSDL điểm danh cá nhân (Bảo mật thông tin).</span>
                 </div>
                 <div class="decision-row">
                   <span class="decision-tag tag-ai-decision">BƯỚC 3 · ĐIỀU HƯỚNG</span>
-                  <span>Bỏ qua tìm kiếm nguồn Discord $\rightarrow$ Chuyển thẳng sang luồng từ chối lịch sự và cung cấp kênh tự phục vụ.</span>
+                  <span>Bỏ qua tìm kiếm nguồn Discord ➔ Chuyển thẳng sang luồng từ chối lịch sự và cung cấp kênh tự phục vụ.</span>
                 </div>
                 <div class="decision-row">
                   <span class="decision-tag tag-rule">QUY TẮC HAX ÁP DỤNG</span>
@@ -923,7 +923,7 @@
               <div class="decision-body">
                 <div class="decision-row">
                   <span class="decision-tag tag-ai-decision">BƯỚC 2 · AI QUYẾT ĐỊNH</span>
-                  <span><b>Nhận diện Intent:</b> <code>greeting</code> $\rightarrow$ <b>QUYẾT ĐỊNH: Phản hồi siêu ngắn gọn</b>, hướng người dùng vào công việc chính, tuyệt đối không spam văn mẫu dài dòng.</span>
+                  <span><b>Nhận diện Intent:</b> <code>greeting</code> ➔ <b>QUYẾT ĐỊNH: Phản hồi siêu ngắn gọn</b>, hướng người dùng vào công việc chính, tuyệt đối không spam văn mẫu dài dòng.</span>
                 </div>
               </div>
             </div>
