@@ -1,4 +1,6 @@
 import os
+import json
+import re
 import discord
 from discord.ext import commands
 from google import genai
@@ -15,97 +17,160 @@ ai_client = None
 if config.GEMINI_API_KEY:
     ai_client = genai.Client(api_key=config.GEMINI_API_KEY)
 
-SYSTEM_PROMPT = """Bạn là Trợ lý Discord cho học viên khóa học (Track B1).
-Nhiệm vụ của bạn:
-1. Giải đáp các thắc mắc về LOGISTICS (hạn nộp bài, hình thức nộp, link nộp bài, quy định điểm danh, sự cố nộp muộn) dựa trên dữ liệu chính thức.
-2. NGUYÊN TẮC BẮT BUỘC:
-   - Trả lời cực kỳ ngắn gọn: TỐI ĐA 2 CÂU.
-   - Luôn kèm theo link hoặc nguồn thông báo chính thức nếu có.
-   - KHÔNG phỏng đoán deadline hoặc quy định khi chưa có thông báo chính thức.
-   - KHÔNG can thiệp/trả lời các thông tin dữ liệu cá nhân (điểm số cá nhân, điểm danh cá nhân).
-   - Nếu KHÔNG CÓ CĂN CỨ hoặc VƯỢT THẨM QUYỀN, hãy trả lời chính xác: "HIEN_THUYET_CHUA_CO_THONG_TIN" để hệ thống tự động tag TA hỗ trợ.
-"""
-
-# Dữ liệu mẫu thông báo chính thức (Logistics Knowledge Base)
+# DỮ LIỆU THÔNG BÁO CHÍNH THỨC (Knowledge Base)
 KNOWLEDGE_BASE = [
     {
-        "title": "Hạn nộp Lab 01 & Quy cách commit",
-        "content": "Hạn nộp Lab 01 là 21:00 ngày 18/9/2026. Học viên commit mã nguồn lên repo GitHub cá nhân/nhóm và dán link commit vào kênh #submit-lab.",
-        "link": "https://discord.com/channels/example/announcements/101"
+        "id": "ANNOUNCEMENT_01",
+        "title": "Hạn nộp Lab 01 & Quy cách commit GitHub",
+        "content": "Hạn nộp Lab 01 là 21:00 ngày 18/9/2026. Học viên commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh #submit-lab.",
+        "link": "https://discord.com/channels/k4-3b/announcements/101"
     },
     {
-        "title": "Quy định nộp muộn & Sự cố kỹ thuật",
+        "id": "ANNOUNCEMENT_02",
+        "title": "Quy định sự cố nộp muộn & Kỹ thuật",
         "content": "Mọi sự cố nộp muộn do Git/mạng cần báo trước hạn 15 phút kèm screenshot lỗi cho TA. Nộp muộn sau hạn không báo trước tính 0 điểm.",
-        "link": "https://discord.com/channels/example/announcements/102"
+        "link": "https://discord.com/channels/k4-3b/announcements/102"
+    },
+    {
+        "id": "ANNOUNCEMENT_03",
+        "title": "Lịch Checkpoint Hackathon (CP1 - CP4)",
+        "content": "CP1: 19:30 17/9 (Canvas 7 dòng) | CP2: 21:00 17/9 (Luồng hoạt động) | CP3: 16:00 18/9 (Video 30s + số đo) | CP4: 21:00 18/9 (Chốt spec.md).",
+        "link": "https://discord.com/channels/k4-3b/announcements/103"
+    },
+    {
+        "id": "ANNOUNCEMENT_04",
+        "title": "Quy định nộp Standup hàng ngày",
+        "content": "Học viên gửi báo cáo Standup hàng ngày trước 09:00 sáng tại kênh #standup theo đúng template quy định.",
+        "link": "https://discord.com/channels/k4-3b/announcements/104"
+    },
+    {
+        "id": "STATUS_UNANNOUNCED",
+        "title": "Các mục CHƯA CÓ THÔNG BÁO CHÍNH THỨC",
+        "content": "Hạn nộp Lab 02, Lab 03, lịch thi Final, điểm danh cá nhân, kiểm tra điểm số cá nhân, yêu cầu xin châm chước commit trễ cá nhân -> Đều CHƯA có thông báo hoặc ngoài thẩm quyền tự động của bot.",
+        "link": ""
     }
 ]
 
-def query_ai_assistant(user_question: str) -> str:
-    if not ai_client:
-        return "HIEN_THUYET_CHUA_CO_THONG_TIN"
+SYSTEM_PROMPT = """Bạn là Trợ lý AI Discord chuyên nghiệp cho khóa học (Track B1).
 
-    context_str = "\n".join([f"- [{kb['title']}] ({kb['link']}): {kb['content']}" for kb in KNOWLEDGE_BASE])
-    prompt = f"{SYSTEM_PROMPT}\n\nDỮ LIỆU CHÍNH THỨC:\n{context_str}\n\nCÂU HỎI HỌC VIÊN: {user_question}\nTRẢ LỜI:"
-    
+NHIỆM VỤ CỦA BẠN:
+Phân loại intent câu hỏi của học viên và đưa ra phản hồi chính xác, an toàn.
+
+DANH SÁCH INTENT & QUY TẮC PHẢN HỒI:
+1. GREETING (Chào hỏi / Giao tiếp xã giao):
+   - Phản hồi ngắn gọn, thân thiện (1 câu), nêu rõ bạn là Trợ lý hỗ trợ tra cứu thông tin logistics khóa học.
+   - need_ta = false.
+
+2. LOGISTICS_GROUNDED (Hỏi hạn nộp, quy cách, link, standup CÓ TRONG DỮ LIỆU CHÍNH THỨC):
+   - Trả lời cực kỳ ngắn gọn: TỐI ĐA 2 CÂU.
+   - BẮT BUỘC đính kèm link nguồn chính thức từ DỮ LIỆU CHÍNH THỨC.
+   - need_ta = false.
+
+3. LOGISTICS_UNGROUNDED (Hỏi thủ tục/deadline như "Lab 02", "Lab 03", "Thi final" nhưng CHƯA CÓ THÔNG BÁO CHÍNH THỨC):
+   - NGUYÊN TẮC: TUYỆT ĐỐI KHÔNG PHỎNG ĐOÁN DEADLINE (Cost-of-Error rất đắt).
+   - Phản hồi ngắn gọn (1 câu): Hiện tại chưa có thông báo chính thức về thông tin này.
+   - need_ta = true.
+
+4. OUT_OF_SCOPE_PERSONAL (Yêu cầu can thiệp dữ liệu cá nhân: tra điểm số, điểm danh cá nhân, xin châm chước nộp trễ):
+   - Phản hồi ngắn gọn (1 câu): Bot không có thẩm quyền xử lý dữ liệu cá nhân hoặc duyệt châm chước.
+   - need_ta = true.
+
+5. TECHNICAL_QUESTION (Hỏi bài tập, thắc mắc kỹ thuật / code / git):
+   - Gợi ý ngắn gọn hướng xử lý (1-2 câu).
+   - need_ta = false (hoặc true nếu câu hỏi phức tạp cần TA can thiệp).
+
+ĐỊNH DẠNG ĐẦU RA BẮT BUỘC (Trả về duy nhất 1 chuỗi JSON hoàn chỉnh):
+{
+  "intent": "GREETING | LOGISTICS_GROUNDED | LOGISTICS_UNGROUNDED | OUT_OF_SCOPE_PERSONAL | TECHNICAL_QUESTION",
+  "need_ta": true/false,
+  "reply": "Nội dung câu trả lời gửi tới học viên (Nếu là LOGISTICS_GROUNDED thì BẮT BUỘC có link nguồn)."
+}
+"""
+
+def query_ai_assistant(user_question: str) -> dict:
+    """Gọi Gemini API để phân loại Intent & sinh phản hồi có cấu trúc JSON."""
+    default_fallback = {
+        "intent": "LOGISTICS_UNGROUNDED",
+        "need_ta": True,
+        "reply": "Hiện tại chưa có thông tin chính thức cho câu hỏi này."
+    }
+
+    if not ai_client:
+        print("   ⚠️ Chưa cấu hình GEMINI_API_KEY!")
+        return default_fallback
+
+    context_str = "\n".join([f"- [{kb['title']}] (Link: {kb['link']}): {kb['content']}" for kb in KNOWLEDGE_BASE])
+    prompt = f"{SYSTEM_PROMPT}\n\nDỮ LIỆU CHÍNH THỨC KHÓA HỌC:\n{context_str}\n\nCÂU HỎI HỌC VIÊN: {user_question}\n\nKẾT QUẢ JSON:"
+
     try:
         response = ai_client.models.generate_content(
-            model='gemini-2.5-flash',  # Tên model chuẩn của Google
+            model='gemini-2.5-flash',
             contents=prompt
         )
-        return response.text.strip()
+        raw_text = response.text.strip()
+        
+        # Trích xuất JSON từ phản hồi của AI (nếu có markdown block ```json)
+        json_match = re.search(r'\{.*\}', raw_text, re.DOTALL)
+        if json_match:
+            parsed = json.loads(json_match.group(0))
+            return parsed
+        else:
+            return default_fallback
     except Exception as e:
-        print(f"Lỗi AI API: {e}")
-        return "HIEN_THUYET_CHUA_CO_THONG_TIN"
+        print(f"   ❌ Lỗi khi gọi Gemini API: {e}")
+        return default_fallback
 
 @bot.event
 async def on_ready():
-    print(f"✅ Bot đã đăng nhập thành công với tên: {bot.user.name} (ID: {bot.user.id})")
-    print("--- sẵn sàng nhận câu hỏi ---")
+    print(f"✅ Bot Trợ Lý Discord đã hoạt động: {bot.user.name} (ID: {bot.user.id})")
+    print("--- Đã tải Knowledge Base & Sẵn sàng phân loại intent ---")
 
 @bot.event
 async def on_message(message: discord.Message):
-    # Tránh bot tự trả lời tin nhắn của chính mình
     if message.author == bot.user:
         return
 
-    # In log nhận tin nhắn để người dùng dễ kiểm tra trên Terminal
     is_mentioned = bot.user.mentioned_in(message)
-    print(f"📩 [Tin nhắn mới] Kênh: #{message.channel} | Tác giả: {message.author} | Tag Bot: {is_mentioned}")
-    print(f"   Nội dung thô: '{message.content}'")
+    is_dm = isinstance(message.channel, discord.DMChannel)
+    is_command = message.content.startswith("!")
 
-    # Nếu tin nhắn tag bot / nhắn trực tiếp DM / câu hỏi bắt đầu bằng !
-    if is_mentioned or isinstance(message.channel, discord.DMChannel) or message.content.startswith("!"):
-        # Xóa tag bot (xử lý cả <@ID> và <@!ID>)
+    if is_mentioned or is_dm or is_command:
+        print(f"📩 [Tin nhắn mới] Kênh: #{message.channel} | Từ: {message.author}")
+        print(f"   Nội dung gốc: '{message.content}'")
+
+        # Làm sạch nội dung câu hỏi
         content = message.content.replace(f"<@{bot.user.id}>", "").replace(f"<@!{bot.user.id}>", "").strip()
         if content.startswith("!"):
             content = content[1:].strip()
 
-        print(f"   🔍 Nội dung câu hỏi sau xử lý: '{content}'")
-
         if not content:
-            print("   ⚠️ Câu hỏi rỗng, gửi lời chào...")
-            await message.channel.send("Chào bạn, mình có thể giúp gì về thông tin hạn nộp bài và thủ tục khóa học?")
+            await message.channel.send("Chào bạn! Mình là Trợ lý Discord. Bạn cần hỗ trợ thông tin gì về hạn nộp bài hay quy định khóa học?")
             return
 
         async with message.channel.typing():
-            print("   🤖 Đang gọi AI xử lý câu hỏi...")
-            answer = query_ai_assistant(content)
-            print(f"   💡 AI phản hồi: '{answer}'")
+            print(f"   🔍 Đang phân loại Intent cho câu hỏi: '{content}'...")
+            ai_res = query_ai_assistant(content)
+            
+            intent = ai_res.get("intent", "UNKNOWN")
+            need_ta = ai_res.get("need_ta", False)
+            reply_text = ai_res.get("reply", "")
+
+            print(f"   🎯 Intent nhận diện: {intent} | Need TA: {need_ta}")
+            print(f"   💬 Phản hồi: '{reply_text}'")
 
             ta_tag = f"<@&{config.TA_ROLE_ID}>" if config.TA_ROLE_ID else "@TA"
 
-            if "HIEN_THUYET_CHUA_CO_THONG_TIN" in answer or not answer:
-                await message.channel.send(
-                    f"⚠️ Hiện tại chưa có thông tin chính thức cho câu hỏi này. {ta_tag} hỗ trợ bạn nhé!"
-                )
+            if need_ta:
+                final_msg = f"{reply_text}\n⚠️ {ta_tag} hỗ trợ học viên giúp mình nhé!"
             else:
-                await message.channel.send(answer)
+                final_msg = reply_text
+
+            await message.channel.send(final_msg)
 
     await bot.process_commands(message)
 
 if __name__ == "__main__":
     if not config.DISCORD_TOKEN:
-        print("❌ LỖI: Chưa cấu hình DISCORD_TOKEN trong file .env!")
-        print("Hãy copy file codebase/.env.example thành codebase/.env và điền Token của bot.")
+        print("❌ LỖI: Chưa cấu hình DISCORD_TOKEN trong file codebase/.env!")
     else:
         bot.run(config.DISCORD_TOKEN)
