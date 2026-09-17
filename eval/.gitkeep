@@ -1,0 +1,4 @@
+# Thư mục eval/
+# Đặt 2 file vào đây:
+# - golden_set.json (hoặc .csv) — ≥20 case kiểm thử
+# - run_results.md — bảng kết quả các lượt chạy

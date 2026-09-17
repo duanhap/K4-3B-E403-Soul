@@ -1,0 +1,32 @@
+# API Keys & secrets — TUYỆT ĐỐI KHÔNG commit
+.env
+.env.local
+.env.*.local
+*.key
+secrets.json
+
+# Data pack — KHÔNG commit lên repo công khai
+data/
+*.csv
+*.mp4
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# Node.js
+node_modules/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
