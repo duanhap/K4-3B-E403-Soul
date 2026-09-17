@@ -130,16 +130,23 @@ async def on_message(message: discord.Message):
     if message.author == bot.user:
         return
 
-    is_mentioned = bot.user.mentioned_in(message)
+    # Kiểm tra xem Bot được tag trực tiếp (User Mention) hay tag qua Role của Bot (Role Mention)
+    is_user_mentioned = bot.user.mentioned_in(message)
+    is_role_mentioned = False
+    if message.guild and message.guild.me:
+        bot_roles = message.guild.me.roles
+        is_role_mentioned = any(role in message.role_mentions for role in bot_roles if not role.is_default())
+
+    is_mentioned = is_user_mentioned or is_role_mentioned
     is_dm = isinstance(message.channel, discord.DMChannel)
     is_command = message.content.startswith("!")
 
     if is_mentioned or is_dm or is_command:
-        print(f"📩 [Tin nhắn mới] Kênh: #{message.channel} | Từ: {message.author}")
+        print(f"📩 [Tin nhắn mới] Kênh: #{message.channel} | Từ: {message.author} | Tag Bot/Role: {is_mentioned}")
         print(f"   Nội dung gốc: '{message.content}'")
 
-        # Làm sạch nội dung câu hỏi
-        content = message.content.replace(f"<@{bot.user.id}>", "").replace(f"<@!{bot.user.id}>", "").strip()
+        # Làm sạch nội dung câu hỏi: Xóa tất cả tag <@ID>, <@!ID>, <@&ID>
+        content = re.sub(r'<@&?\!?\d+>', '', message.content).strip()
         if content.startswith("!"):
             content = content[1:].strip()
 
