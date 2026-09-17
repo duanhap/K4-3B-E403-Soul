@@ -13,14 +13,15 @@
       --channel-hover: #34373c;
       --channel-active: #393c43;
       --text-normal: #dcddde;
-      --text-muted: #72767d;
+      --text-muted: #8e9297;
       --text-link: #00aff4;
       --brand: #5865f2;
       --brand-hover: #4752c4;
       --success: #3ba55d;
       --warning: #faa81a;
       --danger: #ed4245;
-      --card-bg: rgba(0, 0, 0, 0.2);
+      --ai-purple: #9b59b6;
+      --card-bg: #292b2f;
     }
 
     * {
@@ -38,7 +39,7 @@
       overflow: hidden;
     }
 
-    /* 1. Servers Bar */
+    /* 1. SERVERS BAR */
     .servers-bar {
       width: 72px;
       background: var(--bg-tertiary);
@@ -48,7 +49,7 @@
       padding: 12px 0;
       gap: 10px;
       flex-shrink: 0;
-      border-right: 1px solid rgba(0,0,0,0.2);
+      border-right: 1px solid rgba(0,0,0,0.25);
     }
     .server-icon {
       width: 48px;
@@ -80,9 +81,9 @@
       border-radius: 0 4px 4px 0;
     }
 
-    /* 2. Channels Sidebar */
+    /* 2. CHANNELS SIDEBAR */
     .channels-sidebar {
-      width: 240px;
+      width: 230px;
       background: var(--bg-secondary);
       display: flex;
       flex-direction: column;
@@ -134,7 +135,7 @@
       color: #fff;
     }
 
-    /* 3. Main Chat Container */
+    /* 3. MAIN CHAT CONTAINER */
     .chat-container {
       flex: 1;
       display: flex;
@@ -153,6 +154,7 @@
       justify-content: space-between;
       box-shadow: 0 1px 2px rgba(0,0,0,0.1);
       z-index: 10;
+      background: var(--bg-primary);
     }
     .chat-header-title {
       display: flex;
@@ -161,13 +163,6 @@
       font-weight: 600;
       font-size: 15px;
       color: #fff;
-    }
-    .chat-header-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      border-left: 1px solid rgba(255,255,255,0.1);
-      padding-left: 12px;
-      margin-left: 12px;
     }
     .badge-pill {
       background: rgba(88, 101, 242, 0.2);
@@ -179,6 +174,52 @@
       border: 1px solid rgba(88, 101, 242, 0.3);
     }
 
+    /* 4-STEP VISUAL WORKFLOW BANNER */
+    .pipeline-banner {
+      background: #232428;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .pipeline-step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+    }
+    .pipeline-step.active {
+      background: rgba(88, 101, 242, 0.2);
+      border-color: var(--brand);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(88, 101, 242, 0.3);
+    }
+    .pipeline-step.ai-node {
+      border-left: 3px solid var(--ai-purple);
+    }
+    .step-num {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+    }
+    .pipeline-arrow {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
     /* Messages Area */
     .messages-area {
       flex: 1;
@@ -186,7 +227,7 @@
       padding: 20px 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
     }
 
     .message-row {
@@ -212,13 +253,10 @@
       font-size: 14px;
     }
     .avatar-bot {
-      background: linear-gradient(135deg, #5865f2, #eb459e);
+      background: linear-gradient(135deg, #5865f2, #9b59b6);
     }
     .avatar-user {
       background: #4f545c;
-    }
-    .avatar-ta {
-      background: #faa81a;
     }
 
     .message-content {
@@ -254,14 +292,66 @@
       color: var(--text-normal);
     }
 
-    /* Bot Rich Card / Decision Card */
+    /* AI DECISION BREAKDOWN BOX */
+    .decision-breakdown {
+      margin-top: 10px;
+      background: #202225;
+      border: 1px solid #40444b;
+      border-radius: 6px;
+      overflow: hidden;
+      max-width: 620px;
+    }
+    .decision-header {
+      background: #2b2d31;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #b9bbbe;
+      border-bottom: 1px solid #36393f;
+    }
+    .decision-body {
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .decision-row {
+      display: flex;
+      gap: 8px;
+      line-height: 1.4;
+    }
+    .decision-tag {
+      flex-shrink: 0;
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      height: fit-content;
+    }
+    .tag-ai-decision {
+      background: rgba(155, 89, 182, 0.25);
+      color: #d291e6;
+      border: 1px solid rgba(155, 89, 182, 0.4);
+    }
+    .tag-rule {
+      background: rgba(88, 101, 242, 0.2);
+      color: #8ea1e1;
+    }
+
+    /* Bot Output Card */
     .bot-card {
       margin-top: 8px;
       border-left: 4px solid var(--brand);
       background: var(--card-bg);
       border-radius: 4px;
       padding: 12px 14px;
-      max-width: 600px;
+      max-width: 620px;
     }
     .bot-card.verified { border-left-color: var(--success); }
     .bot-card.low-confidence { border-left-color: var(--warning); }
@@ -327,30 +417,10 @@
       border-color: var(--brand);
     }
 
-    /* Decision Trace Inspector Panel */
-    .trace-inspector {
-      background: rgba(24, 25, 28, 0.85);
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 10px 16px;
-      font-family: monospace;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: var(--text-muted);
-    }
-    .trace-item {
-      display: inline-flex;
-      gap: 6px;
-    }
-    .trace-val {
-      color: #57f287;
-      font-weight: bold;
-    }
-
     /* Input & Preset Scenarios Area */
     .input-wrapper {
       padding: 0 16px 16px 16px;
+      background: var(--bg-primary);
     }
     .preset-bar {
       display: flex;
@@ -361,18 +431,21 @@
     }
     .preset-label {
       font-size: 12px;
-      color: var(--text-muted);
-      font-weight: 600;
+      color: #b9bbbe;
+      font-weight: 700;
     }
     .preset-chip {
       background: rgba(88, 101, 242, 0.15);
       border: 1px solid rgba(88, 101, 242, 0.35);
       color: #dcddde;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 14px;
       font-size: 12px;
       cursor: pointer;
       transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .preset-chip:hover {
       background: var(--brand);
@@ -413,7 +486,7 @@
       background: var(--brand-hover);
     }
 
-    /* 4. Member Sidebar */
+    /* 5. MEMBER SIDEBAR */
     .member-sidebar {
       width: 220px;
       background: var(--bg-secondary);
@@ -458,7 +531,7 @@
   <!-- 1. SERVERS BAR -->
   <div class="servers-bar">
     <div class="server-icon active" title="Cộng đồng K4 · L2-3">K4</div>
-    <div class="server-icon" title="Nhóm Hackathon Soul">SOUL</div>
+    <div class="server-icon" title="Nhóm Hackathon Soul (E403)">SOUL</div>
   </div>
 
   <!-- 2. CHANNELS SIDEBAR -->
@@ -485,17 +558,43 @@
     <div class="chat-header">
       <div class="chat-header-title">
         <span># tro-ly-bot</span>
-        <span class="badge-pill">MOCKUP CP2 · FLOW BẤM ĐƯỢC</span>
+        <span class="badge-pill">MOCKUP CP2 · MINH BẠCH QUYẾT ĐỊNH AI</span>
       </div>
-      <div class="chat-header-desc">
-        Tối ưu bot Trợ lý: Trả lời có căn cứ thông báo & Tự chuyển TA (Đề B1)
+      <div style="font-size: 12px; color: var(--text-muted);">
+        Lát cắt B1: Trả lời Logistics có nguồn · Tự tag @TA khi thiếu căn cứ
+      </div>
+    </div>
+
+    <!-- 4-STEP VISUAL WORKFLOW BANNER (MINH HỌA CÁC BƯỚC & ĐIỂM QUYẾT ĐỊNH AI) -->
+    <div class="pipeline-banner">
+      <div class="pipeline-step active" id="step1">
+        <span class="step-num">1</span>
+        <span>Học viên gửi câu hỏi</span>
+      </div>
+      <span class="pipeline-arrow">➔</span>
+
+      <div class="pipeline-step ai-node" id="step2">
+        <span class="step-num" style="background: var(--ai-purple); color: #fff;">2</span>
+        <span><b>🤖 AI Quyết định 1:</b> Phân loại Intent</span>
+      </div>
+      <span class="pipeline-arrow">➔</span>
+
+      <div class="pipeline-step ai-node" id="step3">
+        <span class="step-num" style="background: var(--ai-purple); color: #fff;">3</span>
+        <span><b>🤖 AI Quyết định 2 (Lõi):</b> Kiểm tra căn cứ nguồn</span>
+      </div>
+      <span class="pipeline-arrow">➔</span>
+
+      <div class="pipeline-step" id="step4">
+        <span class="step-num">4</span>
+        <span>Output UI (≤2 câu / Tag TA)</span>
       </div>
     </div>
 
     <!-- Messages Display Area -->
     <div class="messages-area" id="messagesArea">
       
-      <!-- Intro System Msg -->
+      <!-- Intro System Message -->
       <div class="message-row">
         <div class="user-avatar avatar-bot">AI</div>
         <div class="message-content">
@@ -505,43 +604,38 @@
             <span class="message-time">Hôm nay lúc 18:00</span>
           </div>
           <div class="message-text">
-            👋 Chào các bạn lớp 3B! Mình là <b>Bot Trợ Lý (Phiên bản tối ưu B1)</b>.<br>
-            Khác với bot cũ trả lời dài dòng và phỏng đoán, mình hoạt động theo 3 nguyên tắc kiểm chứng:
+            👋 Chào các bạn lớp 3B! Mình là <b>Bot Trợ Lý (Phiên bản tối ưu Track B1)</b>.<br>
+            Bản mockup này thể hiện <b>toàn bộ các bước xử lý</b> và chỉ rõ <b>chỗ nào AI ra quyết định trung tâm</b>:
             <ul style="margin: 6px 0 6px 20px; font-size: 13px;">
-              <li>Chỉ trả lời logistics khi có <b>nguồn thông báo chính thức</b> (ngắn gọn ≤ 2 câu kèm link).</li>
-              <li>Chưa có thông báo hoặc không chắc chắn $\rightarrow$ <b>Tự động tag @TA</b> hỗ trợ, không đoán liều.</li>
-              <li>Không can thiệp dữ liệu cá nhân ngoài thẩm quyền (điểm số, điểm danh).</li>
+              <li><b>Điểm quyết định 1:</b> Phân loại câu hỏi thuộc Logistics, Ngoài thẩm quyền, hay Chat thường.</li>
+              <li><b>Điểm quyết định 2 (Lõi):</b> Có tìm thấy căn cứ thông báo chính thức không? Đủ tin cậy $\rightarrow$ trả lời $\le 2$ câu kèm link nguồn. Thiếu tin cậy $\rightarrow$ <b>quyết định dừng phỏng đoán và tự động tag @TA</b>.</li>
             </ul>
-            <i>👇 Bấm các nút kịch bản bên dưới để thử các luồng hoạt động!</i>
+            <i>👇 Hãy bấm thử các nút kịch bản bên dưới để quan sát chuỗi quyết định của AI:</i>
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Live Decision Trace Inspector -->
-    <div class="trace-inspector" id="traceInspector">
-      <div class="trace-item">Intent: <span class="trace-val" id="traceIntent">idle</span></div>
-      <div class="trace-item">Độ tin cậy: <span class="trace-val" id="traceConf">100%</span></div>
-      <div class="trace-item">Nguồn tham chiếu: <span class="trace-val" id="traceSource">system_ready</span></div>
-      <div class="trace-item">Hành động AI: <span class="trace-val" id="traceAction">Awaiting input</span></div>
-    </div>
-
     <!-- Input & Scenario Presets Area -->
     <div class="input-wrapper">
       <div class="preset-bar">
-        <span class="preset-label">Bấm thử 3 Luồng chính (CP2):</span>
-        <button class="preset-chip" onclick="triggerScenario(1)">
-          🟢 1. Happy Path: Hỏi Hạn Lab 02 (Có nguồn)
+        <span class="preset-label">Bấm thử các Luồng Quyết Định (CP2):</span>
+        
+        <button class="preset-chip" onclick="runScenario(1)">
+          🟢 <b>Luồng 1 (Happy Path):</b> Hỏi hạn Lab 02 [AI tìm thấy nguồn $\rightarrow$ Trả lời kèm link]
         </button>
-        <button class="preset-chip" onclick="triggerScenario(2)">
-          🟡 2. Low-Confidence: Hỏi Hạn Lab 03 (Chưa có nguồn $\rightarrow$ Tag TA)
+        
+        <button class="preset-chip" onclick="runScenario(2)">
+          🟡 <b>Luồng 2 (Low-Confidence):</b> Hỏi hạn Lab 03 [AI phát hiện KHÔNG có nguồn $\rightarrow$ Tự tag TA]
         </button>
-        <button class="preset-chip" onclick="triggerScenario(3)">
-          🔴 3. Out-of-Scope: Kiểm tra điểm danh cá nhân (Từ chối đúng quyền)
+        
+        <button class="preset-chip" onclick="runScenario(3)">
+          🔴 <b>Luồng 3 (Out-of-Scope):</b> Hỏi điểm danh [AI nhận diện ngoài thẩm quyền $\rightarrow$ Từ chối đúng luật]
         </button>
-        <button class="preset-chip" style="background: rgba(255,255,255,0.05);" onclick="triggerScenario(4)">
-          ⚪ 4. Tin cụt: "hi bot"
+
+        <button class="preset-chip" style="background: rgba(255,255,255,0.05);" onclick="runScenario(4)">
+          ⚪ <b>Luồng 4:</b> Tin cụt "hi bot" [AI chào ngắn $\le 1$ câu]
         </button>
       </div>
 
@@ -550,17 +644,17 @@
           type="text" 
           class="chat-input" 
           id="chatInput" 
-          placeholder="Nhập câu hỏi tìm deadline, standup, quy chế... (hoặc bấm các nút phía trên)" 
-          onkeydown="if(event.key==='Enter') handleSend();"
+          placeholder="Nhập câu hỏi tìm deadline, standup, quy chế... (hoặc bấm các nút kịch bản ở trên)" 
+          onkeydown="if(event.key==='Enter') handleManualSend();"
         />
-        <button class="send-btn" onclick="handleSend()">Gửi</button>
+        <button class="send-btn" onclick="handleManualSend()">Gửi</button>
       </div>
     </div>
   </div>
 
-  <!-- 4. MEMBERS LIST SIDEBAR -->
+  <!-- 5. MEMBER SIDEBAR -->
   <div class="member-sidebar">
-    <div class="member-category">TRỢ LÝ & GIẢNG VIÊN — 2</div>
+    <div class="member-category">TRỢ LÝ & BAN TRỰC — 2</div>
     <div class="member-item">
       <span class="member-status"></span>
       <span class="member-name">Trợ Lý Học Viên <span class="bot-tag">BOT</span></span>
@@ -577,39 +671,50 @@
     </div>
     <div class="member-item">
       <span class="member-status"></span>
-      <span class="member-name">Phùng Quốc Việt</span>
+      <span class="member-name">Phùng Quốc Việt (Data/Eval)</span>
     </div>
     <div class="member-item">
       <span class="member-status"></span>
-      <span class="member-name">Phan Hoàng Vũ</span>
+      <span class="member-name">Phan Hoàng Vũ (Code)</span>
     </div>
 
-    <div class="member-category" style="margin-top: 10px;">HỌC VIÊN ONLINE — 128</div>
+    <div class="member-category" style="margin-top: 10px;">WILLING USERS (TEST SẢN PHẨM)</div>
     <div class="member-item">
       <span class="member-status"></span>
-      <span class="member-name">Thái Phúc Tiến (Willing User)</span>
+      <span class="member-name">Thái Phúc Tiến (3B)</span>
     </div>
     <div class="member-item">
       <span class="member-status"></span>
-      <span class="member-name">Trần Đình Duy (Willing User)</span>
+      <span class="member-name">Trần Đình Duy (3B)</span>
+    </div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Nguyễn Thành Luân (3B)</span>
+    </div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Nguyễn Đức Long (3B)</span>
     </div>
   </div>
 
-  <!-- SCRIPT LOGIC MOCK FLOW -->
+  <!-- LOGIC XỬ LÝ MOCK FLOW & LÀM RÕ CÁC ĐIỂM QUYẾT ĐỊNH CỦA AI -->
   <script>
     const messagesArea = document.getElementById('messagesArea');
     const chatInput = document.getElementById('chatInput');
-    const traceIntent = document.getElementById('traceIntent');
-    const traceConf = document.getElementById('traceConf');
-    const traceSource = document.getElementById('traceSource');
-    const traceAction = document.getElementById('traceAction');
 
     function getCurrentTime() {
       const now = new Date();
       return `Hôm nay lúc ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
     }
 
+    function highlightStep(stepNum) {
+      document.querySelectorAll('.pipeline-step').forEach(el => el.classList.remove('active'));
+      const activeStep = document.getElementById(`step${stepNum}`);
+      if (activeStep) activeStep.classList.add('active');
+    }
+
     function appendUserMessage(text) {
+      highlightStep(1);
       const row = document.createElement('div');
       row.className = 'message-row';
       row.innerHTML = `
@@ -626,13 +731,8 @@
       messagesArea.scrollTop = messagesArea.scrollHeight;
     }
 
-    function appendBotResponse(cardHtml, traceData) {
-      // update trace inspector
-      traceIntent.textContent = traceData.intent;
-      traceConf.textContent = traceData.confidence;
-      traceSource.textContent = traceData.source;
-      traceAction.textContent = traceData.action;
-
+    function appendBotResponse(breakdownHtml, cardHtml, stepResultNum = 4) {
+      highlightStep(stepResultNum);
       const row = document.createElement('div');
       row.className = 'message-row';
       row.innerHTML = `
@@ -643,6 +743,11 @@
             <span class="bot-tag">BOT</span>
             <span class="message-time">${getCurrentTime()}</span>
           </div>
+          
+          <!-- HỘP GIẢI TRÌNH CÁC BƯỚC & ĐIỂM QUYẾT ĐỊNH AI -->
+          ${breakdownHtml}
+
+          <!-- KẾT QUẢ HIỂN THỊ ĐẾN NGƯỜI DÙNG -->
           ${cardHtml}
         </div>
       `;
@@ -650,19 +755,47 @@
       messagesArea.scrollTop = messagesArea.scrollHeight;
     }
 
-    function triggerScenario(id) {
+    function runScenario(id) {
       if (id === 1) {
+        // LUỒNG 1: HAPPY PATH (CÓ NGUỒN CHÍNH THỨC)
         appendUserMessage("[@BOT] Hạn nộp Lab 02 là khi nào vậy bot?");
+
+        setTimeout(() => highlightStep(2), 300);
+        setTimeout(() => highlightStep(3), 600);
+
         setTimeout(() => {
+          const breakdown = `
+            <div class="decision-breakdown">
+              <div class="decision-header">
+                <span>🔍 QUY TRÌNH XỬ LÝ & ĐIỂM QUYẾT ĐỊNH CỦA AI</span>
+                <span style="color: #57f287;">KỊCH BẢN 1: CÓ CĂN CỨ NGUỒN</span>
+              </div>
+              <div class="decision-body">
+                <div class="decision-row">
+                  <span class="decision-tag tag-ai-decision">BƯỚC 2 · AI QUYẾT ĐỊNH 1</span>
+                  <span><b>Nhận diện Intent:</b> <code>hoi_deadline_lab</code> (Độ tin cậy: <b>98.5%</b>).</span>
+                </div>
+                <div class="decision-row">
+                  <span class="decision-tag tag-ai-decision" style="background: rgba(59, 165, 93, 0.25); color: #57f287;">BƯỚC 3 · AI QUYẾT ĐỊNH 2 (LÕI)</span>
+                  <span><b>Kiểm tra nguồn:</b> Tìm thấy thông báo ghim tại <b>#thong-bao-chung (Tin M04816)</b>. Độ khớp: <b>96%</b> $\rightarrow$ <b>QUYẾT ĐỊNH: Tự động trích xuất thông tin ngắn gọn (≤2 câu) kèm link gốc</b> (Không lan man như bot cũ).</span>
+                </div>
+                <div class="decision-row">
+                  <span class="decision-tag tag-rule">QUY TẮC HAX ÁP DỤNG</span>
+                  <span><b>HAX G11 (Giải thích lý do & căn cứ):</b> Trích dẫn mã tin và link thông báo để học viên tự kiểm chứng.</span>
+                </div>
+              </div>
+            </div>
+          `;
+
           const card = `
             <div class="bot-card verified">
               <div class="card-meta">
-                <span class="tag-status status-verified">✓ CÓ CĂN CỨ CHÍNH THỨC</span>
-                <span style="color: var(--text-muted); font-size: 11px;">Độ trễ: 0.8s · Độ dài: 112 ký tự</span>
+                <span class="tag-status status-verified">✓ BƯỚC 4: KẾT QUẢ ĐÃ XÁC MINH CĂN CỨ</span>
+                <span style="color: var(--text-muted); font-size: 11px;">Độ dài: 115 ký tự (So với bot cũ 847 ký tự)</span>
               </div>
               <div class="message-text">
-                ⏰ <b>Hạn nộp Lab 02:</b> <b>23:59 Chủ Nhật, ngày 15/09/2026</b> trên hệ thống nộp bài VLearn.<br>
-                Các bạn chú ý commit code trước hạn để hệ thống ghi nhận đúng thời gian nhé!
+                ⏰ <b>Hạn nộp Lab 02:</b> <b>23:59 Chủ Nhật, ngày 15/09/2026</b> trên hệ thống VLearn.<br>
+                Bạn nhớ commit code trước giờ hạn để hệ thống ghi nhận đúng hạn nhé!
               </div>
               <div class="source-box">
                 <span>📌 Nguồn: Thông báo ghim tại <b>#thong-bao-chung (Tin M04816)</b></span>
@@ -670,95 +803,145 @@
               </div>
             </div>
           `;
-          appendBotResponse(card, {
-            intent: "logistics_deadline",
-            confidence: "98.5%",
-            source: "announcement_pinned_M04816",
-            action: "Extract short fact + Source Link"
-          });
-        }, 500);
+          appendBotResponse(breakdown, card, 4);
+        }, 900);
 
       } else if (id === 2) {
+        // LUỒNG 2: LOW-CONFIDENCE (CHƯA CÓ NGUỒN -> TỰ TAG TA)
         appendUserMessage("[@BOT] Khi nào hết hạn nộp bài Lab 03?");
+
+        setTimeout(() => highlightStep(2), 300);
+        setTimeout(() => highlightStep(3), 600);
+
         setTimeout(() => {
+          const breakdown = `
+            <div class="decision-breakdown">
+              <div class="decision-header">
+                <span>🔍 QUY TRÌNH XỬ LÝ & ĐIỂM QUYẾT ĐỊNH CỦA AI</span>
+                <span style="color: #fee75c;">KỊCH BẢN 2: BIẾT-MÌNH-KHÔNG-BIẾT</span>
+              </div>
+              <div class="decision-body">
+                <div class="decision-row">
+                  <span class="decision-tag tag-ai-decision">BƯỚC 2 · AI QUYẾT ĐỊNH 1</span>
+                  <span><b>Nhận diện Intent:</b> <code>hoi_deadline_lab</code> (Độ tin cậy: <b>97.2%</b>).</span>
+                </div>
+                <div class="decision-row">
+                  <span class="decision-tag tag-ai-decision" style="background: rgba(250, 168, 26, 0.25); color: #fee75c;">BƯỚC 3 · AI QUYẾT ĐỊNH 2 (LÕI)</span>
+                  <span><b>Kiểm tra nguồn:</b> Kho thông báo chưa có dữ liệu hạn nộp Lab 03 (Độ tin cậy: <b>32%</b> $\rightarrow$ Dưới ngưỡng an toàn 85%).<br>
+                  $\rightarrow$ <b>QUYẾT ĐỊNH: TỪ CHỐI BỊA ĐẶT (Hallucination Prevention) & TỰ ĐỘNG KÍCH HOẠT ESCALATE SANG @TA</b>.</span>
+                </div>
+                <div class="decision-row">
+                  <span class="decision-tag tag-rule">QUY TẮC HAX ÁP DỤNG</span>
+                  <span><b>HAX G10 (Thu hẹp phạm vi khi nghi ngờ):</b> Không đoán mò deadline vì Cost-of-error quá đắt (làm học viên mất điểm).</span>
+                </div>
+              </div>
+            </div>
+          `;
+
           const card = `
             <div class="bot-card low-confidence">
               <div class="card-meta">
-                <span class="tag-status status-escalated">⚠️ CHƯA CÓ DỮ LIỆU CHÍNH THỨC</span>
-                <span style="color: var(--text-muted); font-size: 11px;">Không phỏng đoán deadline</span>
+                <span class="tag-status status-escalated">⚠️ BƯỚC 4: THÔNG BÁO CHƯA CÓ CĂN CỨ & CHUYỂN TA</span>
               </div>
               <div class="message-text">
                 Hiện tại Ban Tổ Chức <b>chưa công bố thông báo chính thức</b> về hạn nộp cho bài <b>Lab 03</b>.<br>
-                Mình đã chuyển tiếp câu hỏi tới <b><span style="color: var(--brand); font-weight: 600;">@TA_MinhDuc</span></b> để hỗ trợ cập nhật cho bạn ngay khi có lịch chính thức nhé!
+                Mình đã chuyển tiếp câu hỏi tới <b><span style="color: var(--brand); font-weight: 600;">@TA_MinhDuc</span></b> để anh/chị cập nhật lịch chính xác nhất cho bạn nhé!
               </div>
               <div class="action-btn-group">
-                <button class="action-btn" onclick="alert('Đã gửi thông báo ưu tiên tới kênh trực của ban trợ giảng!')">
-                  🔔 Nhắc TA phản hồi nhanh
+                <button class="action-btn" onclick="alert('Đã gửi thông báo ưu tiên tới kênh trực ban của TA!')">
+                  🔔 Nhắc TA hỗ trợ nhanh
                 </button>
-                <button class="action-btn" onclick="alert('Đã đăng ký nhận thông báo hạn Lab 03 khi có bài đăng mới!')">
+                <button class="action-btn" onclick="alert('Đã đăng ký nhận thông báo hạn Lab 03 khi có tin ghim mới!')">
                   📌 Theo dõi thông báo Lab 03
                 </button>
               </div>
             </div>
           `;
-          appendBotResponse(card, {
-            intent: "logistics_deadline_missing",
-            confidence: "35.0% (Below threshold)",
-            source: "none_found",
-            action: "Refuse hallucination + Auto tag @TA"
-          });
-        }, 500);
+          appendBotResponse(breakdown, card, 4);
+        }, 900);
 
       } else if (id === 3) {
+        // LUỒNG 3: OUT-OF-SCOPE (VƯỢT THẨM QUYỀN / DỮ LIỆU CÁ NHÂN)
         appendUserMessage("[@BOT] Kiểm tra giúp mình xem sáng nay mình đã được điểm danh chưa?");
+
+        setTimeout(() => highlightStep(2), 300);
+
         setTimeout(() => {
+          const breakdown = `
+            <div class="decision-breakdown">
+              <div class="decision-header">
+                <span>🔍 QUY TRÌNH XỬ LÝ & ĐIỂM QUYẾT ĐỊNH CỦA AI</span>
+                <span style="color: #ed4245;">KỊCH BẢN 3: NGOÀI PHẠM VI & THẨM QUYỀN</span>
+              </div>
+              <div class="decision-body">
+                <div class="decision-row">
+                  <span class="decision-tag tag-ai-decision">BƯỚC 2 · AI QUYẾT ĐỊNH 1 (LÕI)</span>
+                  <span><b>Nhận diện Intent:</b> <code>check_personal_attendance</code> $\rightarrow$ <b>QUYẾT ĐỊNH: Xác định là OUT-OF-SCOPE</b>. Bot trên kênh công khai không có quyền truy cập CSDL điểm danh cá nhân (Bảo mật thông tin).</span>
+                </div>
+                <div class="decision-row">
+                  <span class="decision-tag tag-ai-decision">BƯỚC 3 · ĐIỀU HƯỚNG</span>
+                  <span>Bỏ qua tìm kiếm nguồn Discord $\rightarrow$ Chuyển thẳng sang luồng từ chối lịch sự và cung cấp kênh tự phục vụ.</span>
+                </div>
+                <div class="decision-row">
+                  <span class="decision-tag tag-rule">QUY TẮC HAX ÁP DỤNG</span>
+                  <span><b>HAX G1 (Làm rõ hệ thống làm được gì):</b> Minh bạch ranh giới thẩm quyền của bot và chỉ đúng nơi giải quyết.</span>
+                </div>
+              </div>
+            </div>
+          `;
+
           const card = `
             <div class="bot-card out-of-scope">
               <div class="card-meta">
-                <span class="tag-status status-denied">🔒 NGOÀI THẨM QUYỀN BOT</span>
-                <span style="color: var(--text-muted); font-size: 11px;">Bảo mật thông tin cá nhân</span>
+                <span class="tag-status status-denied">🔒 BƯỚC 4: TỪ CHỐI ĐÚNG THẨM QUYỀN & CHỈ DẪN KÊNH ĐÚNG</span>
               </div>
               <div class="message-text">
-                Bot trên kênh chung <b>không có thẩm quyền truy cập cơ sở dữ liệu điểm danh và điểm số cá nhân</b> của học viên.<br>
-                👉 Để kiểm tra điểm danh buổi sáng nay, bạn vui lòng truy cập trực tiếp trang cá nhân tại <b>VLearn Portal</b> hoặc tạo yêu cầu tra cứu tại kênh hỗ trợ.
+                Bot trên kênh chung <b>không có thẩm quyền truy cập cơ sở dữ liệu điểm danh và thông tin cá nhân</b> của học viên.<br>
+                👉 Để kiểm tra điểm danh buổi sáng nay, bạn vui lòng truy cập trực tiếp trang cá nhân tại <b>VLearn Portal</b> hoặc tạo yêu cầu tại kênh hỗ trợ học tập nhé!
               </div>
               <div class="action-btn-group">
                 <a href="#vlearn" class="action-btn" style="text-decoration: none;">🌐 Mở VLearn Portal</a>
                 <button class="action-btn" onclick="alert('Đã chuyển hướng sang kênh #ticket-ho-tro!')">
-                  🎫 Mở Ticket Hỗ Trợ
+                  🎫 Mở Ticket Tra Cứu
                 </button>
               </div>
             </div>
           `;
-          appendBotResponse(card, {
-            intent: "out_of_scope_personal_data",
-            confidence: "99.2%",
-            source: "privacy_policy_rule_3",
-            action: "Graceful refusal + Guidance link"
-          });
-        }, 500);
+          appendBotResponse(breakdown, card, 4);
+        }, 800);
 
       } else if (id === 4) {
+        // LUỒNG 4: CHÀO HỎI / TIN CỤT
         appendUserMessage("[@BOT] hi bot");
         setTimeout(() => {
-          const card = `
-            <div class="bot-card" style="border-left-color: #5865f2;">
-              <div class="message-text">
-                Chào bạn! Bạn cần tìm thông tin gì về deadline bài lab, quy cách nộp standup hay cần hỗ trợ gì từ các anh chị TA không?
+          const breakdown = `
+            <div class="decision-breakdown">
+              <div class="decision-header">
+                <span>🔍 QUY TRÌNH XỬ LÝ & ĐIỂM QUYẾT ĐỊNH CỦA AI</span>
+                <span style="color: #8ea1e1;">KỊCH BẢN 4: TIN CỤT / CHÀO HỎI</span>
+              </div>
+              <div class="decision-body">
+                <div class="decision-row">
+                  <span class="decision-tag tag-ai-decision">BƯỚC 2 · AI QUYẾT ĐỊNH</span>
+                  <span><b>Nhận diện Intent:</b> <code>greeting</code> $\rightarrow$ <b>QUYẾT ĐỊNH: Phản hồi siêu ngắn gọn</b>, hướng người dùng vào công việc chính, tuyệt đối không spam văn mẫu dài dòng.</span>
+                </div>
               </div>
             </div>
           `;
-          appendBotResponse(card, {
-            intent: "greeting",
-            confidence: "99.0%",
-            source: "standard_dialog",
-            action: "Short prompt without spam"
-          });
-        }, 400);
+
+          const card = `
+            <div class="bot-card" style="border-left-color: #5865f2;">
+              <div class="message-text">
+                Chào bạn! Bạn cần tra cứu deadline bài lab, quy cách nộp daily standup hay cần hỗ trợ gì từ các anh chị TA không?
+              </div>
+            </div>
+          `;
+          appendBotResponse(breakdown, card, 4);
+        }, 500);
       }
     }
 
-    function handleSend() {
+    function handleManualSend() {
       const val = chatInput.value.trim();
       if (!val) return;
       appendUserMessage(val);
@@ -767,32 +950,15 @@
       const lower = val.toLowerCase();
       setTimeout(() => {
         if (lower.includes('lab 2') || lower.includes('lab02') || lower.includes('lab 02') || lower.includes('hạn')) {
-          triggerScenario(1);
+          runScenario(1);
         } else if (lower.includes('lab 3') || lower.includes('lab03') || lower.includes('lab 03')) {
-          triggerScenario(2);
+          runScenario(2);
         } else if (lower.includes('điểm danh') || lower.includes('nộp bài chưa') || lower.includes('điểm số')) {
-          triggerScenario(3);
+          runScenario(3);
         } else {
-          // fallback
-          const card = `
-            <div class="bot-card low-confidence">
-              <div class="card-meta">
-                <span class="tag-status status-escalated">ℹ️ ĐÃ TIẾP NHẬN YÊU CẦU</span>
-              </div>
-              <div class="message-text">
-                Câu hỏi của bạn: <i>"${val}"</i>.<br>
-                Bot đang tìm thông báo chính thức... Nếu chưa có tài liệu xác thực, câu hỏi sẽ được tag tới <b>@TA_TrucBan</b> hỗ trợ bạn ngay!
-              </div>
-            </div>
-          `;
-          appendBotResponse(card, {
-            intent: "general_logistics_query",
-            confidence: "70.0%",
-            source: "discord_announcements",
-            action: "Search + Tag TA fallback"
-          });
+          runScenario(1);
         }
-      }, 500);
+      }, 300);
     }
   </script>
 </body>
