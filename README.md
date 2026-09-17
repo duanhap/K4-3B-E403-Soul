@@ -8,9 +8,9 @@
 
 | Họ và Tên | Mã Học Viên | Vai trò chính | Phần việc đảm nhiệm trong dự án |
 |---|---|---|---|
-| Nguyễn Công Duẩn | [2A202602716] | Đội trưởng |  |
-| Phùng Quốc Việt | [2A202602456] | Thành viên |  |
-| Phan Hoàng Vũ |[2A202602450]  | Thành viên |  |
+| Nguyễn Công Duẩn | 2A202602716 | Đội trưởng | Quản lý tiến độ các checkpoint, hoàn thiện spec.md, điều phối Willing Users, chuẩn bị Slide & kịch bản Demo (CP5-CP6). |
+| Phùng Quốc Việt | 2A202602456 | Thành viên | Phụ trách Data Mining & Bằng chứng nỗi đau từ K4 pack (k4_messages.csv), xây dựng bộ kiểm thử Golden Set ≥20 case (eval/) và đo lường. |
+| Phan Hoàng Vũ | 2A202602450 | Thành viên | Phụ trách Kỹ thuật / Prototype (codebase/), thiết kế System Prompt phân loại intent logistics/out-of-scope, tích hợp API gọi AI thật xử lý nguồn & tag @TA. |
 
 
 > Nhóm copy nguyên file README này về repo của mình, rồi điền bảng trên. Cột **Phần việc đảm nhiệm** ghi càng cụ thể càng tốt.

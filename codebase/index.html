@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord AI Assistant — Mock Flow CP2 · Nhóm Soul (E403 - Lớp 3B)</title>
+  <style>
+    :root {
+      --bg-tertiary: #202225;
+      --bg-secondary: #2f3136;
+      --bg-primary: #36393f;
+      --bg-floating: #18191c;
+      --channel-hover: #34373c;
+      --channel-active: #393c43;
+      --text-normal: #dcddde;
+      --text-muted: #72767d;
+      --text-link: #00aff4;
+      --brand: #5865f2;
+      --brand-hover: #4752c4;
+      --success: #3ba55d;
+      --warning: #faa81a;
+      --danger: #ed4245;
+      --card-bg: rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-tertiary);
+      color: var(--text-normal);
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* 1. Servers Bar */
+    .servers-bar {
+      width: 72px;
+      background: var(--bg-tertiary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0;
+      gap: 10px;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(0,0,0,0.2);
+    }
+    .server-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: bold;
+      color: #fff;
+      font-size: 14px;
+      position: relative;
+    }
+    .server-icon:hover, .server-icon.active {
+      border-radius: 16px;
+      background: var(--brand);
+    }
+    .server-icon.active::before {
+      content: "";
+      position: absolute;
+      left: -12px;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      background: white;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* 2. Channels Sidebar */
+    .channels-sidebar {
+      width: 240px;
+      background: var(--bg-secondary);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(0,0,0,0.15);
+    }
+    .server-header {
+      height: 48px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+    }
+    .channel-list {
+      flex: 1;
+      padding: 10px 8px;
+      overflow-y: auto;
+    }
+    .channel-group-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      padding: 8px 8px 4px 8px;
+      letter-spacing: 0.5px;
+    }
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 4px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      margin-bottom: 2px;
+      transition: background 0.15s ease;
+    }
+    .channel-item:hover {
+      background: var(--channel-hover);
+      color: var(--text-normal);
+    }
+    .channel-item.active {
+      background: var(--channel-active);
+      color: #fff;
+    }
+
+    /* 3. Main Chat Container */
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-primary);
+      position: relative;
+    }
+
+    /* Chat Header */
+    .chat-header {
+      height: 48px;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .chat-header-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      color: #fff;
+    }
+    .chat-header-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      border-left: 1px solid rgba(255,255,255,0.1);
+      padding-left: 12px;
+      margin-left: 12px;
+    }
+    .badge-pill {
+      background: rgba(88, 101, 242, 0.2);
+      color: #8ea1e1;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid rgba(88, 101, 242, 0.3);
+    }
+
+    /* Messages Area */
+    .messages-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message-row {
+      display: flex;
+      gap: 16px;
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+      font-size: 14px;
+    }
+    .avatar-bot {
+      background: linear-gradient(135deg, #5865f2, #eb459e);
+    }
+    .avatar-user {
+      background: #4f545c;
+    }
+    .avatar-ta {
+      background: #faa81a;
+    }
+
+    .message-content {
+      flex: 1;
+    }
+    .message-header {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .message-author {
+      font-weight: 600;
+      font-size: 15px;
+      color: #fff;
+    }
+    .bot-tag {
+      background: var(--brand);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 4px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .message-time {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .message-text {
+      font-size: 14px;
+      line-height: 1.45;
+      color: var(--text-normal);
+    }
+
+    /* Bot Rich Card / Decision Card */
+    .bot-card {
+      margin-top: 8px;
+      border-left: 4px solid var(--brand);
+      background: var(--card-bg);
+      border-radius: 4px;
+      padding: 12px 14px;
+      max-width: 600px;
+    }
+    .bot-card.verified { border-left-color: var(--success); }
+    .bot-card.low-confidence { border-left-color: var(--warning); }
+    .bot-card.out-of-scope { border-left-color: var(--danger); }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+    }
+    .status-verified { background: rgba(59, 165, 93, 0.2); color: #57f287; }
+    .status-escalated { background: rgba(250, 168, 26, 0.2); color: #fee75c; }
+    .status-denied { background: rgba(237, 66, 69, 0.2); color: #ed4245; }
+
+    .source-box {
+      margin-top: 8px;
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .source-link {
+      color: var(--text-link);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .source-link:hover { text-decoration: underline; }
+
+    .action-btn-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .action-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .action-btn:hover {
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+
+    /* Decision Trace Inspector Panel */
+    .trace-inspector {
+      background: rgba(24, 25, 28, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 16px;
+      font-family: monospace;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text-muted);
+    }
+    .trace-item {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .trace-val {
+      color: #57f287;
+      font-weight: bold;
+    }
+
+    /* Input & Preset Scenarios Area */
+    .input-wrapper {
+      padding: 0 16px 16px 16px;
+    }
+    .preset-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .preset-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .preset-chip {
+      background: rgba(88, 101, 242, 0.15);
+      border: 1px solid rgba(88, 101, 242, 0.35);
+      color: #dcddde;
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .preset-chip:hover {
+      background: var(--brand);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .chat-input-box {
+      background: #40444b;
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .chat-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 14px;
+      outline: none;
+    }
+    .chat-input::placeholder {
+      color: #72767d;
+    }
+    .send-btn {
+      background: var(--brand);
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .send-btn:hover {
+      background: var(--brand-hover);
+    }
+
+    /* 4. Member Sidebar */
+    .member-sidebar {
+      width: 220px;
+      background: var(--bg-secondary);
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-left: 1px solid rgba(0,0,0,0.15);
+    }
+    .member-category {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .member-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      cursor: default;
+    }
+    .member-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+    }
+    .member-name {
+      font-size: 13px;
+      color: var(--text-normal);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. SERVERS BAR -->
+  <div class="servers-bar">
+    <div class="server-icon active" title="Cộng đồng K4 · L2-3">K4</div>
+    <div class="server-icon" title="Nhóm Hackathon Soul">SOUL</div>
+  </div>
+
+  <!-- 2. CHANNELS SIDEBAR -->
+  <div class="channels-sidebar">
+    <div class="server-header">
+      <span>AI20K · Khóa 4 (3B)</span>
+      <span style="color: var(--text-muted); font-size: 12px;">▼</span>
+    </div>
+    <div class="channel-list">
+      <div class="channel-group-title">THÔNG TIN CHÍNH THỨC</div>
+      <div class="channel-item">📢 #thong-bao-chung</div>
+      <div class="channel-item">📌 #tai-nguyen-slide</div>
+      <div class="channel-item">🗓️ #lich-trinh-deadlines</div>
+
+      <div class="channel-group-title" style="margin-top: 12px;">KÊNH TỰ ĐỘNG & HỖ TRỢ</div>
+      <div class="channel-item active">🤖 #tro-ly-bot</div>
+      <div class="channel-item">💬 #thao-luan-lop-3b</div>
+      <div class="channel-item">🎫 #ticket-ho-tro</div>
+    </div>
+  </div>
+
+  <!-- 3. MAIN CHAT CONTAINER -->
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="chat-header-title">
+        <span># tro-ly-bot</span>
+        <span class="badge-pill">MOCKUP CP2 · FLOW BẤM ĐƯỢC</span>
+      </div>
+      <div class="chat-header-desc">
+        Tối ưu bot Trợ lý: Trả lời có căn cứ thông báo & Tự chuyển TA (Đề B1)
+      </div>
+    </div>
+
+    <!-- Messages Display Area -->
+    <div class="messages-area" id="messagesArea">
+      
+      <!-- Intro System Msg -->
+      <div class="message-row">
+        <div class="user-avatar avatar-bot">AI</div>
+        <div class="message-content">
+          <div class="message-header">
+            <span class="message-author">Trợ Lý Học Viên</span>
+            <span class="bot-tag">BOT</span>
+            <span class="message-time">Hôm nay lúc 18:00</span>
+          </div>
+          <div class="message-text">
+            👋 Chào các bạn lớp 3B! Mình là <b>Bot Trợ Lý (Phiên bản tối ưu B1)</b>.<br>
+            Khác với bot cũ trả lời dài dòng và phỏng đoán, mình hoạt động theo 3 nguyên tắc kiểm chứng:
+            <ul style="margin: 6px 0 6px 20px; font-size: 13px;">
+              <li>Chỉ trả lời logistics khi có <b>nguồn thông báo chính thức</b> (ngắn gọn ≤ 2 câu kèm link).</li>
+              <li>Chưa có thông báo hoặc không chắc chắn $\rightarrow$ <b>Tự động tag @TA</b> hỗ trợ, không đoán liều.</li>
+              <li>Không can thiệp dữ liệu cá nhân ngoài thẩm quyền (điểm số, điểm danh).</li>
+            </ul>
+            <i>👇 Bấm các nút kịch bản bên dưới để thử các luồng hoạt động!</i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Live Decision Trace Inspector -->
+    <div class="trace-inspector" id="traceInspector">
+      <div class="trace-item">Intent: <span class="trace-val" id="traceIntent">idle</span></div>
+      <div class="trace-item">Độ tin cậy: <span class="trace-val" id="traceConf">100%</span></div>
+      <div class="trace-item">Nguồn tham chiếu: <span class="trace-val" id="traceSource">system_ready</span></div>
+      <div class="trace-item">Hành động AI: <span class="trace-val" id="traceAction">Awaiting input</span></div>
+    </div>
+
+    <!-- Input & Scenario Presets Area -->
+    <div class="input-wrapper">
+      <div class="preset-bar">
+        <span class="preset-label">Bấm thử 3 Luồng chính (CP2):</span>
+        <button class="preset-chip" onclick="triggerScenario(1)">
+          🟢 1. Happy Path: Hỏi Hạn Lab 02 (Có nguồn)
+        </button>
+        <button class="preset-chip" onclick="triggerScenario(2)">
+          🟡 2. Low-Confidence: Hỏi Hạn Lab 03 (Chưa có nguồn $\rightarrow$ Tag TA)
+        </button>
+        <button class="preset-chip" onclick="triggerScenario(3)">
+          🔴 3. Out-of-Scope: Kiểm tra điểm danh cá nhân (Từ chối đúng quyền)
+        </button>
+        <button class="preset-chip" style="background: rgba(255,255,255,0.05);" onclick="triggerScenario(4)">
+          ⚪ 4. Tin cụt: "hi bot"
+        </button>
+      </div>
+
+      <div class="chat-input-box">
+        <input 
+          type="text" 
+          class="chat-input" 
+          id="chatInput" 
+          placeholder="Nhập câu hỏi tìm deadline, standup, quy chế... (hoặc bấm các nút phía trên)" 
+          onkeydown="if(event.key==='Enter') handleSend();"
+        />
+        <button class="send-btn" onclick="handleSend()">Gửi</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. MEMBERS LIST SIDEBAR -->
+  <div class="member-sidebar">
+    <div class="member-category">TRỢ LÝ & GIẢNG VIÊN — 2</div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Trợ Lý Học Viên <span class="bot-tag">BOT</span></span>
+    </div>
+    <div class="member-item">
+      <span class="member-status" style="background: var(--warning);"></span>
+      <span class="member-name">TA_MinhDuc (Trực ban)</span>
+    </div>
+
+    <div class="member-category" style="margin-top: 10px;">NHÓM SOUL (E403) — 3</div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Nguyễn Công Duẩn (Lead)</span>
+    </div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Phùng Quốc Việt</span>
+    </div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Phan Hoàng Vũ</span>
+    </div>
+
+    <div class="member-category" style="margin-top: 10px;">HỌC VIÊN ONLINE — 128</div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Thái Phúc Tiến (Willing User)</span>
+    </div>
+    <div class="member-item">
+      <span class="member-status"></span>
+      <span class="member-name">Trần Đình Duy (Willing User)</span>
+    </div>
+  </div>
+
+  <!-- SCRIPT LOGIC MOCK FLOW -->
+  <script>
+    const messagesArea = document.getElementById('messagesArea');
+    const chatInput = document.getElementById('chatInput');
+    const traceIntent = document.getElementById('traceIntent');
+    const traceConf = document.getElementById('traceConf');
+    const traceSource = document.getElementById('traceSource');
+    const traceAction = document.getElementById('traceAction');
+
+    function getCurrentTime() {
+      const now = new Date();
+      return `Hôm nay lúc ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    }
+
+    function appendUserMessage(text) {
+      const row = document.createElement('div');
+      row.className = 'message-row';
+      row.innerHTML = `
+        <div class="user-avatar avatar-user">HV</div>
+        <div class="message-content">
+          <div class="message-header">
+            <span class="message-author">Học Viên K4</span>
+            <span class="message-time">${getCurrentTime()}</span>
+          </div>
+          <div class="message-text">${text}</div>
+        </div>
+      `;
+      messagesArea.appendChild(row);
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function appendBotResponse(cardHtml, traceData) {
+      // update trace inspector
+      traceIntent.textContent = traceData.intent;
+      traceConf.textContent = traceData.confidence;
+      traceSource.textContent = traceData.source;
+      traceAction.textContent = traceData.action;
+
+      const row = document.createElement('div');
+      row.className = 'message-row';
+      row.innerHTML = `
+        <div class="user-avatar avatar-bot">AI</div>
+        <div class="message-content">
+          <div class="message-header">
+            <span class="message-author">Trợ Lý Học Viên</span>
+            <span class="bot-tag">BOT</span>
+            <span class="message-time">${getCurrentTime()}</span>
+          </div>
+          ${cardHtml}
+        </div>
+      `;
+      messagesArea.appendChild(row);
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+
+    function triggerScenario(id) {
+      if (id === 1) {
+        appendUserMessage("[@BOT] Hạn nộp Lab 02 là khi nào vậy bot?");
+        setTimeout(() => {
+          const card = `
+            <div class="bot-card verified">
+              <div class="card-meta">
+                <span class="tag-status status-verified">✓ CÓ CĂN CỨ CHÍNH THỨC</span>
+                <span style="color: var(--text-muted); font-size: 11px;">Độ trễ: 0.8s · Độ dài: 112 ký tự</span>
+              </div>
+              <div class="message-text">
+                ⏰ <b>Hạn nộp Lab 02:</b> <b>23:59 Chủ Nhật, ngày 15/09/2026</b> trên hệ thống nộp bài VLearn.<br>
+                Các bạn chú ý commit code trước hạn để hệ thống ghi nhận đúng thời gian nhé!
+              </div>
+              <div class="source-box">
+                <span>📌 Nguồn: Thông báo ghim tại <b>#thong-bao-chung (Tin M04816)</b></span>
+                <a href="#thong-bao-chung" class="source-link">Xem tin gốc ↗</a>
+              </div>
+            </div>
+          `;
+          appendBotResponse(card, {
+            intent: "logistics_deadline",
+            confidence: "98.5%",
+            source: "announcement_pinned_M04816",
+            action: "Extract short fact + Source Link"
+          });
+        }, 500);
+
+      } else if (id === 2) {
+        appendUserMessage("[@BOT] Khi nào hết hạn nộp bài Lab 03?");
+        setTimeout(() => {
+          const card = `
+            <div class="bot-card low-confidence">
+              <div class="card-meta">
+                <span class="tag-status status-escalated">⚠️ CHƯA CÓ DỮ LIỆU CHÍNH THỨC</span>
+                <span style="color: var(--text-muted); font-size: 11px;">Không phỏng đoán deadline</span>
+              </div>
+              <div class="message-text">
+                Hiện tại Ban Tổ Chức <b>chưa công bố thông báo chính thức</b> về hạn nộp cho bài <b>Lab 03</b>.<br>
+                Mình đã chuyển tiếp câu hỏi tới <b><span style="color: var(--brand); font-weight: 600;">@TA_MinhDuc</span></b> để hỗ trợ cập nhật cho bạn ngay khi có lịch chính thức nhé!
+              </div>
+              <div class="action-btn-group">
+                <button class="action-btn" onclick="alert('Đã gửi thông báo ưu tiên tới kênh trực của ban trợ giảng!')">
+                  🔔 Nhắc TA phản hồi nhanh
+                </button>
+                <button class="action-btn" onclick="alert('Đã đăng ký nhận thông báo hạn Lab 03 khi có bài đăng mới!')">
+                  📌 Theo dõi thông báo Lab 03
+                </button>
+              </div>
+            </div>
+          `;
+          appendBotResponse(card, {
+            intent: "logistics_deadline_missing",
+            confidence: "35.0% (Below threshold)",
+            source: "none_found",
+            action: "Refuse hallucination + Auto tag @TA"
+          });
+        }, 500);
+
+      } else if (id === 3) {
+        appendUserMessage("[@BOT] Kiểm tra giúp mình xem sáng nay mình đã được điểm danh chưa?");
+        setTimeout(() => {
+          const card = `
+            <div class="bot-card out-of-scope">
+              <div class="card-meta">
+                <span class="tag-status status-denied">🔒 NGOÀI THẨM QUYỀN BOT</span>
+                <span style="color: var(--text-muted); font-size: 11px;">Bảo mật thông tin cá nhân</span>
+              </div>
+              <div class="message-text">
+                Bot trên kênh chung <b>không có thẩm quyền truy cập cơ sở dữ liệu điểm danh và điểm số cá nhân</b> của học viên.<br>
+                👉 Để kiểm tra điểm danh buổi sáng nay, bạn vui lòng truy cập trực tiếp trang cá nhân tại <b>VLearn Portal</b> hoặc tạo yêu cầu tra cứu tại kênh hỗ trợ.
+              </div>
+              <div class="action-btn-group">
+                <a href="#vlearn" class="action-btn" style="text-decoration: none;">🌐 Mở VLearn Portal</a>
+                <button class="action-btn" onclick="alert('Đã chuyển hướng sang kênh #ticket-ho-tro!')">
+                  🎫 Mở Ticket Hỗ Trợ
+                </button>
+              </div>
+            </div>
+          `;
+          appendBotResponse(card, {
+            intent: "out_of_scope_personal_data",
+            confidence: "99.2%",
+            source: "privacy_policy_rule_3",
+            action: "Graceful refusal + Guidance link"
+          });
+        }, 500);
+
+      } else if (id === 4) {
+        appendUserMessage("[@BOT] hi bot");
+        setTimeout(() => {
+          const card = `
+            <div class="bot-card" style="border-left-color: #5865f2;">
+              <div class="message-text">
+                Chào bạn! Bạn cần tìm thông tin gì về deadline bài lab, quy cách nộp standup hay cần hỗ trợ gì từ các anh chị TA không?
+              </div>
+            </div>
+          `;
+          appendBotResponse(card, {
+            intent: "greeting",
+            confidence: "99.0%",
+            source: "standard_dialog",
+            action: "Short prompt without spam"
+          });
+        }, 400);
+      }
+    }
+
+    function handleSend() {
+      const val = chatInput.value.trim();
+      if (!val) return;
+      appendUserMessage(val);
+      chatInput.value = '';
+
+      const lower = val.toLowerCase();
+      setTimeout(() => {
+        if (lower.includes('lab 2') || lower.includes('lab02') || lower.includes('lab 02') || lower.includes('hạn')) {
+          triggerScenario(1);
+        } else if (lower.includes('lab 3') || lower.includes('lab03') || lower.includes('lab 03')) {
+          triggerScenario(2);
+        } else if (lower.includes('điểm danh') || lower.includes('nộp bài chưa') || lower.includes('điểm số')) {
+          triggerScenario(3);
+        } else {
+          // fallback
+          const card = `
+            <div class="bot-card low-confidence">
+              <div class="card-meta">
+                <span class="tag-status status-escalated">ℹ️ ĐÃ TIẾP NHẬN YÊU CẦU</span>
+              </div>
+              <div class="message-text">
+                Câu hỏi của bạn: <i>"${val}"</i>.<br>
+                Bot đang tìm thông báo chính thức... Nếu chưa có tài liệu xác thực, câu hỏi sẽ được tag tới <b>@TA_TrucBan</b> hỗ trợ bạn ngay!
+              </div>
+            </div>
+          `;
+          appendBotResponse(card, {
+            intent: "general_logistics_query",
+            confidence: "70.0%",
+            source: "discord_announcements",
+            action: "Search + Tag TA fallback"
+          });
+        }
+      }, 500);
+    }
+  </script>
+</body>
+</html>
