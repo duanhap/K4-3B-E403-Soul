@@ -15,7 +15,7 @@
 
 > Nhóm copy nguyên file README này về repo của mình, rồi điền bảng trên. Cột **Phần việc đảm nhiệm** ghi càng cụ thể càng tốt.
 
-- Thời lượng: **47,5 giờ** từ phát đề đến thuyết trình (ca 3A) — LAB 5 (phát đề + build) · LEC 6 (tiếp tục build theo ca) · LAB 6 (vòng thi)
+- Thời lượng: **39 giờ** từ phát đề đến thuyết trình (ca 3B) — LAB 5 (phát đề + build) · LEC 6 (tiếp tục build theo ca) · LAB 6 (vòng thi)
 - Nhóm: **3-4 người** · thi theo phòng (E403 / E402), chia cụm rồi chung kết phòng — xem *Thể thức thi*
 - **Chia cụm theo bàn**, không cần chung đề tài. Chủ đề tự chọn trong khuôn khổ đề bài
 - Nhóm nhỏ thì **chọn lát cắt nhỏ**, và phải có **khảo sát nỗi đau thật** — đây là chỗ ăn điểm nặng nhất
@@ -38,17 +38,17 @@
 | `data/` | Dữ liệu thật đã ẩn danh: `vlearn-pack/` (chatlog VLearn tutor + 6 transcript bài giảng + 2 bộ slide bản hackathon) và **`discord-pack/` (tin nhắn Discord khoá 4 + bản tin bot)** — dùng để tìm bằng chứng và xây golden set. **Đọc `data/README.md` trước** |
 | `further-reading/` | Tài liệu tham khảo có tóm lược tiếng Việt: **Mom Test** (phỏng vấn), **PAIR Guidebook** (Google, 6 chương), **HAX Toolkit** (Microsoft, 18 nguyên tắc), **JTBD Playbook** + worksheet — bắt đầu từ `further-reading/README.md` |
 
-## Lịch — 6 checkpoint (ca 3A · 47,5 giờ)
+## Lịch — 6 checkpoint (ca 3B · 39 giờ)
 
-| Mốc | Cần hoàn thành | Hạn (ca 3A) |
+| Mốc | Cần hoàn thành | Hạn (ca 3B) |
 |---|---|---|
-| — | Khai mạc 17:30 · phát đề 18:00 | 16/9 |
-| **CP1** | Canvas 7 dòng (`02-guide.md` §1.5) + đội trưởng + **link repo GitHub công khai** | **19:30** · 16/9 |
-| **CP2** | Cho thấy **luồng hoạt động** — bấm thử được, hoặc sơ đồ luồng | **21:00** · 16/9 |
-| **CP3** | **Video thao tác** 30 giây + **số đo** (thử bao nhiêu, đúng bao nhiêu) | **16:00** · 17/9 |
-| **CP4** | Chốt `spec.md` — **khoá chuẩn "đạt"** · tự khai phần chưa xong | **21:00** · 17/9 |
-| **CP5** | Slide PDF + **video demo dự phòng cho buổi pitch** — nộp cuối | **13:00** · 18/9 |
-| **CP6** | Thuyết trình · không nộp thêm | **17:30** · 18/9 |
+| — | Khai mạc 17:30 · phát đề 18:00 | 17/9 |
+| **CP1** | Canvas 7 dòng (`02-guide.md` §1.5) + đội trưởng + **link repo GitHub công khai** | **19:30** · 17/9 |
+| **CP2** | Cho thấy **luồng hoạt động** — bấm thử được, hoặc sơ đồ luồng | **21:00** · 17/9 |
+| **CP3** | **Video thao tác** 30 giây + **số đo** (thử bao nhiêu, đúng bao nhiêu) | **16:00** · 18/9 |
+| **CP4** | Chốt `spec.md` — **khoá chuẩn "đạt"** · tự khai phần chưa xong | **21:00** · 18/9 |
+| **CP5** | Slide PDF + **video demo dự phòng cho buổi pitch** — nộp cuối | **22:30** · 18/9 |
+| **CP6** | Thuyết trình · không nộp thêm | **09:00** · 19/9 |
 
 **CP1 đến CP5 mỗi mốc 5 điểm.** Nộp đúng hạn được đủ, nộp muộn là **0 điểm mốc đó** — không bù được bằng mốc khác.
 
@@ -56,9 +56,9 @@
 
 | | |
 |---|---|
-| **Thời gian tự làm** | Ngoài giờ học, và trong buổi **LEC ngày 17/9** |
+| **Thời gian tự làm** | Ngoài giờ học, và trong buổi **LEC ngày 18/9** |
 | **Coach hỗ trợ** | Trên lớp và trên Discord |
-| **Buổi LAB 18/9 · 17:30–21:00** | Đây là **vòng thi**, không phải giờ làm bài |
+| **Buổi LAB 19/9 · 09:00–13:00** | Đây là **vòng thi**, không phải giờ làm bài |
 
 Hai phòng cùng ca dùng chung lịch mốc. Năm link form phát đủ từ đầu — xong mốc nào nộp mốc đó, không phải chờ.
 
@@ -246,8 +246,8 @@ K4-<mã lớp>-<phòng>-<tên nhóm>
 
 | Ví dụ | Của nhóm nào |
 |---|---|
-| `K4-3A-E403-StudyPulse` | Lớp 3A · phòng E403 · nhóm StudyPulse |
-| `K4-3A-E402-LearnLoop` | Lớp 3A · phòng E402 · nhóm LearnLoop |
+| `K4-3B-E403-ChamCongAI` | Lớp 3B · phòng E403 · nhóm ChamCongAI |
+| `K4-3B-E402-DiscordBuddy` | Lớp 3B · phòng E402 · nhóm DiscordBuddy |
 
 **Ba phần đầu bắt buộc đúng.** Phòng là phòng nhóm đang ngồi thi.
 
@@ -341,7 +341,7 @@ Ba điều nên biết trước khi làm:
 
 1. Prototype có 3 mức **Sketch / Mock / Working** — mức nào cũng bắt buộc **≥1 lời gọi AI chạy thật**. Đây là thứ phải thấy được trong **video thao tác ở CP3**.
 2. **Vibe-coding rule:** dùng AI để build thoải mái, nhưng không giải thích được phần có tên mình thì phần đó 0 điểm (giám khảo hỏi bất kỳ thành viên khi thuyết trình).
-3. **Quality bar** chốt tại hạn chốt spec (21:00 17/9, tại CP4) và giữ nguyên sau đó.
+3. **Quality bar** chốt tại hạn chốt spec (21:00 18/9, tại CP4) và giữ nguyên sau đó.
 4. Chỉ dùng dữ liệu trong `data/` hoặc dữ liệu giả tự sinh — không dùng dữ liệu thật của người thật. Không commit API key.
 5. Tuân thủ **quy định bảo mật dữ liệu** bên dưới — đây là điều kiện để được cấp data.
 
