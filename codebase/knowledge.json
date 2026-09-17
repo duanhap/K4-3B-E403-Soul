@@ -1,0 +1,44 @@
+[
+  {
+    "id": "ANNOUNCEMENT_01",
+    "category": "Lab",
+    "title": "Hạn nộp Lab 01 & Quy cách commit GitHub",
+    "content": "Hạn nộp Lab 01 là 21:00 ngày 18/9/2026. Học viên commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh #submit-lab.",
+    "link": "https://discord.com/channels/k4-3b/announcements/101"
+  },
+  {
+    "id": "ANNOUNCEMENT_02",
+    "category": "Quy định",
+    "title": "Quy định sự cố nộp muộn & Kỹ thuật",
+    "content": "Mọi sự cố nộp muộn do Git/mạng cần báo trước hạn 15 phút kèm screenshot lỗi cho TA. Nộp muộn sau hạn không báo trước tính 0 điểm.",
+    "link": "https://discord.com/channels/k4-3b/announcements/102"
+  },
+  {
+    "id": "ANNOUNCEMENT_03",
+    "category": "Hackathon",
+    "title": "Lịch Checkpoint Mini Hackathon (CP1 - CP6)",
+    "content": "CP1: 19:30 17/9 (Canvas 7 dòng) | CP2: 21:00 17/9 (Luồng hoạt động) | CP3: 16:00 18/9 (Video 30s + số đo) | CP4: 21:00 18/9 (Chốt spec.md) | CP5: 22:30 18/9 (Slide & Demo video) | CP6: Vòng thuyết trình chung kết.",
+    "link": "https://discord.com/channels/k4-3b/announcements/103"
+  },
+  {
+    "id": "ANNOUNCEMENT_04",
+    "category": "Standup",
+    "title": "Quy định nộp Standup hàng ngày",
+    "content": "Học viên gửi báo cáo Standup hàng ngày trước 09:00 sáng tại kênh #standup theo đúng template: 1. Việc đã làm, 2. Việc sẽ làm, 3. Khó khăn vướng mắc.",
+    "link": "https://discord.com/channels/k4-3b/announcements/104"
+  },
+  {
+    "id": "ANNOUNCEMENT_05",
+    "category": "Tài liệu",
+    "title": "Link repo đề bài & AI Spec Template",
+    "content": "Mẫu AI Spec được lưu tại spec.md trong repo. Tham khảo rubric 100 điểm tại file 04-rubric.md và hướng dẫn 5 giai đoạn tại 02-guide.md.",
+    "link": "https://github.com/duanhap/K4-3B-E403-Soul/blob/main/spec.md"
+  },
+  {
+    "id": "STATUS_UNANNOUNCED",
+    "category": "Chưa thông báo",
+    "title": "Danh sách các mục CHƯA CÓ THÔNG BÁO CHÍNH THỨC",
+    "content": "Hạn nộp Lab 02, Lab 03, lịch thi Final, điểm danh cá nhân, kiểm tra điểm số cá nhân, yêu cầu xin châm chước commit trễ cá nhân -> Đều CHƯA có thông báo hoặc ngoài thẩm quyền tự động của bot.",
+    "link": ""
+  }
+]

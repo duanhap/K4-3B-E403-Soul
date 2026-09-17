@@ -1,6 +1,7 @@
 import os
 import json
 import re
+from pathlib import Path
 import discord
 from discord.ext import commands
 from google import genai
@@ -17,44 +18,35 @@ ai_client = None
 if config.GEMINI_API_KEY:
     ai_client = genai.Client(api_key=config.GEMINI_API_KEY)
 
-# DỮ LIỆU THÔNG BÁO CHÍNH THỨC (Knowledge Base)
-KNOWLEDGE_BASE = [
-    {
-        "id": "ANNOUNCEMENT_01",
-        "title": "Hạn nộp Lab 01 & Quy cách commit GitHub",
-        "content": "Hạn nộp Lab 01 là 21:00 ngày 18/9/2026. Học viên commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh #submit-lab.",
-        "link": "https://discord.com/channels/k4-3b/announcements/101"
-    },
-    {
-        "id": "ANNOUNCEMENT_02",
-        "title": "Quy định sự cố nộp muộn & Kỹ thuật",
-        "content": "Mọi sự cố nộp muộn do Git/mạng cần báo trước hạn 15 phút kèm screenshot lỗi cho TA. Nộp muộn sau hạn không báo trước tính 0 điểm.",
-        "link": "https://discord.com/channels/k4-3b/announcements/102"
-    },
-    {
-        "id": "ANNOUNCEMENT_03",
-        "title": "Lịch Checkpoint Hackathon (CP1 - CP4)",
-        "content": "CP1: 19:30 17/9 (Canvas 7 dòng) | CP2: 21:00 17/9 (Luồng hoạt động) | CP3: 16:00 18/9 (Video 30s + số đo) | CP4: 21:00 18/9 (Chốt spec.md).",
-        "link": "https://discord.com/channels/k4-3b/announcements/103"
-    },
-    {
-        "id": "ANNOUNCEMENT_04",
-        "title": "Quy định nộp Standup hàng ngày",
-        "content": "Học viên gửi báo cáo Standup hàng ngày trước 09:00 sáng tại kênh #standup theo đúng template quy định.",
-        "link": "https://discord.com/channels/k4-3b/announcements/104"
-    },
-    {
-        "id": "STATUS_UNANNOUNCED",
-        "title": "Các mục CHƯA CÓ THÔNG BÁO CHÍNH THỨC",
-        "content": "Hạn nộp Lab 02, Lab 03, lịch thi Final, điểm danh cá nhân, kiểm tra điểm số cá nhân, yêu cầu xin châm chước commit trễ cá nhân -> Đều CHƯA có thông báo hoặc ngoài thẩm quyền tự động của bot.",
-        "link": ""
-    }
-]
+# Đường dẫn file tri thức JSON
+KB_FILE_PATH = Path(__file__).parent / "knowledge.json"
+
+def load_knowledge_base() -> list:
+    """Tải Knowledge Base từ file JSON."""
+    if KB_FILE_PATH.exists():
+        try:
+            with open(KB_FILE_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"⚠️ Lỗi đọc file knowledge.json: {e}")
+    return []
+
+def save_knowledge_base(kb_data: list):
+    """Lưu Knowledge Base vào file JSON."""
+    try:
+        with open(KB_FILE_PATH, "w", encoding="utf-8") as f:
+            json.dump(kb_data, f, ensure_ascii=False, indent=2)
+        print("✅ Đã lưu Knowledge Base vào file knowledge.json thành công.")
+    except Exception as e:
+        print(f"❌ Lỗi khi lưu file knowledge.json: {e}")
+
+# Tải Knowledge Base ban đầu
+KNOWLEDGE_BASE = load_knowledge_base()
 
 SYSTEM_PROMPT = """Bạn là Trợ lý AI Discord chuyên nghiệp cho khóa học (Track B1).
 
 NHIỆM VỤ CỦA BẠN:
-Phân loại intent câu hỏi của học viên và đưa ra phản hồi chính xác, an toàn.
+Phân loại intent câu hỏi của học viên và đưa ra phản hồi chính xác, an toàn dựa trên DỮ LIỆU CHÍNH THỨC.
 
 DANH SÁCH INTENT & QUY TẮC PHẢN HỒI:
 1. GREETING (Chào hỏi / Giao tiếp xã giao):
@@ -66,7 +58,7 @@ DANH SÁCH INTENT & QUY TẮC PHẢN HỒI:
    - BẮT BUỘC đính kèm link nguồn chính thức từ DỮ LIỆU CHÍNH THỨC.
    - need_ta = false.
 
-3. LOGISTICS_UNGROUNDED (Hỏi thủ tục/deadline như "Lab 02", "Lab 03", "Thi final" nhưng CHƯA CÓ THÔNG BÁO CHÍNH THỨC):
+3. LOGISTICS_UNGROUNDED (Hỏi thủ tục/deadline nhưng CHƯA CÓ THÔNG BÁO CHÍNH THỨC trong Dữ liệu):
    - NGUYÊN TẮC: TUYỆT ĐỐI KHÔNG PHỎNG ĐOÁN DEADLINE (Cost-of-Error rất đắt).
    - Phản hồi ngắn gọn (1 câu): Hiện tại chưa có thông báo chính thức về thông tin này.
    - need_ta = true.
@@ -77,7 +69,7 @@ DANH SÁCH INTENT & QUY TẮC PHẢN HỒI:
 
 5. TECHNICAL_QUESTION (Hỏi bài tập, thắc mắc kỹ thuật / code / git):
    - Gợi ý ngắn gọn hướng xử lý (1-2 câu).
-   - need_ta = false (hoặc true nếu câu hỏi phức tạp cần TA can thiệp).
+   - need_ta = false.
 
 ĐỊNH DẠNG ĐẦU RA BẮT BUỘC (Trả về duy nhất 1 chuỗi JSON hoàn chỉnh):
 {
@@ -88,7 +80,7 @@ DANH SÁCH INTENT & QUY TẮC PHẢN HỒI:
 """
 
 def query_ai_assistant(user_question: str) -> dict:
-    """Gọi Gemini API để phân loại Intent & sinh phản hồi có cấu trúc JSON."""
+    """Gọi Gemini API để phân loại Intent & sinh phản hồi dựa trên Knowledge Base động."""
     default_fallback = {
         "intent": "LOGISTICS_UNGROUNDED",
         "need_ta": True,
@@ -99,7 +91,9 @@ def query_ai_assistant(user_question: str) -> dict:
         print("   ⚠️ Chưa cấu hình GEMINI_API_KEY!")
         return default_fallback
 
-    context_str = "\n".join([f"- [{kb['title']}] (Link: {kb['link']}): {kb['content']}" for kb in KNOWLEDGE_BASE])
+    # Nạp dữ liệu Knowledge Base mới nhất
+    current_kb = load_knowledge_base()
+    context_str = "\n".join([f"- [{kb.get('title', '')}] (Link: {kb.get('link', '')}): {kb.get('content', '')}" for kb in current_kb])
     prompt = f"{SYSTEM_PROMPT}\n\nDỮ LIỆU CHÍNH THỨC KHÓA HỌC:\n{context_str}\n\nCÂU HỎI HỌC VIÊN: {user_question}\n\nKẾT QUẢ JSON:"
 
     try:
@@ -109,7 +103,6 @@ def query_ai_assistant(user_question: str) -> dict:
         )
         raw_text = response.text.strip()
         
-        # Trích xuất JSON từ phản hồi của AI (nếu có markdown block ```json)
         json_match = re.search(r'\{.*\}', raw_text, re.DOTALL)
         if json_match:
             parsed = json.loads(json_match.group(0))
@@ -123,11 +116,56 @@ def query_ai_assistant(user_question: str) -> dict:
 @bot.event
 async def on_ready():
     print(f"✅ Bot Trợ Lý Discord đã hoạt động: {bot.user.name} (ID: {bot.user.id})")
-    print("--- Đã tải Knowledge Base & Sẵn sàng phân loại intent ---")
+    print(f"--- Đã tải {len(load_knowledge_base())} mục tri thức từ knowledge.json ---")
+
+@bot.command(name="add_kb")
+async def add_knowledge(ctx, *, args: str):
+    """Lệnh dành cho TA/Mod cập nhật tri thức mới trực tiếp từ Discord.
+    Cú pháp: !add_kb Tiêu đề thông báo | Nội dung chi tiết | Link nguồn
+    """
+    parts = [p.strip() for p in args.split("|")]
+    if len(parts) < 2:
+        await ctx.send("❌ Sai cú pháp! Dùng: `!add_kb Tiêu đề | Nội dung chi tiết | Link nguồn (tùy chọn)`")
+        return
+
+    title = parts[0]
+    content = parts[1]
+    link = parts[2] if len(parts) > 2 else ""
+
+    kb_list = load_knowledge_base()
+    new_item = {
+        "id": f"KB_{len(kb_list) + 1:02d}",
+        "category": "Cập nhật mới",
+        "title": title,
+        "content": content,
+        "link": link
+    }
+    kb_list.append(new_item)
+    save_knowledge_base(kb_list)
+
+    await ctx.send(f"✅ Đã thêm tri thức mới thành công!\n📌 **{title}**\n📝 {content}\n🔗 {link or 'Không có link'}")
+
+@bot.command(name="list_kb")
+async def list_knowledge(ctx):
+    """Liệt kê tất cả danh mục tri thức hiện có trong Knowledge Base."""
+    kb_list = load_knowledge_base()
+    if not kb_list:
+        await ctx.send("📋 Tri thức hiện tại đang rỗng.")
+        return
+
+    msg = f"📋 **DANH SÁCH TRI THỨC HIỆN CÓ ({len(kb_list)} mục):**\n"
+    for item in kb_list[:10]:  # Giới hạn 10 mục
+        msg += f"• **{item.get('title')}**: {item.get('content')[:60]}...\n"
+    await ctx.send(msg)
 
 @bot.event
 async def on_message(message: discord.Message):
     if message.author == bot.user:
+        return
+
+    # Nếu là lệnh !add_kb hoặc !list_kb thì để bot xử lý command
+    if message.content.startswith("!add_kb") or message.content.startswith("!list_kb"):
+        await bot.process_commands(message)
         return
 
     # Kiểm tra xem Bot được tag trực tiếp (User Mention) hay tag qua Role của Bot (Role Mention)
