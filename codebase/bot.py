@@ -20,6 +20,14 @@ import config
 import knowledge_base as kb  # ← KB module tách riêng
 
 # ─────────────────────────────────────────────
+# Helper: mention kênh #announcements thật
+# ─────────────────────────────────────────────
+def _announcements_mention() -> str:
+    """Trả về <#ID> nếu đã cấu hình, fallback text nếu chưa."""
+    cid = getattr(config, "ANNOUNCEMENTS_CHANNEL_ID", "")
+    return f"<#{cid}>" if cid else "#announcements"
+
+# ─────────────────────────────────────────────
 # Logging setup (cho CP3: lưu mọi AI call)
 # ─────────────────────────────────────────────
 LOG_DIR = Path(__file__).parent.parent / "eval"
@@ -65,9 +73,11 @@ if config.GEMINI_API_KEY:
 
 
 # ─────────────────────────────────────────────
-# System prompt
+# System prompt (inject channel mention động)
 # ─────────────────────────────────────────────
-SYSTEM_PROMPT = """Bạn là Trợ lý AI của khóa học AI Thực Chiến, hỗ trợ cả học viên lẫn TA/Mod trên Discord.
+def _build_system_prompt() -> str:
+    announcements_mention = _announcements_mention()
+    return f"""Bạn là Trợ lý AI của khóa học AI Thực Chiến, hỗ trợ cả học viên lẫn TA/Mod trên Discord.
 
 GIỌNG ĐIỆU BẮT BUỘC:
 - Xưng "mình", gọi người hỏi là "em" (với học viên) hoặc "bạn" (nếu nhận ra là TA/Mod qua ngữ cảnh).
@@ -89,7 +99,7 @@ DANH SÁCH INTENT & QUY TẮC PHẢN HỒI:
 
 3. LOGISTICS_UNGROUNDED — Hỏi thủ tục/deadline CHƯA CÓ THÔNG BÁO CHÍNH THỨC:
    - TUYỆT ĐỐI KHÔNG PHỎNG ĐOÁN DEADLINE — sai thông tin này ảnh hưởng điểm số của em.
-   - Trả lời 1-2 câu: thành thật nói chưa có thông báo chính thức, hướng em theo dõi kênh #thông-báo.
+   - Trả lời 1-2 câu: thành thật nói chưa có thông báo chính thức, hướng em theo dõi kênh {announcements_mention} để cập nhật mới nhất.
    - need_ta = true.
 
 4. OUT_OF_SCOPE_PERSONAL — Yêu cầu tra điểm cá nhân, điểm danh cá nhân, xin châm chước nộp trễ:
@@ -101,18 +111,21 @@ DANH SÁCH INTENT & QUY TẮC PHẢN HỒI:
    - need_ta = false.
 
 ĐỊNH DẠNG ĐẦU RA — trả về DUY NHẤT 1 chuỗi JSON hoàn chỉnh:
-{
+{{
   "intent": "GREETING | LOGISTICS_GROUNDED | LOGISTICS_UNGROUNDED | OUT_OF_SCOPE_PERSONAL | TECHNICAL_QUESTION",
   "need_ta": true/false,
   "confidence": <số thực 0.0–1.0 thể hiện độ tin cậy phân loại intent>,
-  "thinking": {
+  "thinking": {{
     "step1_intent": "<Nhận diện intent là gì, tại sao>",
     "step2_source_check": "<Đã tìm/kiểm tra nguồn nào trong KB, kết quả ra sao. Nếu không cần kiểm tra thì ghi N/A>",
     "step3_decision": "<Quyết định cuối: trả lời thẳng / escalate TA / từ chối, lý do>"
-  },
+  }},
   "reply": "Nội dung trả lời — giọng thân thiện, xưng mình, gọi em, KHÔNG có đường dẫn file nội bộ."
-}
+}}
 """
+
+
+SYSTEM_PROMPT = _build_system_prompt()
 
 # ─────────────────────────────────────────────
 # Màu & nhãn theo intent

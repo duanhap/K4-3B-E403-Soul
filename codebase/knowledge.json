@@ -4,21 +4,21 @@
     "category": "Lab & Hạn nộp",
     "title": "Hạn nộp Lab 01 & Quy cách commit GitHub",
     "content": "Hạn nộp Lab 01 là 21:00 ngày 18/09/2026. Học viên commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh nộp bài theo đúng quy cách. Thời gian commit/push trên GitHub được đối chiếu trực tiếp với deadline chính thức.",
-    "link": ""
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "QD_LAB_02",
     "category": "Lab & Hạn nộp",
     "title": "Quy định sự cố nộp muộn & Kỹ thuật",
     "content": "Mọi sự cố nộp muộn do Git/mạng cần báo trước hạn 15 phút kèm screenshot lỗi cho TA hoặc tạo ticket tại kênh #vlearn-support. Nộp muộn sau hạn không báo trước theo đúng quy trình sẽ tính 0 điểm.",
-    "link": ""
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "QD_LAB_03",
     "category": "Lab & Hạn nộp",
     "title": "Mức trừ điểm khi nộp lab muộn sau deadline",
     "content": "Nộp muộn sau hạn không báo trước theo đúng quy trình sẽ tính 0 điểm. Trường hợp báo trước và có lý do chính đáng được TA duyệt sẽ xử lý theo quy định châm chước.",
-    "link": ""
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "QD_LAB_04",
@@ -38,8 +38,8 @@
     "id": "QD_LAB_06",
     "category": "Lab & Hạn nộp",
     "title": "Hạn nộp Lab 02 và Lab 03",
-    "content": "Hạn nộp Lab 02 và Lab 03 CHƯA CÓ THÔNG BÁO CHÍNH THỨC. Học viên theo dõi thêm thông báo mới tại kênh #thông-báo trên Discord.",
-    "link": ""
+    "content": "Hạn nộp Lab 02 và Lab 03 CHƯA CÓ THÔNG BÁO CHÍNH THỨC. Học viên theo dõi thêm thông báo mới tại kênh #announcements trên Discord.",
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "QD_TEAM_01",
@@ -130,21 +130,21 @@
     "category": "Hackathon & Checkpoint",
     "title": "Lịch Checkpoint Mini Hackathon (CP1–CP6)",
     "content": "CP1: 19:30 ngày 17/9 (Canvas 7 dòng) | CP2: 21:00 ngày 17/9 (Prototype bấm được) | CP3: 16:00 ngày 18/9 (Video 30s AI thật + golden set + số đo) | CP4: 21:00 ngày 18/9 (Chốt spec.md + khóa Quality Bar) | CP5: 22:30 ngày 18/9 (Slide PDF + video demo dự phòng) | CP6: 09:00 ngày 19/9 (Thuyết trình 5'+5' Q&A).",
-    "link": ""
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "CP_HACKATHON_02",
     "category": "Hackathon & Checkpoint",
     "title": "Quy định nộp form Checkpoint — đội trưởng dùng 1 MSSV",
     "content": "Đội trưởng dùng DUY NHẤT 1 MSSV để nộp tất cả 5 form CP1-CP5. Mỗi thành viên đăng nhập VLearn và dán link GitHub repo chung của nhóm. Nộp đúng hạn = 5 điểm checkpoint; nộp muộn = 0 điểm mốc đó.",
-    "link": ""
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "CP_HACKATHON_03",
     "category": "Hackathon & Checkpoint",
     "title": "Quality Bar khóa cứng sau 21:00 ngày 18/9",
     "content": "Quality Bar phải commit vào spec.md trước 21:00 ngày 18/9. Sau thời điểm này KHÔNG được sửa dù kết quả đo thấp hơn bar. Kết quả ghi trung thực: 12/20 có phân tích đầy đủ được điểm hơn 20/20 không có bằng chứng.",
-    "link": ""
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "CP_HACKATHON_04",
@@ -220,8 +220,8 @@
     "id": "WS01_DISCORD_01",
     "category": "Discord & Kênh",
     "title": "Hai kênh quan trọng nhất trên Discord Build Phase",
-    "content": "Kênh #thông-báo: lịch trình, thay đổi, thông tin chính thức. Kênh #tài-nguyên: slide, video record, tài liệu hướng dẫn. Lưu ý phân biệt kênh lớp học (trường) và kênh Build Phase — hỏi đúng nơi để được hỗ trợ nhanh nhất.",
-    "link": ""
+    "content": "Kênh #announcements: lịch trình, thay đổi, thông tin chính thức. Kênh #tài-nguyên: slide, video record, tài liệu hướng dẫn. Lưu ý phân biệt kênh lớp học (trường) và kênh Build Phase — hỏi đúng nơi để được hỗ trợ nhanh nhất.",
+    "link": "<#1550133861030297622>"
   },
   {
     "id": "WS01_SCHEDULE_01",
