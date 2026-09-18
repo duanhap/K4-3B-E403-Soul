@@ -7,8 +7,12 @@ secrets.json
 
 # Data pack — KHÔNG commit lên repo công khai
 data/
+Data/
 *.csv
 *.mp4
+scratch_questions.txt
+extracted_csv_questions.txt
+
 
 # Python
 __pycache__/

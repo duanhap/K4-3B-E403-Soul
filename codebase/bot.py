@@ -97,10 +97,20 @@ def query_ai_assistant(user_question: str) -> dict:
     prompt = f"{SYSTEM_PROMPT}\n\nDỮ LIỆU CHÍNH THỨC KHÓA HỌC:\n{context_str}\n\nCÂU HỎI HỌC VIÊN: {user_question}\n\nKẾT QUẢ JSON:"
 
     try:
-        response = ai_client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt
-        )
+        # Sử dụng model gemini-3.6-flash (hoặc gemini-2.5-flash nếu cần)
+        model_name = getattr(config, 'GEMINI_MODEL', 'gemini-3.6-flash')
+        try:
+            response = ai_client.models.generate_content(
+                model=model_name,
+                contents=prompt
+            )
+        except Exception as model_err:
+            print(f"   ⚠️ Thử model {model_name} thất bại ({model_err}), fallback sang gemini-3.6-flash...")
+            response = ai_client.models.generate_content(
+                model='gemini-3.6-flash',
+                contents=prompt
+            )
+
         raw_text = response.text.strip()
         
         json_match = re.search(r'\{.*\}', raw_text, re.DOTALL)
@@ -111,6 +121,22 @@ def query_ai_assistant(user_question: str) -> dict:
             return default_fallback
     except Exception as e:
         print(f"   ❌ Lỗi khi gọi Gemini API: {e}")
+        # Hỗ trợ tìm kiếm từ khóa cục bộ khi API lỗi/hết quota
+        low_q = user_question.lower()
+        for item in current_kb:
+            title = item.get('title', '').lower()
+            content = item.get('content', '').lower()
+            category = item.get('category', '').lower()
+            if any(kw in low_q for kw in title.split()) or any(kw in low_q for kw in category.split()):
+                link = item.get('link', '')
+                reply_text = f"📌 {item.get('title')}: {item.get('content')}"
+                if link:
+                    reply_text += f"\n🔗 Nguồn: {link}"
+                return {
+                    "intent": "LOGISTICS_GROUNDED",
+                    "need_ta": False,
+                    "reply": reply_text
+                }
         return default_fallback
 
 @bot.event
