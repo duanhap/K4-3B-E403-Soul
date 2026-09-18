@@ -1,0 +1,142 @@
+[
+  {
+    "id": "QD_LAB_01",
+    "category": "Lab & Hạn nộp",
+    "title": "Hạn nộp Lab 01 & Quy cách commit GitHub",
+    "content": "Hạn nộp Lab 01 là 21:00 ngày 18/09/2026. Học viên commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh nộp bài theo đúng quy cách. Thời gian commit/push trên GitHub được đối chiếu trực tiếp với deadline chính thức.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "QD_LAB_02",
+    "category": "Lab & Hạn nộp",
+    "title": "Quy định sự cố nộp muộn & Kỹ thuật",
+    "content": "Mọi sự cố nộp muộn do Git/mạng cần báo trước hạn 15 phút kèm screenshot lỗi cho TA hoặc tạo ticket tại kênh #vlearn-support. Nộp muộn sau hạn không báo trước theo đúng quy trình sẽ tính 0 điểm.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "QD_LAB_03",
+    "category": "Lab & Hạn nộp",
+    "title": "Mức trừ điểm khi nộp lab muộn sau deadline",
+    "content": "Nộp muộn sau hạn không báo trước theo đúng quy trình sẽ tính 0 điểm. Trường hợp báo trước và có lý do chính đáng được TA duyệt sẽ xử lý theo quy định châm chước.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "QD_LAB_04",
+    "category": "Lab & Hạn nộp",
+    "title": "Xử lý sự cố commit Git trễ deadline nhưng nộp VLearn đúng hạn",
+    "content": "Thời gian commit/push trên GitHub được đối chiếu với deadline. Nếu gặp lỗi git/push, học viên phải chụp màn hình lỗi và báo TA trước hạn 15 phút. Nếu nộp VLearn đúng hạn nhưng GitHub trễ mà không báo trước -> tính trễ.",
+    "link": ""
+  },
+  {
+    "id": "QD_LAB_05",
+    "category": "Lab & Hạn nộp",
+    "title": "Gia hạn nộp bài Lab khi trễ hạn ngắn (1-15 phút)",
+    "content": "Nếu gặp sự cố đột xuất khi nộp trên VLearn, gửi ticket ngay tại kênh #vlearn-support để BTC/TA xem xét. Mọi sự cố kỹ thuật cần báo trước hạn 15 phút kèm screenshot cho TA.",
+    "link": ""
+  },
+  {
+    "id": "QD_LAB_06",
+    "category": "Lab & Hạn nộp",
+    "title": "Hạn nộp Lab 02 và Lab 03",
+    "content": "Hạn nộp Lab 02 và Lab 03 CHƯA CÓ THÔNG BÁO CHÍNH THỨC. Học viên theo dõi thêm thông báo mới tại kênh #announcements trên Discord.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "QD_TEAM_01",
+    "category": "Onboarding & Lập đội nhóm",
+    "title": "Quy chuẩn đặt tên tài khoản Discord & Phoenix",
+    "content": "Học viên bắt buộc đổi tên hiển thị trên Discord và Phoenix theo cú pháp: [MãLớp] - HọTên (VD: [3B] - Nguyễn Văn A). Đặt đúng cú pháp để BTC và Lab Coach điểm danh và hỗ trợ.",
+    "link": ""
+  },
+  {
+    "id": "QD_TEAM_02",
+    "category": "Onboarding & Lập đội nhóm",
+    "title": "Số lượng thành viên nhóm & Quy định ghép level",
+    "content": "Mỗi nhóm từ 3-4 người (Workshop 01 nói 4 thành viên). Học viên Level 2 và Level 3 KHÔNG được ghép chung khác level hoặc khác lớp. Phải cùng level: L2 chung L2, L3 chung L3.",
+    "link": ""
+  },
+  {
+    "id": "QD_TEAM_03",
+    "category": "Onboarding & Lập đội nhóm",
+    "title": "Deadline lập team & Hỗ trợ ghép nhóm lẻ",
+    "content": "Deadline lập team tự do: 13/09. Sau hạn này BTC sẽ hỗ trợ ghép nhóm tự động cho học viên chưa có đội. Sau khi tất cả học viên có team, hệ thống mới mở danh sách đề tài để chọn.",
+    "link": ""
+  },
+  {
+    "id": "QD_TEAM_04",
+    "category": "Onboarding & Lập đội nhóm",
+    "title": "Xử lý khi thành viên rút khỏi nhóm giữa chừng",
+    "content": "Trường hợp nhóm thiếu người do thành viên rút, báo ngay với Lab Coach/BTC để điều chỉnh. Đánh giá checkpoint là theo cá nhân, không chỉ theo team.",
+    "link": ""
+  },
+  {
+    "id": "QD_STANDUP_01",
+    "category": "Standup & Daily",
+    "title": "Quy định nộp Daily Standup hàng ngày",
+    "content": "Gửi báo cáo Standup trước 09:00 sáng hàng ngày tại kênh #standup theo template 3 mục: 1. Việc đã làm hôm qua, 2. Việc sẽ làm hôm nay, 3. Khó khăn vướng mắc. Thực hiện bằng lệnh /daily trong kênh Discord của team.",
+    "link": ""
+  },
+  {
+    "id": "WS01_DELIVERABLE_01",
+    "category": "Deliverable & Nộp bài",
+    "title": "Danh sách deliverable bắt buộc cuối Build Phase",
+    "content": "Phải nộp đủ: Source code (GitHub), Tài liệu đặc tả & thiết kế, Tài liệu kiểm thử, Nhật ký làm việc (Vlog), Evaluation/Benchmark, Live URL (sản phẩm chạy được), Video demo, AI Log (tối thiểu 50 conversations/thành viên).",
+    "link": ""
+  },
+  {
+    "id": "WS01_DELIVERABLE_02",
+    "category": "Deliverable & Nộp bài",
+    "title": "Gate 1 và Gate 2 — Checkpoint chính của Build Phase",
+    "content": "Gate 1: chốt đề tài + tài liệu mô tả (deadline 20/9). Gate 2 (Tuần 5): nộp MVP để doanh nghiệp review. Checkpoint tuần 5-6 sẽ lọc những học viên không đạt.",
+    "link": ""
+  },
+  {
+    "id": "WS01_DISCORD_01",
+    "category": "Discord & Kênh",
+    "title": "Hai kênh quan trọng nhất trên Discord Build Phase",
+    "content": "Kênh #announcements: lịch trình, thay đổi, thông tin chính thức. Kênh #tài-nguyên: slide, video record, tài liệu hướng dẫn. Lưu ý phân biệt kênh lớp học (trường) và kênh Build Phase — hỏi đúng nơi để được hỗ trợ nhanh nhất.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "WS01_SCHEDULE_01",
+    "category": "Lịch học & Cơ sở vật chất",
+    "title": "Vị trí & Giờ mở cửa Thư viện trường",
+    "content": "Thư viện nằm tại tòa nhà đối diện Canteen và Highlands Coffee. Giờ mở cửa giai đoạn hè: 09:00 – 17:30.",
+    "link": ""
+  },
+  {
+    "id": "WS01_SCHEDULE_02",
+    "category": "Lịch học & Cơ sở vật chất",
+    "title": "Xử lý khi nhận 2 mã lịch học khác nhau (email cá nhân vs Outlook)",
+    "content": "Ưu tiên theo dõi lịch trên email Outlook trường cấp và xác nhận lại với BTC qua ticket hỗ trợ.",
+    "link": ""
+  },
+  {
+    "id": "WS01_SCHEDULE_03",
+    "category": "Lịch học & Cơ sở vật chất",
+    "title": "Thẻ học viên & Đăng ký phương tiện gửi xe",
+    "content": "Liên hệ ban quản lý sinh viên/Admin tại bàn trực để nhận thẻ học viên và làm thủ tục đăng ký gửi xe theo thông báo.",
+    "link": ""
+  },
+  {
+    "id": "VLEARN_01",
+    "category": "VLearn & Nộp bài",
+    "title": "Hướng dẫn nộp bài trên VLearn (link GitHub repo)",
+    "content": "Mỗi thành viên đăng nhập VLearn → tìm Lab tương ứng → dán link GitHub repo chung của nhóm. Tất cả thành viên dán cùng một link. Đội trưởng kiểm tra đã nộp đủ các form CP bằng 1 MSSV duy nhất.",
+    "link": ""
+  },
+  {
+    "id": "VLEARN_02",
+    "category": "VLearn & Nộp bài",
+    "title": "Xin slide bài giảng sau buổi học",
+    "content": "Slide bài giảng CHƯA CÓ THÔNG BÁO chính thức về việc chia sẻ sau buổi học. Theo dõi kênh #tài-nguyên trên Discord hoặc liên hệ Lab Coach/BTC để được hỗ trợ.",
+    "link": ""
+  },
+  {
+    "id": "VLD_SUPPORT_01",
+    "category": "VLearn & Hỗ trợ Lab",
+    "title": "Xử lý lỗi tải bài lab hoặc kết nối Wi-Fi",
+    "content": "Khi tải lab lỗi, cần ghi rõ lab, tài khoản, bước lỗi, tên file và ảnh màn hình; không tự đoán link hoặc phiên bản. Khi Wi-Fi lỗi, ghi SSID, vị trí, thiết bị, hệ điều hành và ảnh lỗi; có thể quên mạng, kết nối lại, tắt VPN/proxy tạm thời và mở trang HTTP để kích hoạt captive portal. Không tự công bố mật khẩu Wi-Fi.",
+    "link": ""
+  }
+]

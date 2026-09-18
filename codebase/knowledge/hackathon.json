@@ -1,0 +1,128 @@
+[
+  {
+    "id": "CP_HACKATHON_01",
+    "category": "Hackathon & Checkpoint",
+    "title": "Lịch Checkpoint Mini Hackathon (CP1–CP6)",
+    "content": "CP1: 19:30 ngày 17/9 (Canvas 7 dòng) | CP2: 21:00 ngày 17/9 (Prototype bấm được) | CP3: 16:00 ngày 18/9 (Video 30s AI thật + golden set + số đo) | CP4: 21:00 ngày 18/9 (Chốt spec.md + khóa Quality Bar) | CP5: 22:30 ngày 18/9 (Slide PDF + video demo dự phòng) | CP6: 09:00 ngày 19/9 (Thuyết trình 5'+5' Q&A).",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "CP_HACKATHON_02",
+    "category": "Hackathon & Checkpoint",
+    "title": "Quy định nộp form Checkpoint — đội trưởng dùng 1 MSSV",
+    "content": "Đội trưởng dùng DUY NHẤT 1 MSSV để nộp tất cả 5 form CP1-CP5. Mỗi thành viên đăng nhập VLearn và dán link GitHub repo chung của nhóm. Nộp đúng hạn = 5 điểm checkpoint; nộp muộn = 0 điểm mốc đó.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "CP_HACKATHON_03",
+    "category": "Hackathon & Checkpoint",
+    "title": "Quality Bar khóa cứng sau 21:00 ngày 18/9",
+    "content": "Quality Bar phải commit vào spec.md trước 21:00 ngày 18/9. Sau thời điểm này KHÔNG được sửa dù kết quả đo thấp hơn bar. Kết quả ghi trung thực: 12/20 có phân tích đầy đủ được điểm hơn 20/20 không có bằng chứng.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "CP_HACKATHON_04",
+    "category": "Hackathon & Checkpoint",
+    "title": "Vibe-coding rule tại CP6 — giám khảo hỏi ngẫu nhiên",
+    "content": "Tại CP6 giám khảo hỏi ngẫu nhiên bất kỳ thành viên về phần có tên họ trong README. Không giải thích được bản chất kỹ thuật -> 0 điểm phần cá nhân đó. Mỗi thành viên phải nói được ít nhất 1 phần trong buổi thuyết trình.",
+    "link": ""
+  },
+  {
+    "id": "WS01_PROGRAM_01",
+    "category": "Chương trình & Build Phase",
+    "title": "Tổng quan Build Phase 6 tuần — Lịch và Deadline chính",
+    "content": "Build Phase kéo dài 6 tuần, kết thúc khoảng 22/10. Tuần 1: onboard, lập team (deadline 13/9). Tuần 2: chốt đề tài (deadline 20/9 — sau ngày này KHÔNG thể thay đổi). Tuần 3-4: xây POC và MVP. Tuần 5: nộp MVP (Gate 2). Tuần 6: hoàn thiện và launch.",
+    "link": ""
+  },
+  {
+    "id": "WS01_PROGRAM_02",
+    "category": "Chương trình & Build Phase",
+    "title": "Hoạt động định kỳ: Workshop, Office Hours, Mentor Duty",
+    "content": "Workshop: tối Thứ 5 và Chủ Nhật (20h) — kiến thức xây dựng sản phẩm AI. Office Hours: mentor giải đáp trực tiếp theo nhóm. Mentor Duty: tối Thứ 4 và Thứ 7 — mỗi nhóm ~10 team báo cáo tiến độ với mentor phụ trách.",
+    "link": ""
+  },
+  {
+    "id": "WS01_PROGRAM_03",
+    "category": "Chương trình & Build Phase",
+    "title": "Cơ hội việc làm & Checkpoint đánh giá cuối Build Phase",
+    "content": "Checkpoint gần cuối Build Phase đánh giá: thái độ/kỷ luật, output kỹ năng thực tế, đóng góp cá nhân. Học viên đạt chuẩn được doanh nghiệp xét vị trí thực tập, sau đó có cơ hội tuyển dụng. Khóa 1: ~100% offer, Khóa 2: >80% offer. Track Computer Vision: VinFast dự kiến tuyển ~300 bạn.",
+    "link": ""
+  },
+  {
+    "id": "WS01_TOPIC_01",
+    "category": "Đề tài & Chọn hướng",
+    "title": "Quy định chọn đề tài — Deadline và Slot giới hạn",
+    "content": "Deadline chốt đề tài: 20/9 — sau ngày này KHÔNG thể thay đổi. Mỗi đề tài giới hạn 2-3 slot team đăng ký, team nào đăng ký sớm được ưu tiên. Đề tài chỉ là mô tả gợi mở — team có quyền mở rộng, thu hẹp, hoặc đề xuất đề tài mới qua ticket.",
+    "link": ""
+  },
+  {
+    "id": "WS01_TOPIC_02",
+    "category": "Đề tài & Chọn hướng",
+    "title": "Tiêu chí chọn đề tài phù hợp",
+    "content": "Khi chọn đề tài cần tự hỏi: Mình có data không? Có tìm được người dùng để khảo sát không? Team có làm được với khả năng hiện tại không? Nên ưu tiên đề tài liên quan đến doanh nghiệp muốn thực tập để tăng cơ hội được nhận. BTC không cung cấp data, API hay server — team phải tự chủ.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_01",
+    "category": "Tư duy sản phẩm AI",
+    "title": "5 lý do AI product thất bại — từ Workshop 02",
+    "content": "1) Solution First, Problem Last (thấy AI hay → cố tìm problem). 2) Persona quá rộng (sản phẩm cho tất cả mọi người). 3) MVP biến thành app đầy đủ (không biết tính năng nào tạo value). 4) Gắn AI để trông xịn hơn (AI không làm outcome tốt hơn). 5) Đo sai metric (đo lượt đăng ký thay vì hành vi nhận value thật).",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_02",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Framework 5 bước xây dựng AI MVP (thứ tự không đảo ngược)",
+    "content": "Thứ tự: Problem → Persona → AI Leverage → MVP Scope → Magic. KHÔNG đi từ AI → Problem. Bước 1: Pain thật là gì (bệnh gốc, không phải triệu chứng). Bước 2: Persona đủ hẹp để ra quyết định. Bước 3: AI tạo lợi thế thật ở đâu. Bước 4: MVP scope nhỏ nhất để kiểm chứng (1 User - 1 Job - 1 Outcome). Bước 5: Magic Metric đo hành vi nhận value thật.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_03",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Công thức viết Problem Statement đúng chuẩn",
+    "content": "[Persona] gặp khó khăn khi [job to be done], trong bối cảnh [context]. Hiện họ đang tự xử lý bằng [current workaround], dẫn đến [negative outcome]. Ví dụ: Sinh viên 18-24 tuổi gặp khó khăn khi tự học một mình vào buổi tối, trong bối cảnh dễ mất tập trung sau 15-20 phút. Hiện họ dùng Pomodoro/Study With Me, dẫn đến mất tập trung và giảm động lực.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_04",
+    "category": "Tư duy sản phẩm AI",
+    "title": "4 hướng AI tạo giá trị thực sự & 6 câu hỏi kiểm tra tính khả thi",
+    "content": "4 hướng AI tạo value: nhanh hơn / chính xác hơn / cá nhân hóa hơn / tự động hóa. Kiểm tra: Nếu bỏ AI đi, outcome có kém hơn không? Nếu không → AI chỉ là marketing label. 6 câu hỏi khả thi: Data (đủ không?) / Accuracy (sai cỡ nào chấp nhận được?) / Latency (user chờ được không?) / Cost (đáng không?) / Trust (user tin không?) / Human Interlock (cần người duyệt không?).",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_05",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Phân biệt Vanity Metrics vs Magic Metrics",
+    "content": "Vanity Metrics (TRÁNH): số lượt đăng ký, lượt tải app, lượt vào room. Magic Metrics (DÙNG): tỉ lệ hoàn thành phiên học đầu, tỉ lệ quay lại lần 2, thời lượng tập trung trung bình, số đề được dùng thật. Magic phải đo hành vi nhận value thật, không đo sự chú ý.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_06",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Validation Plan — 4 bậc thang kiểm chứng trước khi build",
+    "content": "Thứ tự từ nhỏ đến lớn: 1) Interview — nói chuyện trực tiếp, nghe hành vi hiện tại. 2) Manual MVP (Wizard of Oz) — tự làm thủ công để kiểm chứng giả định. 3) Prototype/Clickable Demo. 4) MVP thật — build khi đã đủ learning. Người Việt Nam thích chia sẻ — đừng gửi form survey, hãy gặp trực tiếp 5-10 người.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_07",
+    "category": "Tư duy sản phẩm AI",
+    "title": "5 nguyên tắc sống còn khi làm AI Product",
+    "content": "1) Bắt đầu bằng problem, không phải AI. 2) Chọn persona đủ hẹp, không phục vụ tất cả. 3) Build thí nghiệm (kiểm chứng giả định), không build hệ sinh thái. 4) Đo hành vi nhận value, không đo sự chú ý. 5) Yêu nỗi đau người dùng, không yêu solution (solution có thể đổi, model có thể đổi).",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_08",
+    "category": "Tư duy sản phẩm AI",
+    "title": "AI MVP Canvas — 9 câu hỏi bản đồ tác chiến",
+    "content": "Khi có idea, trả lời 9 câu: 1) Target user là ai? 2) Job to be done là gì? 3) Pain point thật là gì? 4) Current workaround là gì? 5) Problem statement là gì? 6) Core outcome là gì? 7) AI leverage ở đâu? 8) MVP scope gồm gì / chưa build gì? 9) Validation metric là gì? Nếu Problem Clarity hoặc Persona Sharpness thấp -> khoan build, làm rõ problem trước.",
+    "link": ""
+  },
+  {
+    "id": "SPEC_TAIDOC_01",
+    "category": "Tài liệu & Spec",
+    "title": "Link repo đề bài & AI Spec Template",
+    "content": "Mẫu AI Spec lưu tại spec.md trong repo nhóm. Rubric 100 điểm tại 04-rubric.md. Hướng dẫn 5 giai đoạn tại 02-guide.md. Tham khảo canvas-cp1.md cho mẫu Canvas CP1.",
+    "link": ""
+  }
+]

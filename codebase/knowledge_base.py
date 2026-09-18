@@ -12,8 +12,10 @@ from pathlib import Path
 from typing import Optional
 
 # ─────────────────────────────────────────────
-# Đường dẫn file KB — luôn relative với file này
 # ─────────────────────────────────────────────
+# Đường dẫn file/thư mục KB
+# ─────────────────────────────────────────────
+KB_DIR = Path(__file__).parent / "knowledge"
 KB_FILE_PATH = Path(__file__).parent / "knowledge.json"
 
 # ─────────────────────────────────────────────
@@ -21,21 +23,41 @@ KB_FILE_PATH = Path(__file__).parent / "knowledge.json"
 # ─────────────────────────────────────────────
 
 def load() -> list[dict]:
-    """Tải toàn bộ KB từ file JSON. Trả về [] nếu file lỗi."""
-    if not KB_FILE_PATH.exists():
-        print(f"⚠️  KB file không tồn tại: {KB_FILE_PATH}")
-        return []
-    try:
-        with open(KB_FILE_PATH, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return data if isinstance(data, list) else []
-    except (json.JSONDecodeError, OSError) as e:
-        print(f"⚠️  Lỗi đọc KB: {e}")
-        return []
+    """
+    Tải toàn bộ KB. Ưu tiên tải từ thư mục codebase/knowledge/*.json.
+    Nếu thư mục không tồn tại hoặc rỗng thì fallback đọc file knowledge.json cũ.
+    """
+    items: list[dict] = []
+
+    # 1. Đọc từ các file json trong thư mục knowledge/
+    if KB_DIR.exists():
+        json_files = list(KB_DIR.glob("*.json"))
+        if json_files:
+            for filepath in sorted(json_files):
+                try:
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        if isinstance(data, list):
+                            items.extend(data)
+                except (json.JSONDecodeError, OSError) as e:
+                    print(f"⚠️  Lỗi đọc KB từ file {filepath.name}: {e}")
+            if items:
+                return items
+
+    # 2. Fallback đọc file single knowledge.json cũ nếu có
+    if KB_FILE_PATH.exists():
+        try:
+            with open(KB_FILE_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            return data if isinstance(data, list) else []
+        except (json.JSONDecodeError, OSError) as e:
+            print(f"⚠️  Lỗi đọc KB file đơn: {e}")
+
+    return []
 
 
 def save(kb_data: list[dict]) -> bool:
-    """Ghi KB vào file JSON. Trả về True nếu thành công."""
+    """Ghi đè KB vào file knowledge.json (dùng cho backup/fallback)."""
     try:
         with open(KB_FILE_PATH, "w", encoding="utf-8") as f:
             json.dump(kb_data, f, ensure_ascii=False, indent=2)
@@ -47,11 +69,12 @@ def save(kb_data: list[dict]) -> bool:
 
 def add_item(title: str, content: str, category: str = "Cập nhật mới", link: str = "") -> dict:
     """
-    Thêm 1 mục mới vào KB và lưu file.
-    Trả về item vừa thêm.
+    Thêm 1 mục mới vào KB.
+    Lưu vào codebase/knowledge/custom_updates.json nếu có thư mục knowledge/,
+    đồng thời lưu backup vào knowledge.json.
     """
-    kb = load()
-    new_id = f"KB_{len(kb) + 1:03d}"
+    all_items = load()
+    new_id = f"KB_{len(all_items) + 1:03d}"
     item = {
         "id": new_id,
         "category": category,
@@ -59,19 +82,51 @@ def add_item(title: str, content: str, category: str = "Cập nhật mới", lin
         "content": content,
         "link": link,
     }
-    kb.append(item)
-    save(kb)
+
+    if KB_DIR.exists():
+        target_file = KB_DIR / "custom_updates.json"
+        existing = []
+        if target_file.exists():
+            try:
+                with open(target_file, "r", encoding="utf-8") as f:
+                    existing = json.load(f)
+            except Exception:
+                existing = []
+        existing.append(item)
+        try:
+            with open(target_file, "w", encoding="utf-8") as f:
+                json.dump(existing, f, ensure_ascii=False, indent=2)
+        except OSError as e:
+            print(f"❌ Lỗi ghi custom_updates.json: {e}")
+
+    # Backup đồng bộ
+    all_items.append(item)
+    save(all_items)
     return item
 
 
 def remove_item(item_id: str) -> bool:
-    """Xóa mục theo id. Trả về True nếu tìm thấy và xóa được."""
+    """Xóa mục theo id khỏi tất cả các file JSON trong knowledge/ và file knowledge.json."""
+    found = False
+
+    if KB_DIR.exists():
+        for filepath in KB_DIR.glob("*.json"):
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, list):
+                    new_data = [item for item in data if item.get("id") != item_id]
+                    if len(new_data) < len(data):
+                        found = True
+                        with open(filepath, "w", encoding="utf-8") as f:
+                            json.dump(new_data, f, ensure_ascii=False, indent=2)
+            except OSError as e:
+                print(f"⚠️ Lỗi xóa mục tại {filepath.name}: {e}")
+
+    # Cập nhật cả file backup
     kb = load()
-    original_len = len(kb)
-    kb = [item for item in kb if item.get("id") != item_id]
-    if len(kb) == original_len:
-        return False  # Không tìm thấy id
-    return save(kb)
+    save(kb)
+    return found
 
 
 def get_by_id(item_id: str) -> Optional[dict]:
@@ -80,6 +135,7 @@ def get_by_id(item_id: str) -> Optional[dict]:
         if item.get("id") == item_id:
             return item
     return None
+
 
 
 # ─────────────────────────────────────────────
