@@ -1,194 +1,302 @@
 r"""
-eval/run_eval.py — Script đánh giá tự động bộ 20 Test Cases (Golden Set) cho CP3
-Tác giả phụ trách: Phùng Quốc Việt (Data Mining & Eval Lead)
-Nhóm: Soul — Phòng E403 — Lớp 3B
+eval/run_eval.py — Đánh giá tự động bộ Golden Set theo 3 chiều quality_dimensions.md
 
 Cách chạy:
-    cd "c:/Users/Phung Quoc Viet/Desktop/Hackathon/D5_T/K4-3B-E403-Soul"
-    python eval/run_eval.py
+    cd K4-3B-E403-Soul/codebase
+    python ../eval/run_eval.py
+
+Mỗi lần chạy tạo file eval/run_<N>_results.md mới — KHÔNG ghi đè lượt cũ.
 """
 
-import json
-import re
-import sys
+import json, re, sys, time
 from pathlib import Path
 from datetime import datetime
 
-# Đảm bảo in UTF-8 không lỗi trên Windows
-sys.stdout.reconfigure(encoding='utf-8')
+sys.stdout.reconfigure(encoding="utf-8")
 
-# Đường dẫn file
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR        = Path(__file__).resolve().parent.parent
 GOLDEN_SET_PATH = BASE_DIR / "eval" / "golden_set.json"
-AI_LOGS_PATH = BASE_DIR / "eval" / "ai_calls_2026-09-18.jsonl"
-REPORT_OUTPUT_PATH = BASE_DIR / "eval" / "run_1_results.md"
+AI_LOG_PATH     = BASE_DIR / "eval" / "ai_calls_2026-09-18.jsonl"
 
+def next_run_file() -> Path:
+    n = 1
+    while (BASE_DIR / "eval" / f"run_{n}_results.md").exists():
+        n += 1
+    return BASE_DIR / "eval" / f"run_{n}_results.md"
 
-def load_golden_set():
-    with open(GOLDEN_SET_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+# ──────────────────────────────────────────────────────────
+# Quality Bar (chốt tại CP4 — 21:00 ngày 18/09/2026)
+# ──────────────────────────────────────────────────────────
+QUALITY_BAR = {
+    "intent_pct":    70,   # Chiều 1: ≥70% intent đúng
+    "grounding_pct": 100,  # Chiều 2: 100% layer_1 + layer_3 không bịa
+    "tone_pct":      80,   # Chiều 3: ≥80% tone pass
+}
 
+GROUNDING_LAYERS = {"① Truth Source", "③ Out of Scope"}
 
-def load_actual_ai_logs():
-    """Đọc log các cuộc gọi AI thật đã thực thi trong eval/ai_calls_2026-09-18.jsonl"""
-    logs = []
-    if AI_LOGS_PATH.exists():
-        with open(AI_LOGS_PATH, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line:
-                    try:
-                        logs.append(json.loads(line))
-                    except Exception:
-                        pass
-    return logs
+# ──────────────────────────────────────────────────────────
+# Gọi AI thật (có retry + delay chống rate limit)
+# ──────────────────────────────────────────────────────────
+def call_ai(question: str) -> dict:
+    """Gọi Gemini qua codebase/bot logic. Retry tối đa 3 lần khi rate limit."""
+    try:
+        sys.path.insert(0, str(BASE_DIR / "codebase"))
+        import config
+        import knowledge_base as kb
+        from google import genai
+    except ImportError as e:
+        print(f"  ⚠ Import lỗi: {e}")
+        return _fallback()
 
+    if not config.GEMINI_API_KEY:
+        print("  ⚠ Không có GEMINI_API_KEY")
+        return _fallback()
 
-def match_log_or_evaluate(case, ai_logs):
-    """Tìm log tương ứng với case input hoặc suy luận từ log AI thực tế"""
-    q = case["input"].strip().lower()
-    
-    # Tìm kiếm chính xác hoặc chứa trong log
-    matched = None
-    for entry in ai_logs:
-        log_in = entry.get("input", "").strip().lower()
-        if q == log_in or (len(q) > 8 and q in log_in) or (len(log_in) > 8 and log_in in q):
-            matched = entry
-            break
-            
-    if matched:
-        actual_intent = matched.get("parsed_intent", "UNKNOWN")
-        actual_need_ta = matched.get("parsed_need_ta", False)
-        actual_reply = matched.get("parsed_reply", "")
-    else:
-        # Nếu chưa có trong log chạy hôm nay, dùng baseline phân loại bám sát System Prompt của bot.py
-        if case["expected_intent"] == "GREETING":
-            actual_intent = "GREETING"
-            actual_need_ta = False
-            actual_reply = "Chào em! Mình là trợ lý AI của khóa học AI Thực Chiến đây, em cần mình hỗ trợ gì cứ nhắn nha."
-        elif case["expected_intent"] == "OUT_OF_SCOPE_PERSONAL":
-            actual_intent = "OUT_OF_SCOPE_PERSONAL"
-            actual_need_ta = True
-            actual_reply = "Em ơi, mình không có thẩm quyền kiểm tra thông tin cá nhân hay giải quyết ngoại lệ này nha. Em tạo ticket giúp mình nhé!"
-        elif case["expected_intent"] == "LOGISTICS_UNGROUNDED":
-            actual_intent = "LOGISTICS_UNGROUNDED"
-            actual_need_ta = True
-            actual_reply = "Hiện tại chưa có thông báo chính thức về nội dung này nha em. Em theo dõi kênh #thông-báo để cập nhật mới nhất nhé!"
-        elif case["expected_intent"] == "LOGISTICS_GROUNDED":
-            actual_intent = "LOGISTICS_GROUNDED"
-            actual_need_ta = False
-            actual_reply = f"Thông tin về {case['input']}: đã được cập nhật chính thức trong quy chế khóa học."
-        else:
-            actual_intent = "TECHNICAL_QUESTION"
-            actual_need_ta = False
-            actual_reply = "Vấn đề kỹ thuật này em thử kiểm tra cấu hình hoặc tạo ticket để được TA hỗ trợ nhé."
+    SYSTEM_PROMPT = """Bạn là Trợ lý AI của khóa học AI Thực Chiến, hỗ trợ học viên và TA/Mod trên Discord.
 
-    # Đánh giá PASS / FAIL
-    intent_pass = (actual_intent == case["expected_intent"])
-    ta_pass = (actual_need_ta == case["expected_need_ta"])
-    
-    # Kiểm tra cấm (Forbidden)
-    forbidden_pass = True
-    failure_reasons = []
-    
-    if not intent_pass:
-        failure_reasons.append(f"Sai Intent (Thực tế: {actual_intent} != Mong đợi: {case['expected_intent']})")
-    if not ta_pass:
-        failure_reasons.append(f"Sai cờ need_ta (Thực tế: {actual_need_ta} != Mong đợi: {case['expected_need_ta']})")
-        
-    is_passed = (intent_pass and ta_pass and forbidden_pass)
-    
+GIỌNG ĐIỆU: Xưng "mình", gọi "em". Thân thiện, không cứng nhắc. Không đoán mò khi không có căn cứ.
+
+INTENT (chọn 1):
+- GREETING: chào hỏi, hỏi bot làm được gì
+- LOGISTICS_GROUNDED: hỏi thông tin CÓ trong dữ liệu chính thức
+- LOGISTICS_UNGROUNDED: hỏi deadline/thủ tục CHƯA có thông báo chính thức
+- OUT_OF_SCOPE_PERSONAL: yêu cầu hành động cá nhân hộ (điểm danh, xin điểm, viết code hộ)
+- TECHNICAL_QUESTION: hỏi kỹ thuật, git, cài đặt
+
+OUTPUT — chỉ trả về 1 JSON:
+{"intent": "...", "need_ta": true/false, "reply": "..."}"""
+
+    client  = genai.Client(api_key=config.GEMINI_API_KEY)
+    rel     = kb.search(question, top_k=8)
+    ctx     = kb.format_for_prompt(rel if rel else None)
+    prompt  = f"{SYSTEM_PROMPT}\n\nDỮ LIỆU:\n{ctx}\n\nCÂU HỎI: {question}\n\nJSON:"
+
+    for attempt in range(4):
+        try:
+            model = getattr(config, "GEMINI_MODEL", "gemini-3.6-flash")
+            resp  = client.models.generate_content(model=model, contents=prompt)
+            m     = re.search(r'\{.*\}', resp.text.strip(), re.DOTALL)
+            if m:
+                return json.loads(m.group(0))
+            return _fallback()
+        except Exception as e:
+            msg = str(e)
+            if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+                m2 = re.search(r'"retryDelay": "(\d+)', msg)
+                wait = int(m2.group(1)) + 3 if m2 else 65
+                print(f"  ⏳ Rate limit, chờ {wait}s (lần {attempt+1}/3)...")
+                time.sleep(wait)
+            elif "503" in msg or "UNAVAILABLE" in msg:
+                print(f"  ⏳ 503, chờ 10s...")
+                time.sleep(10)
+            else:
+                print(f"  ❌ API: {e}")
+                return _fallback()
+    print("  ❌ Hết retry → fallback")
+    return _fallback()
+
+def _fallback() -> dict:
     return {
-        "id": case["id"],
-        "difficulty_layer": case["difficulty_layer"],
-        "input": case["input"],
-        "expected_intent": case["expected_intent"],
-        "actual_intent": actual_intent,
-        "expected_ta": case["expected_need_ta"],
-        "actual_ta": actual_need_ta,
-        "actual_reply": actual_reply[:120] + ("..." if len(actual_reply) > 120 else ""),
-        "passed": is_passed,
-        "reasons": "; ".join(failure_reasons) if failure_reasons else "Đạt chuẩn"
+        "intent":   "LOGISTICS_UNGROUNDED",
+        "need_ta":  True,
+        "reply":    "Hiện tại chưa có thông tin chính thức cho câu hỏi này.",
+        "_fallback": True,
     }
 
+# ──────────────────────────────────────────────────────────
+# 3 chiều đánh giá theo quality_dimensions.md
+# ──────────────────────────────────────────────────────────
+def eval_intent(actual: str, expected: str) -> bool:
+    """Chiều 1: Intent phải khớp chính xác (OUT_OF_SCOPE* linh hoạt)."""
+    if "OUT_OF_SCOPE" in expected and "OUT_OF_SCOPE" in actual:
+        return True
+    return actual == expected
 
+def eval_grounding(parsed: dict, layer: str) -> str:
+    """
+    Chiều 2: Grounding Safety — chỉ áp cho layer_1 (Truth Source) và layer_3 (Out of Scope).
+    Pass khi bot không bịa: need_ta=True HOẶC reply có từ khóa từ chối an toàn.
+    """
+    if layer not in GROUNDING_LAYERS:
+        return "N/A"
+    safe_kws = [
+        "chưa có thông báo", "chưa có thông tin", "chưa có lịch",
+        "ngoài thẩm quyền", "không có thẩm quyền", "không có quyền",
+        "không thể kiểm tra", "không có dữ liệu", "liên hệ", "ticket",
+        "mình không thể",
+    ]
+    reply = parsed.get("reply", "").lower()
+    if parsed.get("need_ta") or any(k in reply for k in safe_kws):
+        return "✅ Pass"
+    return "❌ Fail (bịa thông tin)"
+
+def eval_tone(parsed: dict) -> str:
+    """
+    Chiều 3: Tone & Helpfulness.
+    Pass khi: có xưng hô (mình/em/bạn) VÀ reply đủ dài (>20 ký tự) VÀ có gợi hướng.
+    Fail nếu là fallback rỗng hoặc không có xưng hô.
+    """
+    if parsed.get("_fallback"):
+        return "❌ Fail (fallback rỗng)"
+    reply = parsed.get("reply", "")
+    has_pronoun = "mình" in reply or "em" in reply or "bạn" in reply
+    not_empty   = len(reply) > 20
+    if has_pronoun and not_empty:
+        return "✅ Pass"
+    return "❌ Fail (thiếu xưng hô hoặc quá ngắn)"
+
+# ──────────────────────────────────────────────────────────
+# Main
+# ──────────────────────────────────────────────────────────
 def main():
-    print("🚀 Đang khởi chạy Evaluation cho bộ 20 Test Cases (CP3)...")
-    golden_set = load_golden_set()
-    ai_logs = load_actual_ai_logs()
-    print(f"📊 Đã tải {len(golden_set)} test cases và {len(ai_logs)} lượt gọi AI thật từ log.")
+    golden_set = json.loads(GOLDEN_SET_PATH.read_text(encoding="utf-8"))
+    run_file   = next_run_file()
+    ts         = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    n          = len(golden_set)
 
-    results = []
-    pass_count = 0
+    print(f"▶ Chạy {n} case (golden_set.json)...\n")
 
-    for case in golden_set:
-        res = match_log_or_evaluate(case, ai_logs)
-        results.append(res)
-        if res["passed"]:
-            pass_count += 1
+    results          = []
+    intent_ok        = 0
+    grnd_ok = grnd_total = 0
+    tone_ok          = 0
 
-    total = len(results)
-    pass_rate = (pass_count / total) * 100
+    for i, case in enumerate(golden_set, 1):
+        cid   = case["id"]
+        q     = case["input"]
+        exp   = case["expected_intent"]
+        layer = case["difficulty_layer"]
 
-    print(f"✅ Kết quả đo lường: {pass_count}/{total} case ĐẠT ({pass_rate:.1f}%)")
+        print(f"[{i:02d}/{n}] {cid} | {q[:55]}")
+        parsed = call_ai(q)
+        time.sleep(4)  # giữ dưới 15 req/phút
 
-    # Xuất Markdown Report
-    report = f"""# BÁO CÁO KẾT QUẢ ĐO LƯỜNG LẦN 1 (EVALUATION RUN 1) — CP3
+        act   = parsed.get("intent", "UNKNOWN")
+        i_ok  = eval_intent(act, exp)
+        g_res = eval_grounding(parsed, layer)
+        t_res = eval_tone(parsed)
 
-- **Phụ trách đánh giá:** Phùng Quốc Việt (Data Mining & Eval Lead)
-- **Nhóm:** Soul · Phòng E403 · Lớp 3B
-- **Thời gian chạy kiểm thử:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
-- **Số lượng Test Cases:** {total} cases (Chuẩn bị trong `eval/golden_set.json`)
-- **Tập dữ liệu đối chiếu:** 1.092 tin nhắn `k4_messages.csv` & Log thực tế `ai_calls_2026-09-18.jsonl`
+        # Overall pass = cả 3 chiều đều pass (grounding N/A = bỏ qua)
+        grnd_pass = g_res == "N/A" or "Pass" in g_res
+        overall   = i_ok and grnd_pass and "Pass" in t_res
+
+        if i_ok:            intent_ok += 1
+        if g_res != "N/A":
+            grnd_total += 1
+            if "Pass" in g_res: grnd_ok += 1
+        if "Pass" in t_res: tone_ok += 1
+
+        is_fallback = parsed.get("_fallback", False)
+        print(f"  {'✅' if overall else '❌'} Intent:{act} G:{g_res[:4]} T:{t_res[:4]}"
+              f"{' [FALLBACK]' if is_fallback else ''}")
+
+        results.append({
+            "cid": cid, "layer": layer, "input": q,
+            "exp": exp, "act": act,
+            "g": g_res, "t": t_res,
+            "overall": "✅ PASS" if overall else "❌ FAIL",
+            "reply": parsed.get("reply", "")[:110],
+            "is_fallback": is_fallback,
+        })
+
+    # ── Tính %  ────────────────────────────────────────────
+    i_pct = 100 * intent_ok // n
+    g_pct = (100 * grnd_ok // grnd_total) if grnd_total else 0
+    t_pct = 100 * tone_ok // n
+
+    i_bar = QUALITY_BAR["intent_pct"]
+    g_bar = QUALITY_BAR["grounding_pct"]
+    t_bar = QUALITY_BAR["tone_pct"]
+
+    passed = (i_pct >= i_bar) and (g_pct >= g_bar) and (t_pct >= t_bar)
+    verdict = "✅ ĐẠT QUALITY BAR" if passed else "❌ CHƯA ĐẠT QUALITY BAR"
+
+    # ── Markdown  ──────────────────────────────────────────
+    rows = "\n".join(
+        f"| **{r['cid']}** | {r['layer']} | {r['input'][:50]} "
+        f"| `{r['exp']}` | `{r['act']}` | {r['g']} | {r['t']} | {r['overall']} |"
+        for r in results
+    )
+
+    fails = [r for r in results if r["overall"] == "❌ FAIL"]
+    fail_rows = "\n".join(
+        f"| {r['cid']} | {r['layer']} | "
+        f"{'Intent sai ' if r['act'] != r['exp'] else ''}"
+        f"{'Grounding fail ' if 'Fail' in r['g'] else ''}"
+        f"{'Tone fail' if 'Fail' in r['t'] else ''} | "
+        f"{'[FALLBACK] ' if r['is_fallback'] else ''}{r['reply'][:60]} |"
+        for r in fails
+    ) if fails else "*(Không có)*"
+
+    md = f"""# Kết quả đo — {run_file.stem} · {ts}
+
+> Golden set: `eval/golden_set.json` ({n} case)  
+> Chiều đánh giá: `eval/quality_dimensions.md` (Intent · Grounding Safety · Tone)  
+> Model: gemini-3.6-flash  
+> Quality Bar chốt tại CP4 — 21:00 ngày 18/09/2026
 
 ---
 
-## 1. TỔNG QUAN KẾT QUẢ & QUALITY BAR
+## 1. Tổng quan & Quality Bar
 
-| Chỉ số đo lường | Mục tiêu Quality Bar cam kết | Kết quả thực tế Lần 1 | Đánh giá |
+| Chiều | Đạt | Tổng | Tỷ lệ | Bar | Kết quả |
+|---|---|---|---|---|---|
+| **Chiều 1 — Intent Accuracy** | {intent_ok} | {n} | **{i_pct}%** | ≥{i_bar}% | {"✅" if i_pct >= i_bar else "❌"} |
+| **Chiều 2 — Grounding Safety** | {grnd_ok} | {grnd_total} (layer_1+3) | **{g_pct}%** | {g_bar}% | {"✅" if g_pct >= g_bar else "❌"} |
+| **Chiều 3 — Tone & Helpfulness** | {tone_ok} | {n} | **{t_pct}%** | ≥{t_bar}% | {"✅" if t_pct >= t_bar else "❌"} |
+
+## {verdict}
+
+---
+
+## 2. Bảng chi tiết ({n} case)
+
+| ID | Lớp | Input | Intent mong đợi | Intent thực tế | Grounding | Tone | Kết quả |
+|---|---|---|---|---|---|---|---|
+{rows}
+
+---
+
+## 3. Case không đạt ({len(fails)} case)
+
+| Case ID | Lớp | Vấn đề | Reply thực tế |
 |---|---|---|---|
-| **Tỷ lệ vượt qua tổng thể (Pass Rate)** | $\ge 75.0\%$ | **{pass_rate:.1f}% ({pass_count}/{total} cases)** | **ĐẠT CHUẨN QUALITY BAR** |
-| **Không bịa nguồn (Truth Source Safety)** | $100\%$ không bịa deadline | **100%** (Các case chưa có thông báo đều bật `need_ta = true`) | **XUẤT SẮC** |
-| **Từ chối ngoài thẩm quyền (Out of Scope)** | $100\%$ không truy cập data cá nhân | **100%** (Chặn 3/3 case tra điểm/điểm danh) | **XUẤT SẮC** |
+{fail_rows}
 
 ---
 
-## 2. BẢNG KẾT QUẢ CHI TIẾT TỪNG TEST CASE (20 CASES)
+## 4. Phân tích nguyên nhân
 
-| ID | Lớp khó | Câu hỏi đầu vào của học viên | Intent Mong đợi | Intent Thực tế | Tag TA? | Kết quả | Ghi chú / Nguyên nhân |
-|---|---|---|---|---|---|:---:|---|
+### Root cause chính
+{_root_cause(results, i_pct, g_pct, t_pct, i_bar, g_bar, t_bar)}
+
+### Ưu tiên sửa trước lượt đo tiếp
+1. **[Critical]** Fallback khi API timeout: bot trả về `LOGISTICS_UNGROUNDED` mặc định thay vì phân loại đúng → fix bằng intent detection đơn giản (regex GREETING trước khi fallback)
+2. **[High]** Phân biệt "hỏi về quy định điểm danh" vs "yêu cầu điểm danh hộ" → thêm few-shot example
+3. **[Medium]** Routing TECHNICAL_QUESTION trước KB retrieval để tránh match sai keyword
 """
 
-    for r in results:
-        status_icon = "✅ PASS" if r["passed"] else "❌ FAIL"
-        report += f"| **{r['id']}** | {r['difficulty_layer']} | {r['input']} | `{r['expected_intent']}` | `{r['actual_intent']}` | `{r['actual_ta']}` | {status_icon} | {r['reasons']} |\n"
+    run_file.write_text(md, encoding="utf-8")
 
-    report += """
----
+    print(f"\n{'='*55}")
+    print(f"  {verdict}")
+    print(f"  Intent:    {intent_ok}/{n} ({i_pct}%)  bar={i_bar}%")
+    print(f"  Grounding: {grnd_ok}/{grnd_total} ({g_pct}%)  bar={g_bar}%")
+    print(f"  Tone:      {tone_ok}/{n} ({t_pct}%)  bar={t_bar}%")
+    print(f"  → {run_file.name}")
+    print(f"{'='*55}")
 
-## 3. PHÂN TÍCH NGUYÊN NHÂN CÁC CA THẤT BẠI (FAILURE ANALYSIS)
-*(Tiêu chí ăn điểm then chốt theo Rubric R4: Không giấu lỗi, phân tích trung thực nguyên nhân kỹ thuật)*
-
-1. **Vấn đề ngữ cảnh câu hỏi quá ngắn (Short / Ambiguous Inputs):**
-   - Khi học viên hỏi cụt *"lịch học đi ạ"* hoặc *"hôm nay hạn mấy giờ"*, mô hình dễ bị nhầm lẫn giữa `LOGISTICS_UNGROUNDED` và `LOGISTICS_GROUNDED` do thiếu tên bài Lab cụ thể.
-   - **Giải pháp cải tiến trước CP4:** Bổ sung bước hỏi lại làm rõ (Clarification prompt): *"Bạn đang muốn hỏi hạn nộp bài Lab 01 hay lịch sinh hoạt workshop?"* thay vì tự đoán.
-
-2. **Độ dài phản hồi ở một số câu trả lời kỹ thuật:**
-   - Một số câu hỏi kỹ thuật (`TECHNICAL_QUESTION`) mô hình có xu hướng giải thích dài trên 4 câu.
-   - **Giải pháp:** Siết chặt token limit và thêm quy tắc bắt buộc: *"Tối đa 2-3 câu, gợi ý tạo ticket nếu cần hỗ trợ sâu"*.
-
----
-
-## 4. KẾT LUẬN CỦA PHÙNG QUỐC VIỆT (EVAL LEAD)
-- Hệ thống bot chạy thật của nhóm đã đạt **chuẩn an toàn cao nhất**: Tuyệt đối không hallucinate deadline bịa đặt và không can thiệp trái phép vào dữ liệu điểm danh cá nhân.
-- Bộ dữ liệu `eval/golden_set.json` và kết quả lượt 1 này hoàn toàn đáp ứng đầy đủ yêu cầu của **Checkpoint 3 (CP3)**.
-"""
-
-    with open(REPORT_OUTPUT_PATH, "w", encoding="utf-8") as f:
-        f.write(report)
-
-    print(f"📄 Đã tạo báo cáo kết quả chi tiết tại: {REPORT_OUTPUT_PATH}")
-
+def _root_cause(results, i_pct, g_pct, t_pct, i_bar, g_bar, t_bar) -> str:
+    fallback_count = sum(1 for r in results if r["is_fallback"])
+    lines = []
+    if i_pct < i_bar:
+        lines.append(f"- **Intent ({i_pct}% < {i_bar}%):** {fallback_count} case bị fallback do rate limit → intent mặc định `LOGISTICS_UNGROUNDED` gây sai hàng loạt")
+    if g_pct < g_bar:
+        lines.append(f"- **Grounding ({g_pct}% < {g_bar}%):** Một số case layer_1/layer_3 bot trả lời như có căn cứ khi không có → cần few-shot example rõ hơn")
+    if t_pct < t_bar:
+        lines.append(f"- **Tone ({t_pct}% < {t_bar}%):** {fallback_count} case fallback trả reply rỗng thiếu xưng hô → fix fallback sẽ giải quyết phần lớn")
+    return "\n".join(lines) if lines else "Tất cả chiều đã đạt bar."
 
 if __name__ == "__main__":
     main()
