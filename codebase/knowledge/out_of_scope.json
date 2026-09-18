@@ -1,0 +1,65 @@
+[
+  {
+    "id": "QD_WORKSHOP_01",
+    "category": "Điểm danh & Workshop & XP",
+    "title": "Lịch Workshop & Quy trình điểm danh tự động",
+    "content": "Workshop diễn ra định kỳ tối Thứ 5 và Chủ Nhật hàng tuần (20h). Tham gia Zoom bằng đúng email đã đăng ký, đổi tên Zoom đúng cú pháp chuẩn để hệ thống điểm danh tự động.",
+    "link": ""
+  },
+  {
+    "id": "QD_WORKSHOP_02",
+    "category": "Điểm danh & Workshop & XP",
+    "title": "Cơ chế tính điểm XP & Bảng xếp hạng",
+    "content": "XP được tích lũy tự động từ: điểm danh workshop, nộp Daily Standup, báo cáo Mentor Duty, submit Gate, tham gia Build Showcase. XP KHÔNG ảnh hưởng đến điểm cuối khóa 12 tuần — chỉ phản ánh mức độ tham gia Build Phase. Lên level thay đổi màu sắc, role trên Discord.",
+    "link": ""
+  },
+  {
+    "id": "QD_WORKSHOP_03",
+    "category": "Điểm danh & Workshop & XP",
+    "title": "Khắc phục lỗi điểm danh QR Code & MyVinUni không hiển thị",
+    "content": "Học viên điểm danh QR tại lớp nhưng lịch sử không hiển thị trên MyVinUni: gửi email cho bộ phận IT/BTC hoặc tạo ticket hỗ trợ để kiểm tra và cập nhật lại dữ liệu điểm danh.",
+    "link": ""
+  },
+  {
+    "id": "QD_WORKSHOP_04",
+    "category": "Điểm danh & Workshop & XP",
+    "title": "Ngồi nhầm phòng lab hoặc nhầm ca học",
+    "content": "Học viên phải tham gia đúng phòng/ca đã phân công. Trường hợp bất khả kháng cần xin phép Moderator/TA trực phòng TRƯỚC buổi học.",
+    "link": ""
+  },
+  {
+    "id": "QD_SUPPORT_01",
+    "category": "Thủ tục & Hỗ trợ",
+    "title": "Hướng dẫn mở Ticket hỗ trợ kỹ thuật & quy chế khóa học",
+    "content": "3 bước hỗ trợ theo thứ tự: 1) Hỏi bot tại kênh #hỏi-bot-cú-tê, 2) Hỏi cộng đồng tại #hỏi-đáp, 3) Tạo ticket (Create Ticket) mô tả vấn đề. BTC ưu tiên xử lý ticket khẩn trước. Nếu qua 1 ngày chưa được hỗ trợ, tag/nhắc nhở.",
+    "link": ""
+  },
+  {
+    "id": "QD_SUPPORT_02",
+    "category": "Thủ tục & Hỗ trợ",
+    "title": "Quy trình xin châm chước cá nhân / tra cứu điểm cá nhân",
+    "content": "Bot AI không có thẩm quyền duyệt châm chước cá nhân hoặc kiểm tra điểm số riêng tư. Các yêu cầu này cần gửi trực tiếp tới Mod/TA/BTC qua ticket.",
+    "link": ""
+  },
+  {
+    "id": "QD_UNANNOUNCED",
+    "category": "Chưa thông báo",
+    "title": "Danh sách các mục CHƯA CÓ THÔNG BÁO CHÍNH THỨC",
+    "content": "Hạn nộp Lab 02, Lab 03, lịch thi Final, điểm danh cá nhân, kiểm tra điểm số cá nhân, xin châm chước commit trễ cá nhân, danh sách giảng viên cụ thể, phân quyền kênh học, xin slide bài giảng -> Đều CHƯA có thông báo hoặc ngoài thẩm quyền bot.",
+    "link": ""
+  },
+  {
+    "id": "WS01_AILOG_01",
+    "category": "AI Log",
+    "title": "AI Log — Yêu cầu bắt buộc 50 conversations/thành viên",
+    "content": "AI Log ghi lại conversations giữa học viên với AI coding tool (Cursor, VS Code Copilot, Claude...) trong quá trình build. Mục đích: chứng minh sản phẩm do học viên tự xây dựng. Yêu cầu tối thiểu: 50 conversations/thành viên trước khi submit demo.",
+    "link": ""
+  },
+  {
+    "id": "WS01_AILOG_02",
+    "category": "AI Log",
+    "title": "Cách setup AI Log — Git hook và AI hook",
+    "content": "Setup AI Log: 1) Clone demo repo được cấp. 2) Chạy script setup để cấu hình Git hook và AI hook. 3) Dán API key vào .env. 4) Sau mỗi commit/push, hệ thống tự gửi log về server. 5) Kiểm tra trạng thái trên dashboard mục AI Log. Nếu có dữ liệu nhạy cảm, vào file log xóa trước khi push.",
+    "link": ""
+  }
+]

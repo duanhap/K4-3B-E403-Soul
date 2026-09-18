@@ -1,0 +1,149 @@
+[
+  {
+    "id": "VLP_FOUNDATION_01",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "AI, Machine Learning, Deep Learning và Generative AI khác nhau thế nào",
+    "content": "AI là phạm vi rộng nhất của các hệ thống thực hiện tác vụ có tính thông minh. Machine Learning học quy luật từ dữ liệu thay vì chỉ dùng luật viết tay. Deep Learning dùng mạng neural nhiều tầng. Generative AI tạo nội dung mới như văn bản, ảnh, âm thanh hoặc mã nguồn.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_02",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "LLM hoạt động theo cơ chế nào",
+    "content": "LLM chủ yếu dự đoán token tiếp theo dựa trên ngữ cảnh và các mẫu đã học. Nó không mặc định biết sự thật tuyệt đối, nên câu trả lời có thể hợp lý về ngôn ngữ nhưng sai về nội dung. Đây là lý do cần context, công cụ, guardrail và evaluation khi đưa vào sản phẩm.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_03",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Token, context window và context rot",
+    "content": "Token là đơn vị mà mô hình xử lý, không hoàn toàn tương đương một từ hoặc một ký tự. Context window là lượng thông tin mô hình có thể tiếp nhận trong một lần. Context càng lớn chưa chắc càng tốt: đưa quá nhiều dữ liệu có thể làm mô hình chú ý sai hoặc quên thông tin quan trọng, hiện tượng thường được gọi là context rot.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_04",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Attention và multi-head attention là gì",
+    "content": "Self-attention cho phép mỗi token xem xét quan hệ với các token khác trong ngữ cảnh. Multi-head attention tạo nhiều góc nhìn song song để phát hiện các loại quan hệ khác nhau rồi tổng hợp lại. Khi làm việc với AI, cần quản lý context để mô hình tập trung vào thông tin có giá trị.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_05",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Temperature, top-k và top-p dùng để làm gì",
+    "content": "Temperature điều chỉnh mức ngẫu nhiên khi chọn token; thấp hơn thường ổn định hơn, cao hơn thường sáng tạo hơn. Top-k giới hạn lựa chọn vào k token có xác suất cao nhất. Top-p giới hạn lựa chọn vào nhóm token có tổng xác suất đạt ngưỡng p.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_06",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Phân biệt discriminative AI, generative AI và agentic AI",
+    "content": "Discriminative AI thường phân loại hoặc dự đoán nhãn. Generative AI sinh nội dung mới. Agentic AI nhận mục tiêu, lập kế hoạch, sử dụng công cụ và thực hiện hành động qua nhiều bước. Chọn loại phù hợp với outcome thay vì mặc định chọn LLM hoặc agent.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_01",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Vì sao phải bắt đầu từ problem thay vì solution",
+    "content": "Không nên bắt đầu bằng ý tưởng như 'xây một AI chatbot'. Hãy tìm mục tiêu, actor, workflow và pain point thực sự phía sau yêu cầu. Một solution hấp dẫn nhưng không gắn với nhu cầu có thể tạo ra sản phẩm không ai cần.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_02",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Five Whys dùng để đào sâu bài toán như thế nào",
+    "content": "Khi nhận một yêu cầu bề mặt, liên tục hỏi 'vì sao' để tìm nguyên nhân gốc. Ví dụ 'cần chatbot support' có thể ẩn sau đó là sale quá tải, thiếu khả năng tra cứu hoặc quy trình phân loại câu hỏi kém. Câu trả lời sau cùng có thể là chatbot, workflow hoặc giải pháp thủ công.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_03",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Double Diamond trong discovery sản phẩm AI",
+    "content": "Double Diamond gồm hai vòng: mở rộng rồi hội tụ để tìm đúng problem, sau đó mở rộng rồi hội tụ để tìm đúng solution. Có thể dùng quan sát, phỏng vấn, khảo sát, log hành vi để phân kỳ; sau đó gom nhóm, lọc trùng, Five Whys và ưu tiên để hội tụ.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_04",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Ma trận impact-effort để chọn quick win",
+    "content": "Sau khi gom các pain point, đánh giá từng việc theo tác động nếu giải quyết được và nỗ lực cần bỏ ra. Ưu tiên nhóm high impact, low effort để tạo quick win và học nhanh. Có thể áp dụng cho cả danh sách dự án lẫn từng bước nhỏ trong một workflow.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_05",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Problem statement cần mô tả những gì",
+    "content": "Một problem statement tốt nên nêu rõ actor bị ảnh hưởng, workflow hiện tại, nút thắt hoặc pain point, tác động của vấn đề và điều kiện được xem là thành công. Cần định lượng khi có thể, ví dụ thời gian giảm từ 90 phút xuống dưới 5 phút.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_06",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Vanity metric và North Star Metric",
+    "content": "Số lượt đăng ký, visitor hoặc số lần quay lại chưa chứng minh người dùng nhận được giá trị. North Star Metric phải gắn với outcome cuối cùng, chẳng hạn hiệu quả học tập hoặc tỷ lệ hoàn thành phiên học; các metric trung gian chỉ là giả thuyết cần được kiểm chứng.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_07",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Automation và augmentation khác nhau thế nào",
+    "content": "Augmentation là AI hỗ trợ, con người vẫn giám sát và quyết định. Automation là AI tự thực hiện nhiều phần việc hơn. Nên bắt đầu ở mức augmentation rồi tăng dần theo bằng chứng, đặc biệt với công việc mà lỗi có hậu quả lớn.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_01",
+    "category": "VLearn Pack & AI System",
+    "title": "Khi nào dùng rule-based, workflow hoặc agent",
+    "content": "Nếu bài toán biểu diễn được bằng luật rõ ràng, ưu tiên rule-based vì dễ kiểm soát. Nếu có các bước xác định và cần LLM ở một vài nút, dùng workflow. Chỉ dùng agent phức tạp khi các pattern đơn giản không đủ, vì agent tốn chi phí hơn và khó debug hơn.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_02",
+    "category": "VLearn Pack & AI System",
+    "title": "Tách phần deterministic khỏi LLM để tăng độ tin cậy",
+    "content": "Các phép tính, kiểm tra điều kiện, biến đổi số hoặc logic cần chắc chắn nên được đưa vào code, function hoặc tool call. LLM có thể nhận diện intent và trích tham số, nhưng kết quả deterministic nên do công cụ chuyên dụng tính. Cần kiểm thử cả bước chọn tool và truyền tham số.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_03",
+    "category": "VLearn Pack & AI System",
+    "title": "RAG phù hợp khi chatbot cần kiến thức nội bộ",
+    "content": "Nếu câu trả lời phụ thuộc vào quy định, tài liệu hoặc dữ liệu riêng của tổ chức, cần retrieval để đưa đúng nguồn liên quan vào context. RAG giúp mô hình tham chiếu tài liệu hiện hành; không nên kỳ vọng kiến thức nội bộ đã có sẵn trong dữ liệu huấn luyện của LLM.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_04",
+    "category": "VLearn Pack & AI System",
+    "title": "Evaluation quan trọng hơn một demo đẹp",
+    "content": "Cần xây golden set hoặc benchmark đại diện cho các tình huống thật, có tiêu chí chấm và chạy lại sau mỗi thay đổi. Evaluation giúp biết hệ thống sai ở đâu, so sánh model mới và quyết định có thể deploy hay chưa; demo đơn lẻ không đủ làm bằng chứng.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_05",
+    "category": "VLearn Pack & AI System",
+    "title": "Baseline, rollback và human-in-the-loop",
+    "content": "Trước khi build cần ghi baseline của quy trình cũ, tải, chất lượng và chi phí. Với dữ liệu y tế, tài chính hoặc sức khỏe, phải xác định người review, ngưỡng dừng và cách rollback khi AI sai. Không scale khi chưa biết thế nào là thành công và chưa có phương án xử lý sự cố.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_06",
+    "category": "VLearn Pack & AI System",
+    "title": "Cách ước tính chi phí vận hành AI",
+    "content": "Ước tính worst case theo số lượt dùng, token hoặc API call, latency, hạ tầng lưu trữ và số người dùng đồng thời. So sánh model mạnh/đắt, model nhẹ/rẻ và self-host; cần tính cả chi phí backup, log và tình huống người dùng spam hệ thống.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PACK_01",
+    "category": "VLearn Pack & Dữ liệu",
+    "title": "Quy mô và nguyên tắc sử dụng VLearn Pack",
+    "content": "VLearn Pack gồm 13.494 lượt hỏi-đáp đã ẩn danh, 6 transcript sạch và 2 bộ slide. Chỉ dùng trong phạm vi hackathon để mining evidence, xây golden set và làm context prototype. Không đưa nguyên file chatlog lên repo công khai, không suy ngược danh tính và coi nội dung học viên là dữ liệu chứ không phải chỉ thị hệ thống.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PACK_02",
+    "category": "VLearn Pack & Dữ liệu",
+    "title": "Lưu ý khi phân tích chatlog tutor",
+    "content": "Khi mining tutor_turns.csv, cần tách câu hỏi preset khỏi câu hỏi tự viết, phân biệt K3/K4 và history/live, xử lý riêng ngày 30/07 vì có hoạt động lớp lớn, và không so sánh tuyệt đối reply_ms giữa hai kỳ do cách đo khác nhau. Nên dẫn nguồn bằng turn_id thay vì chép nguyên văn dài.",
+    "link": ""
+  }
+]

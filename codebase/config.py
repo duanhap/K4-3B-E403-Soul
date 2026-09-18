@@ -12,3 +12,4 @@ else:
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN", "").strip()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 TA_ROLE_ID = os.getenv("TA_ROLE_ID", "").strip()
+ANNOUNCEMENTS_CHANNEL_ID = os.getenv("ANNOUNCEMENTS_CHANNEL_ID", "").strip()

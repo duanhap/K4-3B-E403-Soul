@@ -1,0 +1,114 @@
+[
+  {
+    "id": "TECHNICAL_GIT_01",
+    "category": "Kỹ thuật & Git",
+    "title": "Lỗi git push bị từ chối (rejected) — xử lý conflict",
+    "content": "Khi git push bị rejected do remote có commit mới hơn local: chạy git pull --rebase origin main trước rồi push lại. Nếu có conflict, giải quyết conflict rồi: git add . && git rebase --continue && git push.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_GIT_02",
+    "category": "Kỹ thuật & Git",
+    "title": "Kiểm tra lịch sử commit và thời điểm push lên GitHub",
+    "content": "Dùng: git log --oneline --format='%h %ai %s' để xem timestamp commit. GitHub ghi giờ UTC. Nếu cần bằng chứng nộp đúng hạn, chụp màn hình GitHub với timestamp hiển thị.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_GIT_03",
+    "category": "Kỹ thuật & Git",
+    "title": "Quy định Clone/Fork repo bài lab và Branch Protection",
+    "content": "Commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh nộp bài đúng quy cách. Branch protection trên repo cá nhân là tùy chọn — không bắt buộc theo quy định chương trình.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_ENV_01",
+    "category": "Kỹ thuật & Môi trường",
+    "title": "Thiết lập file .env và biến môi trường cho bot Discord",
+    "content": "Tạo file .env trong codebase/ với: DISCORD_TOKEN=xxx, GEMINI_API_KEY=xxx, TA_ROLE_ID=xxx. Thêm .env vào .gitignore — KHÔNG commit API key lên GitHub. Tham khảo file .env.example trong repo.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_ENV_02",
+    "category": "Kỹ thuật & Môi trường",
+    "title": "Cài đặt dependencies từ requirements.txt",
+    "content": "Chạy: pip install -r requirements.txt để cài đặt thư viện. Nếu lỗi version: pip install -r requirements.txt --upgrade. Khuyến khích dùng virtual environment: python -m venv venv trước khi cài.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_CVAT_01",
+    "category": "Kỹ thuật & Cài đặt Lab",
+    "title": "Lỗi OPA 500 Health Check khi cài CVAT",
+    "content": "Lỗi OPA chưa lấy được policy bundle từ cvat-server gây lỗi 500 health check ở bước 3. Nguyên nhân: CVAT server đang thực hiện DB migration. Giải pháp: chờ một thời gian ngắn để CVAT hoàn tất migration, OPA sẽ tải bundle thành công.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_CVAT_02",
+    "category": "Kỹ thuật & Cài đặt Lab",
+    "title": "Hỗ trợ cài đặt Docker/CVAT trước buổi lab",
+    "content": "Nhiều học viên gặp khó khăn cài Docker/CVAT. Liên hệ TA hoặc tạo ticket hỗ trợ kỹ thuật trên Discord TRƯỚC thời gian làm bài lab để được xử lý kịp thời.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_CVAT_03",
+    "category": "Kỹ thuật & Cài đặt Lab",
+    "title": "Nguồn dữ liệu ảnh gán nhãn trong bài Lab CVAT",
+    "content": "Toàn bộ ảnh để gán nhãn trong bài lab CVAT sẽ được ban tổ chức/chương trình cấp sẵn cho học viên. Học viên không cần tự tìm ảnh.",
+    "link": ""
+  },
+  {
+    "id": "VLD_API_01",
+    "category": "VLearn & API Key",
+    "title": "API key là gì và lưu ở đâu",
+    "content": "API key là credential cho phép ứng dụng gọi Gemini, OpenAI hoặc Groq; có key không đồng nghĩa tài khoản có credit miễn phí. Lưu key trong file .env hoặc secret manager, không hard-code, không commit lên GitHub, notebook công khai hay gửi vào prompt. Dùng .env.example với placeholder cho đồng đội.",
+    "link": ""
+  },
+  {
+    "id": "VLD_API_02",
+    "category": "VLearn & API Key",
+    "title": "Tạo và kiểm tra API key Gemini, OpenAI, Groq",
+    "content": "Gemini: tạo key trong Google AI Studio và kiểm tra quota. OpenAI: tạo secret key trong OpenAI Platform, kiểm tra Billing vì ChatGPT Plus/Pro không tự cấp credit API. Groq: tạo key trong Groq Console và theo dõi Usage/rate limit. Key bị lộ phải revoke và tạo key mới.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CLOUD_01",
+    "category": "VLearn & Cloud Credits",
+    "title": "Phân biệt cloud credit, free tier và API quota",
+    "content": "Cloud credit là số dư chi tiêu theo điều kiện; free tier/API quota là giới hạn request, token, phút hoặc tài nguyên miễn phí; student/research/startup grant là chương trình xét điều kiện. Trước khi dùng phải kiểm tra ngày hết hạn, region, dịch vụ được phép, yêu cầu thẻ, budget alert và khả năng tự động phát sinh phí.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CLOUD_02",
+    "category": "VLearn & Cloud Credits",
+    "title": "Checklist chống phát sinh phí sau khi nhận credit",
+    "content": "Kiểm tra số dư và ngày hết hạn, bật usage notification/budget alert, đặt giới hạn quota, xem resource đang chạy ở region nào, không để bucket/VM/endpoint public, dùng key riêng cho từng project và xóa resource thử nghiệm sau khi làm lab.",
+    "link": ""
+  },
+  {
+    "id": "VLD_PYTHON_01",
+    "category": "VLearn & Python",
+    "title": "Thiết lập virtual environment Python cho lab",
+    "content": "Windows: py -m venv .venv rồi .\\.venv\\Scripts\\Activate.ps1. Linux/macOS: python3 -m venv .venv rồi source .venv/bin/activate. Sau khi kích hoạt, chạy python -m pip install --upgrade pip và python -m pip install -r requirements.txt. Thoát môi trường bằng deactivate.",
+    "link": ""
+  },
+  {
+    "id": "VLD_PYTHON_02",
+    "category": "VLearn & Python",
+    "title": "Chọn đúng Python interpreter trong VS Code",
+    "content": "Trong VS Code chọn Python: Select Interpreter và chọn interpreter trong .venv, sau đó mở terminal mới. Kiểm tra bằng python --version và python -c \"import sys; print(sys.executable)\". Dùng python -m pip để pip thuộc đúng interpreter đang chạy.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CODING_01",
+    "category": "VLearn & AI Coding Tools",
+    "title": "Quickstart Claude Code và Codex",
+    "content": "Claude Code: kiểm tra bằng claude --version và claude doctor, đăng nhập bằng claude rồi /login. Codex: kiểm tra codex --version, đăng nhập bằng codex login và xem trạng thái bằng codex login status. Luôn cd vào đúng repository trước khi giao tác vụ cho agent.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CODING_02",
+    "category": "VLearn & AI Coding Tools",
+    "title": "Quy trình vibe coding có kiểm soát",
+    "content": "Đọc repository, nêu rõ mục tiêu và phạm vi, cho agent lập kế hoạch, sửa thay đổi nhỏ, đọc diff, chạy test/lint, sửa lỗi và commit. Không dán API key hoặc dữ liệu nhạy cảm vào prompt; không chấp nhận lệnh xóa/ghi đè hàng loạt khi chưa hiểu tác động.",
+    "link": ""
+  }
+]

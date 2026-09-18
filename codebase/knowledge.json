@@ -1,198 +1,590 @@
 [
   {
-    "id": "ANNOUNCEMENT_01",
-    "category": "Lab",
-    "title": "Hạn nộp Lab 01 & Quy cách commit GitHub",
-    "content": "Hạn nộp Lab 01 là 21:00 ngày 18/9/2026. Học viên commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh #submit-lab.",
-    "link": "codebase/QUY_DINH.md#1-quy-dinh-nop-bai--su-co-ky-thuat"
-  },
-  {
-    "id": "ANNOUNCEMENT_02",
-    "category": "Quy định",
-    "title": "Quy định sự cố nộp muộn & Kỹ thuật",
-    "content": "Mọi sự cố nộp muộn do Git/mạng cần báo trước hạn 15 phút kèm screenshot lỗi cho TA. Nộp muộn sau hạn không báo trước tính 0 điểm.",
-    "link": "codebase/QUY_DINH.md#1-quy-dinh-nop-bai--su-co-ky-thuat"
-  },
-  {
-    "id": "ANNOUNCEMENT_03",
-    "category": "Hackathon",
-    "title": "Lịch Checkpoint Mini Hackathon (CP1 - CP6)",
-    "content": "CP1: 19:30 17/9 (Canvas 7 dòng) | CP2: 21:00 17/9 (Luồng hoạt động) | CP3: 16:00 18/9 (Video 30s + số đo) | CP4: 21:00 18/9 (Chốt spec.md) | CP5: 22:30 18/9 (Slide & Demo video) | CP6: Vòng thuyết trình chung kết.",
-    "link": ""
-  },
-  {
-    "id": "ANNOUNCEMENT_04",
-    "category": "Standup",
-    "title": "Quy định nộp Standup hàng ngày",
-    "content": "Học viên gửi báo cáo Standup hàng ngày trước 09:00 sáng tại kênh #standup theo đúng template: 1. Việc đã làm, 2. Việc sẽ làm, 3. Khó khăn vướng mắc.",
-    "link": "codebase/QUY_DINH.md#4-quy-dinh-daily-standup--ticket-ho-tro"
-  },
-  {
-    "id": "ANNOUNCEMENT_05",
-    "category": "Tài liệu",
-    "title": "Link repo đề bài & AI Spec Template",
-    "content": "Mẫu AI Spec được lưu tại spec.md trong repo. Tham khảo rubric 100 điểm tại file 04-rubric.md và hướng dẫn 5 giai đoạn tại 02-guide.md.",
-    "link": "https://github.com/duanhap/K4-3B-E403-Soul/blob/main/spec.md"
-  },
-  {
-    "id": "STATUS_UNANNOUNCED",
-    "category": "Chưa thông báo",
-    "title": "Danh sách các mục CHƯA CÓ THÔNG BÁO CHÍNH THỨC",
-    "content": "Hạn nộp Lab 02, Lab 03, lịch thi Final, điểm danh cá nhân, kiểm tra điểm số cá nhân, yêu cầu xin châm chước commit trễ cá nhân -> Đều CHƯA có thông báo hoặc ngoài thẩm quyền tự động của bot.",
-    "link": "codebase/QUY_DINH.md#4-quy-dinh-daily-standup--ticket-ho-tro"
-  },
-  {
-    "id": "DEMO_LAB_01",
+    "id": "QD_LAB_01",
     "category": "Lab & Hạn nộp",
-    "title": "Gia hạn nộp bài Lab khi trễ hạn ngắn (1-15 phút)",
-    "content": "Học viên thắc mắc do sự cố mạng/nộp muộn 1-2 phút nên hệ thống khóa nộp bài. Quy định: Mọi sự cố kỹ thuật cần báo trước hạn 15 phút kèm screenshot cho TA. Nếu gặp sự cố đột xuất khi nộp trên VLearn, gửi ticket ngay tại kênh #vlearn-support để BTC/TA xem xét.",
-    "link": "codebase/QUY_DINH.md#1-quy-dinh-nop-bai--su-co-ky-thuat"
+    "title": "Hạn nộp Lab 01 & Quy cách commit GitHub",
+    "content": "Hạn nộp Lab 01 là 21:00 ngày 18/09/2026. Học viên commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh nộp bài theo đúng quy cách. Thời gian commit/push trên GitHub được đối chiếu trực tiếp với deadline chính thức.",
+    "link": "<#1550133861030297622>"
   },
   {
-    "id": "DEMO_LAB_02",
+    "id": "QD_LAB_02",
+    "category": "Lab & Hạn nộp",
+    "title": "Quy định sự cố nộp muộn & Kỹ thuật",
+    "content": "Mọi sự cố nộp muộn do Git/mạng cần báo trước hạn 15 phút kèm screenshot lỗi cho TA hoặc tạo ticket tại kênh #vlearn-support. Nộp muộn sau hạn không báo trước theo đúng quy trình sẽ tính 0 điểm.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "QD_LAB_03",
     "category": "Lab & Hạn nộp",
     "title": "Mức trừ điểm khi nộp lab muộn sau deadline",
-    "content": "Học viên thắc mắc nộp lab muộn sau 23:59 bị trừ bao nhiêu điểm. Quy định: Nộp muộn sau hạn không báo trước theo đúng quy trình sẽ tính 0 điểm. Trường hợp báo trước và có lý do chính đáng được TA duyệt sẽ xử lý theo quy định châm chước.",
-    "link": "codebase/QUY_DINH.md#1-quy-dinh-nop-bai--su-co-ky-thuat"
+    "content": "Nộp muộn sau hạn không báo trước theo đúng quy trình sẽ tính 0 điểm. Trường hợp báo trước và có lý do chính đáng được TA duyệt sẽ xử lý theo quy định châm chước.",
+    "link": "<#1550133861030297622>"
   },
   {
-    "id": "DEMO_LAB_03",
+    "id": "QD_LAB_04",
     "category": "Lab & Hạn nộp",
-    "title": "Xử lý sự cố commit Git trễ sau deadline nhưng nộp VLearn đúng hạn",
-    "content": "Học viên hỏi nếu nộp codelab đúng hạn trên Vlearn nhưng commit local bị lỗi và push lên GitHub sau deadline thì có tính đúng hạn không. Trả lời: Thời gian commit/push trên GitHub được đối chiếu với deadline. Nếu gặp lỗi git/push, học viên phải chụp màn hình lỗi và báo TA trước hạn 15 phút.",
-    "link": "codebase/QUY_DINH.md#1-quy-dinh-nop-bai--su-co-ky-thuat"
+    "title": "Xử lý sự cố commit Git trễ deadline nhưng nộp VLearn đúng hạn",
+    "content": "Thời gian commit/push trên GitHub được đối chiếu với deadline. Nếu gặp lỗi git/push, học viên phải chụp màn hình lỗi và báo TA trước hạn 15 phút. Nếu nộp VLearn đúng hạn nhưng GitHub trễ mà không báo trước -> tính trễ.",
+    "link": ""
   },
   {
-    "id": "DEMO_LAB_04",
+    "id": "QD_LAB_05",
     "category": "Lab & Hạn nộp",
-    "title": "Quy định Clone/Fork code và Branch Protection trên Git",
-    "content": "Học viên thắc mắc về quy định clone/fork repo bài lab và thiết lập branch protection trên repo Git cá nhân/nhóm. Yêu cầu: Commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh nộp bài theo đúng quy cách.",
-    "link": "codebase/QUY_DINH.md#1-quy-dinh-nop-bai--su-co-ky-thuat"
+    "title": "Gia hạn nộp bài Lab khi trễ hạn ngắn (1-15 phút)",
+    "content": "Nếu gặp sự cố đột xuất khi nộp trên VLearn, gửi ticket ngay tại kênh #vlearn-support để BTC/TA xem xét. Mọi sự cố kỹ thuật cần báo trước hạn 15 phút kèm screenshot cho TA.",
+    "link": ""
   },
   {
-    "id": "DEMO_LAB_05",
+    "id": "QD_LAB_06",
     "category": "Lab & Hạn nộp",
-    "title": "Hạn nộp chính thức của bài Lab 02 & Lab 03",
-    "content": "Học viên hỏi hạn nộp Lab 02 và Lab 03. Trạng thái: Hạn nộp Lab 01 là 21:00 ngày 18/9/2026. Hạn nộp Lab 02 và Lab 03 CHƯA CÓ THÔNG BÁO CHÍNH THỨC, học viên theo dõi thêm thông báo mới trên Discord.",
-    "link": "codebase/QUY_DINH.md#1-quy-dinh-nop-bai--su-co-ky-thuat"
+    "title": "Hạn nộp Lab 02 và Lab 03",
+    "content": "Hạn nộp Lab 02 và Lab 03 CHƯA CÓ THÔNG BÁO CHÍNH THỨC. Học viên theo dõi thêm thông báo mới tại kênh #announcements trên Discord.",
+    "link": "<#1550133861030297622>"
   },
   {
-    "id": "DEMO_CVAT_01",
-    "category": "Kỹ thuật & Cài đặt Lab",
-    "title": "Lỗi OPA chưa lấy được policy bundle từ cvat-server (Lỗi 500 Health Check)",
-    "content": "Học viên gặp lỗi bước 3 khi cài đặt CVAT, OPA chưa lấy được policy bundle gây lỗi 500 health check. Nguyên nhân: Do CVAT server đang thực hiện DB migration. Hướng dẫn: Chờ một thời gian ngắn để CVAT server hoàn tất migration, OPA sẽ tải bundle thành công.",
-    "link": ""
-  },
-  {
-    "id": "DEMO_CVAT_02",
-    "category": "Kỹ thuật & Cài đặt Lab",
-    "title": "Hỗ trợ kỹ thuật cài đặt và sử dụng công cụ gán nhãn CVAT",
-    "content": "Nhiều học viên gặp khó khăn trong việc cài đặt Docker/CVAT trước buổi lab. Hướng dẫn: Học viên chủ động liên hệ TA hoặc tạo ticket hỗ trợ kỹ thuật trên Discord trước thời gian làm bài lab để được xử lý kịp thời.",
-    "link": ""
-  },
-  {
-    "id": "DEMO_CVAT_03",
-    "category": "Kỹ thuật & Cài đặt Lab",
-    "title": "Nguồn dữ liệu hình ảnh phục vụ gán nhãn trong bài Lab CVAT",
-    "content": "Học viên thắc mắc dữ liệu ảnh gán nhãn trong lab CVAT tự tìm hay được cấp. Trả lời: Toàn bộ ảnh để gán nhãn trong bài lab CVAT sẽ được ban tổ chức/chương trình cấp sẵn cho học viên.",
-    "link": ""
-  },
-  {
-    "id": "DEMO_TEAM_01",
+    "id": "QD_TEAM_01",
     "category": "Onboarding & Lập đội nhóm",
-    "title": "Thời hạn ghép đội tự do & Hỗ trợ ghép nhóm lẻ",
-    "content": "Học viên thắc mắc deadline ghép đội tự do kết thúc sớm hoặc khó tìm đồng đội. Giải đáp: BTC có thông báo và hỗ trợ ghép nhóm tự động cho các học viên chưa có đội sau khi hết hạn ghép đội tự do.",
-    "link": "codebase/QUY_DINH.md#2-quy-dinh-onboarding--lap-doi-nhom"
+    "title": "Quy chuẩn đặt tên tài khoản Discord & Phoenix",
+    "content": "Học viên bắt buộc đổi tên hiển thị trên Discord và Phoenix theo cú pháp: [MãLớp] - HọTên (VD: [3B] - Nguyễn Văn A). Đặt đúng cú pháp để BTC và Lab Coach điểm danh và hỗ trợ.",
+    "link": ""
   },
   {
-    "id": "DEMO_TEAM_02",
+    "id": "QD_TEAM_02",
     "category": "Onboarding & Lập đội nhóm",
-    "title": "Quy định ghép nhóm giữa các Level 2 và Level 3",
-    "content": "Học viên hỏi các level có được ghép nhóm chung không. Quy định: Học viên Level 2 và Level 3 được phép lập đội chung nhưng BẮT BUỘC phải cùng level (L2 chung L2, L3 chung L3), không được ghép khác level hoặc khác lớp học.",
-    "link": "codebase/QUY_DINH.md#2-quy-dinh-onboarding--lap-doi-nhom"
+    "title": "Số lượng thành viên nhóm & Quy định ghép level",
+    "content": "Mỗi nhóm từ 3-4 người (Workshop 01 nói 4 thành viên). Học viên Level 2 và Level 3 KHÔNG được ghép chung khác level hoặc khác lớp. Phải cùng level: L2 chung L2, L3 chung L3.",
+    "link": ""
   },
   {
-    "id": "DEMO_TEAM_03",
+    "id": "QD_TEAM_03",
     "category": "Onboarding & Lập đội nhóm",
-    "title": "Số lượng thành viên nhóm & Xử lý khi thành viên nghỉ giữa chừng",
-    "content": "Học viên hỏi quy định số lượng người/nhóm và cách giải quyết khi có thành viên rút khỏi nhóm. Quy định: Mỗi nhóm từ 3-4 người. Trường hợp nhóm thiếu người do sự cố, báo ngay với Lab Coach/BTC để điều chỉnh.",
-    "link": "codebase/QUY_DINH.md#2-quy-dinh-onboarding--lap-doi-nhom"
+    "title": "Deadline lập team & Hỗ trợ ghép nhóm lẻ",
+    "content": "Deadline lập team tự do: 13/09. Sau hạn này BTC sẽ hỗ trợ ghép nhóm tự động cho học viên chưa có đội. Sau khi tất cả học viên có team, hệ thống mới mở danh sách đề tài để chọn.",
+    "link": ""
   },
   {
-    "id": "DEMO_TEAM_04",
+    "id": "QD_TEAM_04",
     "category": "Onboarding & Lập đội nhóm",
-    "title": "Quy chuẩn đổi tên tài khoản Discord & Nền tảng Phoenix",
-    "content": "Học viên hỏi cú pháp đặt tên tài khoản. Quy định: Học viên bắt buộc đổi tên hiển thị trên Discord và Phoenix theo đúng cú pháp chuẩn của khóa học (VD: [MãLớp] - HọTên) để BTC và Lab Coach điểm danh và hỗ trợ.",
-    "link": "codebase/QUY_DINH.md#2-quy-dinh-onboarding--lap-doi-nhom"
-  },
-  {
-    "id": "DEMO_WORKSHOP_01",
-    "category": "Điểm danh & Workshop & XP",
-    "title": "Quy trình điểm danh tự động khi tham gia Workshop trực tuyến",
-    "content": "Học viên hỏi làm sao để được tính điểm danh workshop. Hướng dẫn: Tham gia workshop (tối T5 và Chủ Nhật hàng tuần), đặt tên Zoom đúng cú pháp chuẩn và đăng nhập Zoom bằng đúng email đã đăng ký với chương trình để hệ thống điểm danh tự động.",
-    "link": "codebase/QUY_DINH.md#3-quy-dinh-diem-danh-workshop--xp"
-  },
-  {
-    "id": "DEMO_WORKSHOP_02",
-    "category": "Điểm danh & Workshop & XP",
-    "title": "Khắc phục lỗi điểm danh QR Code & Lịch sử không hiện trên MyVinUni",
-    "content": "Học viên phản ánh điểm danh QR tại lớp nhưng lịch sử điểm danh không hiển thị trên ứng dụng MyVinUni. Hướng dẫn: Gửi email cho bộ phận IT/BTC hoặc tạo ticket hỗ trợ để kiểm tra và cập nhật lại dữ liệu điểm danh.",
+    "title": "Xử lý khi thành viên rút khỏi nhóm giữa chừng",
+    "content": "Trường hợp nhóm thiếu người do thành viên rút, báo ngay với Lab Coach/BTC để điều chỉnh. Đánh giá checkpoint là theo cá nhân, không chỉ theo team.",
     "link": ""
   },
   {
-    "id": "DEMO_WORKSHOP_03",
+    "id": "QD_WORKSHOP_01",
     "category": "Điểm danh & Workshop & XP",
-    "title": "Cơ chế tính điểm kinh nghiệm (XP) & Kiểm tra Bảng xếp hạng",
-    "content": "Học viên thắc mắc về cách tích lũy XP sau workshop và cách xem vị trí trên Leaderboard. Giải đáp: XP được cộng tự động sau mỗi buổi tham gia đầy đủ và làm bài tập. Học viên dùng lệnh bot hoặc xem bảng xếp hạng tại kênh quy định.",
-    "link": "codebase/QUY_DINH.md#3-quy-dinh-diem-danh-workshop--xp"
+    "title": "Lịch Workshop & Quy trình điểm danh tự động",
+    "content": "Workshop diễn ra định kỳ tối Thứ 5 và Chủ Nhật hàng tuần (20h). Tham gia Zoom bằng đúng email đã đăng ký, đổi tên Zoom đúng cú pháp chuẩn để hệ thống điểm danh tự động.",
+    "link": ""
   },
   {
-    "id": "DEMO_WORKSHOP_04",
+    "id": "QD_WORKSHOP_02",
     "category": "Điểm danh & Workshop & XP",
-    "title": "Xử lý trường hợp ngồi nhầm phòng lab hoặc nhầm ca học",
-    "content": "Học viên thắc mắc nếu ngồi nhầm phòng lab thì điểm danh thế nào. Hướng dẫn: Học viên phải đi đúng phòng/ca đã phân công. Nếu có lý do đặc biệt phải chuyển phòng, cần báo trước cho Moderator/TA trực phòng.",
-    "link": "codebase/QUY_DINH.md#3-quy-dinh-diem-danh-workshop--xp"
-  },
-  {
-    "id": "DEMO_SCHEDULE_01",
-    "category": "Lịch học & Cơ sở vật chất",
-    "title": "Xử lý khi nhận 2 mã lịch học khác nhau trên Email cá nhân và Outlook",
-    "content": "Học viên hỏi nên theo lịch học nào khi nhận mã số lịch 02 và 03 khác nhau giữa email cá nhân và email Outlook. Hướng dẫn: Ưu tiên theo dõi lịch trên email Outlook trường cấp và xác nhận lại với BTC qua ticket hỗ trợ.",
+    "title": "Cơ chế tính điểm XP & Bảng xếp hạng",
+    "content": "XP được tích lũy tự động từ: điểm danh workshop, nộp Daily Standup, báo cáo Mentor Duty, submit Gate, tham gia Build Showcase. XP KHÔNG ảnh hưởng đến điểm cuối khóa 12 tuần — chỉ phản ánh mức độ tham gia Build Phase. Lên level thay đổi màu sắc, role trên Discord.",
     "link": ""
   },
   {
-    "id": "DEMO_SCHEDULE_02",
-    "category": "Lịch học & Cơ sở vật chất",
-    "title": "Vị trí & Thời gian mở cửa Thư viện trường",
-    "content": "Học viên hỏi vị trí thư viện trường vì bị lạc đường. Thông tin: Thư viện trường nằm tại tòa nhà đối diện Canteen và Highlands Coffee. Thời gian mở cửa trong giai đoạn hè từ 09:00 đến 17:30.",
+    "id": "QD_WORKSHOP_03",
+    "category": "Điểm danh & Workshop & XP",
+    "title": "Khắc phục lỗi điểm danh QR Code & MyVinUni không hiển thị",
+    "content": "Học viên điểm danh QR tại lớp nhưng lịch sử không hiển thị trên MyVinUni: gửi email cho bộ phận IT/BTC hoặc tạo ticket hỗ trợ để kiểm tra và cập nhật lại dữ liệu điểm danh.",
     "link": ""
   },
   {
-    "id": "DEMO_SCHEDULE_03",
-    "category": "Lịch học & Cơ sở vật chất",
-    "title": "Thẻ học viên, Đăng ký phương tiện gửi xe & Thẻ tài khoản",
-    "content": "Học viên thắc mắc thủ tục nhận thẻ học viên và đăng ký gửi xe. Hướng dẫn: Liên hệ ban quản lý sinh viên/Admin tại bàn trực để nhận thẻ và làm thủ tục gửi xe theo thông báo.",
+    "id": "QD_WORKSHOP_04",
+    "category": "Điểm danh & Workshop & XP",
+    "title": "Ngồi nhầm phòng lab hoặc nhầm ca học",
+    "content": "Học viên phải tham gia đúng phòng/ca đã phân công. Trường hợp bất khả kháng cần xin phép Moderator/TA trực phòng TRƯỚC buổi học.",
     "link": ""
   },
   {
-    "id": "DEMO_PROCEDURE_01",
+    "id": "QD_STANDUP_01",
+    "category": "Standup & Daily",
+    "title": "Quy định nộp Daily Standup hàng ngày",
+    "content": "Gửi báo cáo Standup trước 09:00 sáng hàng ngày tại kênh #standup theo template 3 mục: 1. Việc đã làm hôm qua, 2. Việc sẽ làm hôm nay, 3. Khó khăn vướng mắc. Thực hiện bằng lệnh /daily trong kênh Discord của team.",
+    "link": ""
+  },
+  {
+    "id": "QD_SUPPORT_01",
     "category": "Thủ tục & Hỗ trợ",
-    "title": "Quy định nộp báo cáo Daily Standup hàng ngày",
-    "content": "Học viên hỏi cú pháp nộp Standup. Quy định: Gửi báo cáo Standup hàng ngày trước 09:00 sáng tại kênh #standup theo template: 1. Việc đã làm, 2. Việc sẽ làm, 3. Khó khăn vướng mắc.",
-    "link": "codebase/QUY_DINH.md#4-quy-dinh-daily-standup--ticket-ho-tro"
+    "title": "Hướng dẫn mở Ticket hỗ trợ kỹ thuật & quy chế khóa học",
+    "content": "3 bước hỗ trợ theo thứ tự: 1) Hỏi bot tại kênh #hỏi-bot-cú-tê, 2) Hỏi cộng đồng tại #hỏi-đáp, 3) Tạo ticket (Create Ticket) mô tả vấn đề. BTC ưu tiên xử lý ticket khẩn trước. Nếu qua 1 ngày chưa được hỗ trợ, tag/nhắc nhở.",
+    "link": ""
   },
   {
-    "id": "DEMO_PROCEDURE_02",
-    "category": "Thủ tục & Hỗ trợ",
-    "title": "Hướng dẫn mở Ticket hỗ trợ kỹ thuật và quy chế khóa học",
-    "content": "Học viên chưa rõ cách gửi thắc mắc cho Mod/TA. Hướng dẫn: Dùng lệnh tạo ticket trên Discord hoặc nhắn trực tiếp tại kênh vlearn-support / tech-support để được Moderator trợ giúp.",
-    "link": "codebase/QUY_DINH.md#4-quy-dinh-daily-standup--ticket-ho-tro"
-  },
-  {
-    "id": "DEMO_PROCEDURE_03",
+    "id": "QD_SUPPORT_02",
     "category": "Thủ tục & Hỗ trợ",
     "title": "Quy trình xin châm chước cá nhân / tra cứu điểm cá nhân",
-    "content": "Học viên yêu cầu tra cứu điểm cá nhân hoặc xin châm chước nộp muộn do lý do cá nhân. Quy định: Bot AI không có thẩm quyền xử lý dữ liệu cá nhân hoặc duyệt châm chước. Học viên cần liên hệ trực tiếp TA/BTC.",
-    "link": "codebase/QUY_DINH.md#4-quy-dinh-daily-standup--ticket-ho-tro"
+    "content": "Bot AI không có thẩm quyền duyệt châm chước cá nhân hoặc kiểm tra điểm số riêng tư. Các yêu cầu này cần gửi trực tiếp tới Mod/TA/BTC qua ticket.",
+    "link": ""
+  },
+  {
+    "id": "QD_UNANNOUNCED",
+    "category": "Chưa thông báo",
+    "title": "Danh sách các mục CHƯA CÓ THÔNG BÁO CHÍNH THỨC",
+    "content": "Hạn nộp Lab 02, Lab 03, lịch thi Final, điểm danh cá nhân, kiểm tra điểm số cá nhân, xin châm chước commit trễ cá nhân, danh sách giảng viên cụ thể, phân quyền kênh học, xin slide bài giảng -> Đều CHƯA có thông báo hoặc ngoài thẩm quyền bot.",
+    "link": ""
+  },
+  {
+    "id": "CP_HACKATHON_01",
+    "category": "Hackathon & Checkpoint",
+    "title": "Lịch Checkpoint Mini Hackathon (CP1–CP6)",
+    "content": "CP1: 19:30 ngày 17/9 (Canvas 7 dòng) | CP2: 21:00 ngày 17/9 (Prototype bấm được) | CP3: 16:00 ngày 18/9 (Video 30s AI thật + golden set + số đo) | CP4: 21:00 ngày 18/9 (Chốt spec.md + khóa Quality Bar) | CP5: 22:30 ngày 18/9 (Slide PDF + video demo dự phòng) | CP6: 09:00 ngày 19/9 (Thuyết trình 5'+5' Q&A).",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "CP_HACKATHON_02",
+    "category": "Hackathon & Checkpoint",
+    "title": "Quy định nộp form Checkpoint — đội trưởng dùng 1 MSSV",
+    "content": "Đội trưởng dùng DUY NHẤT 1 MSSV để nộp tất cả 5 form CP1-CP5. Mỗi thành viên đăng nhập VLearn và dán link GitHub repo chung của nhóm. Nộp đúng hạn = 5 điểm checkpoint; nộp muộn = 0 điểm mốc đó.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "CP_HACKATHON_03",
+    "category": "Hackathon & Checkpoint",
+    "title": "Quality Bar khóa cứng sau 21:00 ngày 18/9",
+    "content": "Quality Bar phải commit vào spec.md trước 21:00 ngày 18/9. Sau thời điểm này KHÔNG được sửa dù kết quả đo thấp hơn bar. Kết quả ghi trung thực: 12/20 có phân tích đầy đủ được điểm hơn 20/20 không có bằng chứng.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "CP_HACKATHON_04",
+    "category": "Hackathon & Checkpoint",
+    "title": "Vibe-coding rule tại CP6 — giám khảo hỏi ngẫu nhiên",
+    "content": "Tại CP6 giám khảo hỏi ngẫu nhiên bất kỳ thành viên về phần có tên họ trong README. Không giải thích được bản chất kỹ thuật -> 0 điểm phần cá nhân đó. Mỗi thành viên phải nói được ít nhất 1 phần trong buổi thuyết trình.",
+    "link": ""
+  },
+  {
+    "id": "WS01_PROGRAM_01",
+    "category": "Chương trình & Build Phase",
+    "title": "Tổng quan Build Phase 6 tuần — Lịch và Deadline chính",
+    "content": "Build Phase kéo dài 6 tuần, kết thúc khoảng 22/10. Tuần 1: onboard, lập team (deadline 13/9). Tuần 2: chốt đề tài (deadline 20/9 — sau ngày này KHÔNG thể thay đổi). Tuần 3-4: xây POC và MVP. Tuần 5: nộp MVP (Gate 2). Tuần 6: hoàn thiện và launch.",
+    "link": ""
+  },
+  {
+    "id": "WS01_PROGRAM_02",
+    "category": "Chương trình & Build Phase",
+    "title": "Hoạt động định kỳ: Workshop, Office Hours, Mentor Duty",
+    "content": "Workshop: tối Thứ 5 và Chủ Nhật (20h) — kiến thức xây dựng sản phẩm AI. Office Hours: mentor giải đáp trực tiếp theo nhóm. Mentor Duty: tối Thứ 4 và Thứ 7 — mỗi nhóm ~10 team báo cáo tiến độ với mentor phụ trách.",
+    "link": ""
+  },
+  {
+    "id": "WS01_PROGRAM_03",
+    "category": "Chương trình & Build Phase",
+    "title": "Cơ hội việc làm & Checkpoint đánh giá cuối Build Phase",
+    "content": "Checkpoint gần cuối Build Phase đánh giá: thái độ/kỷ luật, output kỹ năng thực tế, đóng góp cá nhân. Học viên đạt chuẩn được doanh nghiệp xét vị trí thực tập, sau đó có cơ hội tuyển dụng. Khóa 1: ~100% offer, Khóa 2: >80% offer. Track Computer Vision: VinFast dự kiến tuyển ~300 bạn.",
+    "link": ""
+  },
+  {
+    "id": "WS01_DELIVERABLE_01",
+    "category": "Deliverable & Nộp bài",
+    "title": "Danh sách deliverable bắt buộc cuối Build Phase",
+    "content": "Phải nộp đủ: Source code (GitHub), Tài liệu đặc tả & thiết kế, Tài liệu kiểm thử, Nhật ký làm việc (Vlog), Evaluation/Benchmark, Live URL (sản phẩm chạy được), Video demo, AI Log (tối thiểu 50 conversations/thành viên).",
+    "link": ""
+  },
+  {
+    "id": "WS01_DELIVERABLE_02",
+    "category": "Deliverable & Nộp bài",
+    "title": "Gate 1 và Gate 2 — Checkpoint chính của Build Phase",
+    "content": "Gate 1: chốt đề tài + tài liệu mô tả (deadline 20/9). Gate 2 (Tuần 5): nộp MVP để doanh nghiệp review. Checkpoint tuần 5-6 sẽ lọc những học viên không đạt.",
+    "link": ""
+  },
+  {
+    "id": "WS01_AILOG_01",
+    "category": "AI Log",
+    "title": "AI Log — Yêu cầu bắt buộc 50 conversations/thành viên",
+    "content": "AI Log ghi lại conversations giữa học viên với AI coding tool (Cursor, VS Code Copilot, Claude...) trong quá trình build. Mục đích: chứng minh sản phẩm do học viên tự xây dựng. Yêu cầu tối thiểu: 50 conversations/thành viên trước khi submit demo.",
+    "link": ""
+  },
+  {
+    "id": "WS01_AILOG_02",
+    "category": "AI Log",
+    "title": "Cách setup AI Log — Git hook và AI hook",
+    "content": "Setup AI Log: 1) Clone demo repo được cấp. 2) Chạy script setup để cấu hình Git hook và AI hook. 3) Dán API key vào .env. 4) Sau mỗi commit/push, hệ thống tự gửi log về server. 5) Kiểm tra trạng thái trên dashboard mục AI Log. Nếu có dữ liệu nhạy cảm, vào file log xóa trước khi push.",
+    "link": ""
+  },
+  {
+    "id": "WS01_TOPIC_01",
+    "category": "Đề tài & Chọn hướng",
+    "title": "Quy định chọn đề tài — Deadline và Slot giới hạn",
+    "content": "Deadline chốt đề tài: 20/9 — sau ngày này KHÔNG thể thay đổi. Mỗi đề tài giới hạn 2-3 slot team đăng ký, team nào đăng ký sớm được ưu tiên. Đề tài chỉ là mô tả gợi mở — team có quyền mở rộng, thu hẹp, hoặc đề xuất đề tài mới qua ticket.",
+    "link": ""
+  },
+  {
+    "id": "WS01_TOPIC_02",
+    "category": "Đề tài & Chọn hướng",
+    "title": "Tiêu chí chọn đề tài phù hợp",
+    "content": "Khi chọn đề tài cần tự hỏi: Mình có data không? Có tìm được người dùng để khảo sát không? Team có làm được với khả năng hiện tại không? Nên ưu tiên đề tài liên quan đến doanh nghiệp muốn thực tập để tăng cơ hội được nhận. BTC không cung cấp data, API hay server — team phải tự chủ.",
+    "link": ""
+  },
+  {
+    "id": "WS01_DISCORD_01",
+    "category": "Discord & Kênh",
+    "title": "Hai kênh quan trọng nhất trên Discord Build Phase",
+    "content": "Kênh #announcements: lịch trình, thay đổi, thông tin chính thức. Kênh #tài-nguyên: slide, video record, tài liệu hướng dẫn. Lưu ý phân biệt kênh lớp học (trường) và kênh Build Phase — hỏi đúng nơi để được hỗ trợ nhanh nhất.",
+    "link": "<#1550133861030297622>"
+  },
+  {
+    "id": "WS01_SCHEDULE_01",
+    "category": "Lịch học & Cơ sở vật chất",
+    "title": "Vị trí & Giờ mở cửa Thư viện trường",
+    "content": "Thư viện nằm tại tòa nhà đối diện Canteen và Highlands Coffee. Giờ mở cửa giai đoạn hè: 09:00 – 17:30.",
+    "link": ""
+  },
+  {
+    "id": "WS01_SCHEDULE_02",
+    "category": "Lịch học & Cơ sở vật chất",
+    "title": "Xử lý khi nhận 2 mã lịch học khác nhau (email cá nhân vs Outlook)",
+    "content": "Ưu tiên theo dõi lịch trên email Outlook trường cấp và xác nhận lại với BTC qua ticket hỗ trợ.",
+    "link": ""
+  },
+  {
+    "id": "WS01_SCHEDULE_03",
+    "category": "Lịch học & Cơ sở vật chất",
+    "title": "Thẻ học viên & Đăng ký phương tiện gửi xe",
+    "content": "Liên hệ ban quản lý sinh viên/Admin tại bàn trực để nhận thẻ học viên và làm thủ tục đăng ký gửi xe theo thông báo.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_01",
+    "category": "Tư duy sản phẩm AI",
+    "title": "5 lý do AI product thất bại — từ Workshop 02",
+    "content": "1) Solution First, Problem Last (thấy AI hay → cố tìm problem). 2) Persona quá rộng (sản phẩm cho tất cả mọi người). 3) MVP biến thành app đầy đủ (không biết tính năng nào tạo value). 4) Gắn AI để trông xịn hơn (AI không làm outcome tốt hơn). 5) Đo sai metric (đo lượt đăng ký thay vì hành vi nhận value thật).",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_02",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Framework 5 bước xây dựng AI MVP (thứ tự không đảo ngược)",
+    "content": "Thứ tự: Problem → Persona → AI Leverage → MVP Scope → Magic. KHÔNG đi từ AI → Problem. Bước 1: Pain thật là gì (bệnh gốc, không phải triệu chứng). Bước 2: Persona đủ hẹp để ra quyết định. Bước 3: AI tạo lợi thế thật ở đâu. Bước 4: MVP scope nhỏ nhất để kiểm chứng (1 User - 1 Job - 1 Outcome). Bước 5: Magic Metric đo hành vi nhận value thật.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_03",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Công thức viết Problem Statement đúng chuẩn",
+    "content": "[Persona] gặp khó khăn khi [job to be done], trong bối cảnh [context]. Hiện họ đang tự xử lý bằng [current workaround], dẫn đến [negative outcome]. Ví dụ: Sinh viên 18-24 tuổi gặp khó khăn khi tự học một mình vào buổi tối, trong bối cảnh dễ mất tập trung sau 15-20 phút. Hiện họ dùng Pomodoro/Study With Me, dẫn đến mất tập trung và giảm động lực.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_04",
+    "category": "Tư duy sản phẩm AI",
+    "title": "4 hướng AI tạo giá trị thực sự & 6 câu hỏi kiểm tra tính khả thi",
+    "content": "4 hướng AI tạo value: nhanh hơn / chính xác hơn / cá nhân hóa hơn / tự động hóa. Kiểm tra: Nếu bỏ AI đi, outcome có kém hơn không? Nếu không → AI chỉ là marketing label. 6 câu hỏi khả thi: Data (đủ không?) / Accuracy (sai cỡ nào chấp nhận được?) / Latency (user chờ được không?) / Cost (đáng không?) / Trust (user tin không?) / Human Interlock (cần người duyệt không?).",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_05",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Phân biệt Vanity Metrics vs Magic Metrics",
+    "content": "Vanity Metrics (TRÁNH): số lượt đăng ký, lượt tải app, lượt vào room. Magic Metrics (DÙNG): tỉ lệ hoàn thành phiên học đầu, tỉ lệ quay lại lần 2, thời lượng tập trung trung bình, số đề được dùng thật. Magic phải đo hành vi nhận value thật, không đo sự chú ý.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_06",
+    "category": "Tư duy sản phẩm AI",
+    "title": "Validation Plan — 4 bậc thang kiểm chứng trước khi build",
+    "content": "Thứ tự từ nhỏ đến lớn: 1) Interview — nói chuyện trực tiếp, nghe hành vi hiện tại. 2) Manual MVP (Wizard of Oz) — tự làm thủ công để kiểm chứng giả định. 3) Prototype/Clickable Demo. 4) MVP thật — build khi đã đủ learning. Người Việt Nam thích chia sẻ — đừng gửi form survey, hãy gặp trực tiếp 5-10 người.",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_07",
+    "category": "Tư duy sản phẩm AI",
+    "title": "5 nguyên tắc sống còn khi làm AI Product",
+    "content": "1) Bắt đầu bằng problem, không phải AI. 2) Chọn persona đủ hẹp, không phục vụ tất cả. 3) Build thí nghiệm (kiểm chứng giả định), không build hệ sinh thái. 4) Đo hành vi nhận value, không đo sự chú ý. 5) Yêu nỗi đau người dùng, không yêu solution (solution có thể đổi, model có thể đổi).",
+    "link": ""
+  },
+  {
+    "id": "WS02_PRODUCT_08",
+    "category": "Tư duy sản phẩm AI",
+    "title": "AI MVP Canvas — 9 câu hỏi bản đồ tác chiến",
+    "content": "Khi có idea, trả lời 9 câu: 1) Target user là ai? 2) Job to be done là gì? 3) Pain point thật là gì? 4) Current workaround là gì? 5) Problem statement là gì? 6) Core outcome là gì? 7) AI leverage ở đâu? 8) MVP scope gồm gì / chưa build gì? 9) Validation metric là gì? Nếu Problem Clarity hoặc Persona Sharpness thấp -> khoan build, làm rõ problem trước.",
+    "link": ""
+  },
+  {
+    "id": "VLEARN_01",
+    "category": "VLearn & Nộp bài",
+    "title": "Hướng dẫn nộp bài trên VLearn (link GitHub repo)",
+    "content": "Mỗi thành viên đăng nhập VLearn → tìm Lab tương ứng → dán link GitHub repo chung của nhóm. Tất cả thành viên dán cùng một link. Đội trưởng kiểm tra đã nộp đủ các form CP bằng 1 MSSV duy nhất.",
+    "link": ""
+  },
+  {
+    "id": "VLEARN_02",
+    "category": "VLearn & Nộp bài",
+    "title": "Xin slide bài giảng sau buổi học",
+    "content": "Slide bài giảng CHƯA CÓ THÔNG BÁO chính thức về việc chia sẻ sau buổi học. Theo dõi kênh #tài-nguyên trên Discord hoặc liên hệ Lab Coach/BTC để được hỗ trợ.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_GIT_01",
+    "category": "Kỹ thuật & Git",
+    "title": "Lỗi git push bị từ chối (rejected) — xử lý conflict",
+    "content": "Khi git push bị rejected do remote có commit mới hơn local: chạy git pull --rebase origin main trước rồi push lại. Nếu có conflict, giải quyết conflict rồi: git add . && git rebase --continue && git push.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_GIT_02",
+    "category": "Kỹ thuật & Git",
+    "title": "Kiểm tra lịch sử commit và thời điểm push lên GitHub",
+    "content": "Dùng: git log --oneline --format='%h %ai %s' để xem timestamp commit. GitHub ghi giờ UTC. Nếu cần bằng chứng nộp đúng hạn, chụp màn hình GitHub với timestamp hiển thị.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_GIT_03",
+    "category": "Kỹ thuật & Git",
+    "title": "Quy định Clone/Fork repo bài lab và Branch Protection",
+    "content": "Commit mã nguồn lên repo GitHub công khai cá nhân/nhóm và dán link commit vào kênh nộp bài đúng quy cách. Branch protection trên repo cá nhân là tùy chọn — không bắt buộc theo quy định chương trình.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_ENV_01",
+    "category": "Kỹ thuật & Môi trường",
+    "title": "Thiết lập file .env và biến môi trường cho bot Discord",
+    "content": "Tạo file .env trong codebase/ với: DISCORD_TOKEN=xxx, GEMINI_API_KEY=xxx, TA_ROLE_ID=xxx. Thêm .env vào .gitignore — KHÔNG commit API key lên GitHub. Tham khảo file .env.example trong repo.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_ENV_02",
+    "category": "Kỹ thuật & Môi trường",
+    "title": "Cài đặt dependencies từ requirements.txt",
+    "content": "Chạy: pip install -r requirements.txt để cài đặt thư viện. Nếu lỗi version: pip install -r requirements.txt --upgrade. Khuyến khích dùng virtual environment: python -m venv venv trước khi cài.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_CVAT_01",
+    "category": "Kỹ thuật & Cài đặt Lab",
+    "title": "Lỗi OPA 500 Health Check khi cài CVAT",
+    "content": "Lỗi OPA chưa lấy được policy bundle từ cvat-server gây lỗi 500 health check ở bước 3. Nguyên nhân: CVAT server đang thực hiện DB migration. Giải pháp: chờ một thời gian ngắn để CVAT hoàn tất migration, OPA sẽ tải bundle thành công.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_CVAT_02",
+    "category": "Kỹ thuật & Cài đặt Lab",
+    "title": "Hỗ trợ cài đặt Docker/CVAT trước buổi lab",
+    "content": "Nhiều học viên gặp khó khăn cài Docker/CVAT. Liên hệ TA hoặc tạo ticket hỗ trợ kỹ thuật trên Discord TRƯỚC thời gian làm bài lab để được xử lý kịp thời.",
+    "link": ""
+  },
+  {
+    "id": "TECHNICAL_CVAT_03",
+    "category": "Kỹ thuật & Cài đặt Lab",
+    "title": "Nguồn dữ liệu ảnh gán nhãn trong bài Lab CVAT",
+    "content": "Toàn bộ ảnh để gán nhãn trong bài lab CVAT sẽ được ban tổ chức/chương trình cấp sẵn cho học viên. Học viên không cần tự tìm ảnh.",
+    "link": ""
+  },
+  {
+    "id": "SPEC_TAIDOC_01",
+    "category": "Tài liệu & Spec",
+    "title": "Link repo đề bài & AI Spec Template",
+    "content": "Mẫu AI Spec lưu tại spec.md trong repo nhóm. Rubric 100 điểm tại 04-rubric.md. Hướng dẫn 5 giai đoạn tại 02-guide.md. Tham khảo canvas-cp1.md cho mẫu Canvas CP1.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_01",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "AI, Machine Learning, Deep Learning và Generative AI khác nhau thế nào",
+    "content": "AI là phạm vi rộng nhất của các hệ thống thực hiện tác vụ có tính thông minh. Machine Learning học quy luật từ dữ liệu thay vì chỉ dùng luật viết tay. Deep Learning dùng mạng neural nhiều tầng. Generative AI tạo nội dung mới như văn bản, ảnh, âm thanh hoặc mã nguồn.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_02",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "LLM hoạt động theo cơ chế nào",
+    "content": "LLM chủ yếu dự đoán token tiếp theo dựa trên ngữ cảnh và các mẫu đã học. Nó không mặc định biết sự thật tuyệt đối, nên câu trả lời có thể hợp lý về ngôn ngữ nhưng sai về nội dung. Đây là lý do cần context, công cụ, guardrail và evaluation khi đưa vào sản phẩm.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_03",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Token, context window và context rot",
+    "content": "Token là đơn vị mà mô hình xử lý, không hoàn toàn tương đương một từ hoặc một ký tự. Context window là lượng thông tin mô hình có thể tiếp nhận trong một lần. Context càng lớn chưa chắc càng tốt: đưa quá nhiều dữ liệu có thể làm mô hình chú ý sai hoặc quên thông tin quan trọng, hiện tượng thường được gọi là context rot.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_04",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Attention và multi-head attention là gì",
+    "content": "Self-attention cho phép mỗi token xem xét quan hệ với các token khác trong ngữ cảnh. Multi-head attention tạo nhiều góc nhìn song song để phát hiện các loại quan hệ khác nhau rồi tổng hợp lại. Khi làm việc với AI, cần quản lý context để mô hình tập trung vào thông tin có giá trị.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_05",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Temperature, top-k và top-p dùng để làm gì",
+    "content": "Temperature điều chỉnh mức ngẫu nhiên khi chọn token; thấp hơn thường ổn định hơn, cao hơn thường sáng tạo hơn. Top-k giới hạn lựa chọn vào k token có xác suất cao nhất. Top-p giới hạn lựa chọn vào nhóm token có tổng xác suất đạt ngưỡng p.",
+    "link": ""
+  },
+  {
+    "id": "VLP_FOUNDATION_06",
+    "category": "VLearn Pack & AI Foundation",
+    "title": "Phân biệt discriminative AI, generative AI và agentic AI",
+    "content": "Discriminative AI thường phân loại hoặc dự đoán nhãn. Generative AI sinh nội dung mới. Agentic AI nhận mục tiêu, lập kế hoạch, sử dụng công cụ và thực hiện hành động qua nhiều bước. Chọn loại phù hợp với outcome thay vì mặc định chọn LLM hoặc agent.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_01",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Vì sao phải bắt đầu từ problem thay vì solution",
+    "content": "Không nên bắt đầu bằng ý tưởng như 'xây một AI chatbot'. Hãy tìm mục tiêu, actor, workflow và pain point thực sự phía sau yêu cầu. Một solution hấp dẫn nhưng không gắn với nhu cầu có thể tạo ra sản phẩm không ai cần.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_02",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Five Whys dùng để đào sâu bài toán như thế nào",
+    "content": "Khi nhận một yêu cầu bề mặt, liên tục hỏi 'vì sao' để tìm nguyên nhân gốc. Ví dụ 'cần chatbot support' có thể ẩn sau đó là sale quá tải, thiếu khả năng tra cứu hoặc quy trình phân loại câu hỏi kém. Câu trả lời sau cùng có thể là chatbot, workflow hoặc giải pháp thủ công.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_03",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Double Diamond trong discovery sản phẩm AI",
+    "content": "Double Diamond gồm hai vòng: mở rộng rồi hội tụ để tìm đúng problem, sau đó mở rộng rồi hội tụ để tìm đúng solution. Có thể dùng quan sát, phỏng vấn, khảo sát, log hành vi để phân kỳ; sau đó gom nhóm, lọc trùng, Five Whys và ưu tiên để hội tụ.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_04",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Ma trận impact-effort để chọn quick win",
+    "content": "Sau khi gom các pain point, đánh giá từng việc theo tác động nếu giải quyết được và nỗ lực cần bỏ ra. Ưu tiên nhóm high impact, low effort để tạo quick win và học nhanh. Có thể áp dụng cho cả danh sách dự án lẫn từng bước nhỏ trong một workflow.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_05",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Problem statement cần mô tả những gì",
+    "content": "Một problem statement tốt nên nêu rõ actor bị ảnh hưởng, workflow hiện tại, nút thắt hoặc pain point, tác động của vấn đề và điều kiện được xem là thành công. Cần định lượng khi có thể, ví dụ thời gian giảm từ 90 phút xuống dưới 5 phút.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_06",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Vanity metric và North Star Metric",
+    "content": "Số lượt đăng ký, visitor hoặc số lần quay lại chưa chứng minh người dùng nhận được giá trị. North Star Metric phải gắn với outcome cuối cùng, chẳng hạn hiệu quả học tập hoặc tỷ lệ hoàn thành phiên học; các metric trung gian chỉ là giả thuyết cần được kiểm chứng.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PRODUCT_07",
+    "category": "VLearn Pack & Tư duy sản phẩm AI",
+    "title": "Automation và augmentation khác nhau thế nào",
+    "content": "Augmentation là AI hỗ trợ, con người vẫn giám sát và quyết định. Automation là AI tự thực hiện nhiều phần việc hơn. Nên bắt đầu ở mức augmentation rồi tăng dần theo bằng chứng, đặc biệt với công việc mà lỗi có hậu quả lớn.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_01",
+    "category": "VLearn Pack & AI System",
+    "title": "Khi nào dùng rule-based, workflow hoặc agent",
+    "content": "Nếu bài toán biểu diễn được bằng luật rõ ràng, ưu tiên rule-based vì dễ kiểm soát. Nếu có các bước xác định và cần LLM ở một vài nút, dùng workflow. Chỉ dùng agent phức tạp khi các pattern đơn giản không đủ, vì agent tốn chi phí hơn và khó debug hơn.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_02",
+    "category": "VLearn Pack & AI System",
+    "title": "Tách phần deterministic khỏi LLM để tăng độ tin cậy",
+    "content": "Các phép tính, kiểm tra điều kiện, biến đổi số hoặc logic cần chắc chắn nên được đưa vào code, function hoặc tool call. LLM có thể nhận diện intent và trích tham số, nhưng kết quả deterministic nên do công cụ chuyên dụng tính. Cần kiểm thử cả bước chọn tool và truyền tham số.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_03",
+    "category": "VLearn Pack & AI System",
+    "title": "RAG phù hợp khi chatbot cần kiến thức nội bộ",
+    "content": "Nếu câu trả lời phụ thuộc vào quy định, tài liệu hoặc dữ liệu riêng của tổ chức, cần retrieval để đưa đúng nguồn liên quan vào context. RAG giúp mô hình tham chiếu tài liệu hiện hành; không nên kỳ vọng kiến thức nội bộ đã có sẵn trong dữ liệu huấn luyện của LLM.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_04",
+    "category": "VLearn Pack & AI System",
+    "title": "Evaluation quan trọng hơn một demo đẹp",
+    "content": "Cần xây golden set hoặc benchmark đại diện cho các tình huống thật, có tiêu chí chấm và chạy lại sau mỗi thay đổi. Evaluation giúp biết hệ thống sai ở đâu, so sánh model mới và quyết định có thể deploy hay chưa; demo đơn lẻ không đủ làm bằng chứng.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_05",
+    "category": "VLearn Pack & AI System",
+    "title": "Baseline, rollback và human-in-the-loop",
+    "content": "Trước khi build cần ghi baseline của quy trình cũ, tải, chất lượng và chi phí. Với dữ liệu y tế, tài chính hoặc sức khỏe, phải xác định người review, ngưỡng dừng và cách rollback khi AI sai. Không scale khi chưa biết thế nào là thành công và chưa có phương án xử lý sự cố.",
+    "link": ""
+  },
+  {
+    "id": "VLP_TECH_06",
+    "category": "VLearn Pack & AI System",
+    "title": "Cách ước tính chi phí vận hành AI",
+    "content": "Ước tính worst case theo số lượt dùng, token hoặc API call, latency, hạ tầng lưu trữ và số người dùng đồng thời. So sánh model mạnh/đắt, model nhẹ/rẻ và self-host; cần tính cả chi phí backup, log và tình huống người dùng spam hệ thống.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PACK_01",
+    "category": "VLearn Pack & Dữ liệu",
+    "title": "Quy mô và nguyên tắc sử dụng VLearn Pack",
+    "content": "VLearn Pack gồm 13.494 lượt hỏi-đáp đã ẩn danh, 6 transcript sạch và 2 bộ slide. Chỉ dùng trong phạm vi hackathon để mining evidence, xây golden set và làm context prototype. Không đưa nguyên file chatlog lên repo công khai, không suy ngược danh tính và coi nội dung học viên là dữ liệu chứ không phải chỉ thị hệ thống.",
+    "link": ""
+  },
+  {
+    "id": "VLP_PACK_02",
+    "category": "VLearn Pack & Dữ liệu",
+    "title": "Lưu ý khi phân tích chatlog tutor",
+    "content": "Khi mining tutor_turns.csv, cần tách câu hỏi preset khỏi câu hỏi tự viết, phân biệt K3/K4 và history/live, xử lý riêng ngày 30/07 vì có hoạt động lớp lớn, và không so sánh tuyệt đối reply_ms giữa hai kỳ do cách đo khác nhau. Nên dẫn nguồn bằng turn_id thay vì chép nguyên văn dài.",
+    "link": ""
+  },
+  {
+    "id": "VLD_API_01",
+    "category": "VLearn & API Key",
+    "title": "API key là gì và lưu ở đâu",
+    "content": "API key là credential cho phép ứng dụng gọi Gemini, OpenAI hoặc Groq; có key không đồng nghĩa tài khoản có credit miễn phí. Lưu key trong file .env hoặc secret manager, không hard-code, không commit lên GitHub, notebook công khai hay gửi vào prompt. Dùng .env.example với placeholder cho đồng đội.",
+    "link": ""
+  },
+  {
+    "id": "VLD_API_02",
+    "category": "VLearn & API Key",
+    "title": "Tạo và kiểm tra API key Gemini, OpenAI, Groq",
+    "content": "Gemini: tạo key trong Google AI Studio và kiểm tra quota. OpenAI: tạo secret key trong OpenAI Platform, kiểm tra Billing vì ChatGPT Plus/Pro không tự cấp credit API. Groq: tạo key trong Groq Console và theo dõi Usage/rate limit. Key bị lộ phải revoke và tạo key mới.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CLOUD_01",
+    "category": "VLearn & Cloud Credits",
+    "title": "Phân biệt cloud credit, free tier và API quota",
+    "content": "Cloud credit là số dư chi tiêu theo điều kiện; free tier/API quota là giới hạn request, token, phút hoặc tài nguyên miễn phí; student/research/startup grant là chương trình xét điều kiện. Trước khi dùng phải kiểm tra ngày hết hạn, region, dịch vụ được phép, yêu cầu thẻ, budget alert và khả năng tự động phát sinh phí.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CLOUD_02",
+    "category": "VLearn & Cloud Credits",
+    "title": "Checklist chống phát sinh phí sau khi nhận credit",
+    "content": "Kiểm tra số dư và ngày hết hạn, bật usage notification/budget alert, đặt giới hạn quota, xem resource đang chạy ở region nào, không để bucket/VM/endpoint public, dùng key riêng cho từng project và xóa resource thử nghiệm sau khi làm lab.",
+    "link": ""
+  },
+  {
+    "id": "VLD_PYTHON_01",
+    "category": "VLearn & Python",
+    "title": "Thiết lập virtual environment Python cho lab",
+    "content": "Windows: py -m venv .venv rồi .\\.venv\\Scripts\\Activate.ps1. Linux/macOS: python3 -m venv .venv rồi source .venv/bin/activate. Sau khi kích hoạt, chạy python -m pip install --upgrade pip và python -m pip install -r requirements.txt. Thoát môi trường bằng deactivate.",
+    "link": ""
+  },
+  {
+    "id": "VLD_PYTHON_02",
+    "category": "VLearn & Python",
+    "title": "Chọn đúng Python interpreter trong VS Code",
+    "content": "Trong VS Code chọn Python: Select Interpreter và chọn interpreter trong .venv, sau đó mở terminal mới. Kiểm tra bằng python --version và python -c \"import sys; print(sys.executable)\". Dùng python -m pip để pip thuộc đúng interpreter đang chạy.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CODING_01",
+    "category": "VLearn & AI Coding Tools",
+    "title": "Quickstart Claude Code và Codex",
+    "content": "Claude Code: kiểm tra bằng claude --version và claude doctor, đăng nhập bằng claude rồi /login. Codex: kiểm tra codex --version, đăng nhập bằng codex login và xem trạng thái bằng codex login status. Luôn cd vào đúng repository trước khi giao tác vụ cho agent.",
+    "link": ""
+  },
+  {
+    "id": "VLD_CODING_02",
+    "category": "VLearn & AI Coding Tools",
+    "title": "Quy trình vibe coding có kiểm soát",
+    "content": "Đọc repository, nêu rõ mục tiêu và phạm vi, cho agent lập kế hoạch, sửa thay đổi nhỏ, đọc diff, chạy test/lint, sửa lỗi và commit. Không dán API key hoặc dữ liệu nhạy cảm vào prompt; không chấp nhận lệnh xóa/ghi đè hàng loạt khi chưa hiểu tác động.",
+    "link": ""
+  },
+  {
+    "id": "VLD_SUPPORT_01",
+    "category": "VLearn & Hỗ trợ Lab",
+    "title": "Xử lý lỗi tải bài lab hoặc kết nối Wi-Fi",
+    "content": "Khi tải lab lỗi, cần ghi rõ lab, tài khoản, bước lỗi, tên file và ảnh màn hình; không tự đoán link hoặc phiên bản. Khi Wi-Fi lỗi, ghi SSID, vị trí, thiết bị, hệ điều hành và ảnh lỗi; có thể quên mạng, kết nối lại, tắt VPN/proxy tạm thời và mở trang HTTP để kích hoạt captive portal. Không tự công bố mật khẩu Wi-Fi.",
+    "link": ""
   }
 ]
