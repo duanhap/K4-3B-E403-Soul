@@ -208,4 +208,3 @@ Prompt injection / yêu cầu tiết lộ hệ thống → Bot giữ role, từ 
 | CP2 · 17/09 21:00 | Prototype bot Discord: 4 đường đi, intent routing 5 nhãn, Thinking embed | Thiết kế flow xong trước khi tích hợp AI thật |
 | CP3 · 18/09 16:00 | Tích hợp Gemini thật, KB 84 mục từ data T-136, golden set 20 case, run_1 | run_1: 60% Intent, 75% Grounding, 70% Tone — chưa đạt bar |
 | CP4 · 18/09 21:00 | Hoàn thiện spec.md §1–§9, chốt Quality Bar, ghi nhận run_1 chưa đạt | Phân tích root cause: fallback API rate limit + TC15 grounding fail |
-| CP4 · 18/09 (sau fix) | run_2 bị rate limit toàn bộ → loại; fix fallback + few-shot OUT_OF_SCOPE_PERSONAL → run_3 đạt bar | run_3: 90% Intent, 100% Grounding, 90% Tone — đạt cả 3 chiều |
