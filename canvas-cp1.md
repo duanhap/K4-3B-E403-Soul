@@ -11,10 +11,9 @@ Track B · Trợ lý Discord | Đề B1: Tối ưu Trợ lý hiện có
 | 4 | 1–2 bằng chứng đầu (số + cách đếm + mã hội thoại/tin nhắn, hoặc khảo sát/phỏng vấn có số người) | Phương pháp: Đếm trên toàn bộ 1.092 tin nhắn thật trong file `data/discord-pack/k4_messages.csv` của Khóa 4. Số liệu: Bot gửi 313 tin, trong đó 117 tin dài >500 ký tự (37.4%). Nhiều tin dài từ 700 đến 1.482 ký tự. Bằng chứng thiếu căn cứ nhưng trả lời lan man: Tin M07416 hỏi hạn Lab 02 -> bot M28485 trả lời 847 ký tự lòng vòng không tag TA. Bằng chứng hỏi lặp vì bot dài dòng/không rõ ràng: Cùng câu hỏi quy cách nộp standup bị 4 học viên hỏi 4 lần trong 4 phút (M65121, M72480, M45897, M66116 -> bot M17171 dài 1.482 ký tự). Bằng chứng trả lời ngoài thẩm quyền: M84993 (hỏi kiểm tra nộp bài cá nhân), M40677 (hỏi xin châm chước commit trễ) bot đều không chuyển người có thẩm quyền. |
 | 5 | Lát cắt MỘT CÂU (1 user · 1 việc · 1 quyết định AI · 1 kết quả) | Một học viên gõ câu hỏi logistics trên Discord · AI quyết định câu hỏi có căn cứ trong thông báo chính thức hay không · nếu CÓ thì trích xuất câu trả lời ngắn gọn (≤2 câu) kèm link thông báo, nếu KHÔNG (hoặc ngoài thẩm quyền) thì thông báo chưa có dữ liệu và tự động tag @TA hỗ trợ · học viên nhận đúng thông tin trong 3 giây mà không sợ nhầm deadline. |
 | 6 | AI tự làm đến đâu + 1 dòng lý do · ≥3 willing users ngoài nhóm | - Tự làm: Nhận diện intent logistics, trích xuất câu trả lời ngắn gọn kèm link nguồn khi có trong thông báo chính thức.
-
-- Không tự làm: Không tự phỏng đoán deadline khi chưa có thông báo; không trả lời các câu hỏi can thiệp dữ liệu cá nhân (điểm danh/điểm số); khi không chắc chắn bắt buộc phải chuyển giao (@TA).
-- Lý do (Cost-of-Error): Cung cấp sai hạn nộp khiến học viên bị 0 điểm lab — chi phí sai sót rất đắt nên bot phải áp dụng cơ chế "Conditional" (chỉ tự động khi chắc chắn có nguồn).
-- Willing users (Đã liên hệ và nhận lời thử prototype):
+ - Không tự làm: Không tự phỏng đoán deadline khi chưa có thông báo; không trả lời các câu hỏi can thiệp dữ liệu cá nhân (điểm danh/điểm số); khi không chắc chắn bắt buộc phải chuyển giao (@TA).
+ - Lý do (Cost-of-Error): Cung cấp sai hạn nộp khiến học viên bị 0 điểm lab — chi phí sai sót rất đắt nên bot phải áp dụng cơ chế "Conditional" (chỉ tự động khi chắc chắn có nguồn).
+ - Willing users (Đã liên hệ và nhận lời thử prototype):
      1. Thái Phúc Tiến - 2A202602873 - 3B
      2. Trần Đình Duy - 2A202602631 - 3B
      3. Nguyễn Thành Luân - 2A202602769 - 3B
